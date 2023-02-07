@@ -57,19 +57,7 @@
     </properties>
 
     <dependencyManagement>
-        <dependencies>
-		
-	    <dependency>
-		<groupId>io.micrometer</groupId>
-		<artifactId>micrometer-core</artifactId>
-		<version>${io.micrometer.prometheus.version}</version>
-	    </dependency>
-	    <dependency>
-		<groupId>io.micrometer</groupId>
-		<artifactId>micrometer-registry-prometheus</artifactId>
-		<version>${io.micrometer.prometheus.version}</version>
-	    </dependency>
-		
+        <dependencies>		
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -87,6 +75,19 @@
     </dependencyManagement>
 
     <dependencies>
+    
+                <!-- Prometheus -->
+                <dependency>
+		     <groupId>io.micrometer</groupId>
+		     <artifactId>micrometer-core</artifactId>
+		     <version>${io.micrometer.prometheus.version}</version>
+	        </dependency>
+	        <dependency>
+		     <groupId>io.micrometer</groupId>
+		     <artifactId>micrometer-registry-prometheus</artifactId>
+		     <version>${io.micrometer.prometheus.version}</version>
+	        </dependency>
+		
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
