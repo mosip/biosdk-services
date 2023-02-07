@@ -51,10 +51,13 @@
         <kernel.biometricsdk.version>1.2.0</kernel.biometricsdk.version>
         <kernel.logger.logback.version>1.2.0.1-B1</kernel.logger.logback.version>
         <kernel.core.version>1.2.0.1-B1</kernel.core.version>
+	    
+	<io.micrometer.prometheus.version>1.5.5</io.micrometer.prometheus.version>
+	    
     </properties>
 
     <dependencyManagement>
-        <dependencies>
+        <dependencies>		
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -72,6 +75,19 @@
     </dependencyManagement>
 
     <dependencies>
+    
+                <!-- Prometheus -->
+                <dependency>
+		     <groupId>io.micrometer</groupId>
+		     <artifactId>micrometer-core</artifactId>
+		     <version>${io.micrometer.prometheus.version}</version>
+	        </dependency>
+	        <dependency>
+		     <groupId>io.micrometer</groupId>
+		     <artifactId>micrometer-registry-prometheus</artifactId>
+		     <version>${io.micrometer.prometheus.version}</version>
+	        </dependency>
+		
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
