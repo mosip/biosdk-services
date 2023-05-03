@@ -23,7 +23,7 @@ java -Dloader.path=<biosdk jar provided by third-party vendors> -Dbiosdk_bioapi_
 
 For example:
 ```text
-java -Dloader.path=mock-sdk.jar -Dbiosdk_bioapi_impl=io.mosip.mock.sdk.impl.SampleSDK -jar biosdk-services-1.1.3.jar
+java -Dloader.path=mock-sdk-1.2.1-SNAPSHOT-jar-with-dependencies.jar -Dbiosdk_bioapi_impl=io.mosip.mock.sdk.impl.SampleSDKV2 -jar biosdk-services-1.2.1-SNAPSHOT.jar
 ```
 
 ### Check service status
