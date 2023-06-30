@@ -6,7 +6,7 @@
 
     <artifactId>biosdk-services</artifactId>
     <groupId>io.mosip.biosdk</groupId>
-    <version>1.1.5.5-rc2</version>
+    <version>1.1.5.5</version>
     <name>biosdk-services</name>
 
     <description>Sample implementation of biometrics SDK services</description>
