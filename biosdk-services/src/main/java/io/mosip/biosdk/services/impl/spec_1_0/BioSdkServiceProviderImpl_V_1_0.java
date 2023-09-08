@@ -4,22 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.mosip.biosdk.services.config.LoggerConfig;
 import io.mosip.biosdk.services.constants.ErrorMessages;
-import io.mosip.biosdk.services.dto.ErrorDto;
 import io.mosip.biosdk.services.dto.RequestDto;
-import io.mosip.biosdk.services.dto.ResponseDto;
 import io.mosip.biosdk.services.exceptions.BioSDKException;
 import io.mosip.biosdk.services.impl.spec_1_0.dto.request.*;
 import io.mosip.biosdk.services.spi.BioSdkServiceProvider;
 import io.mosip.biosdk.services.utils.Utils;
-import io.mosip.kernel.biometrics.entities.BiometricRecord;
 import io.mosip.kernel.biometrics.model.Response;
 import io.mosip.kernel.biometrics.model.SDKInfo;
-import io.mosip.kernel.biometrics.spi.IBioApi;
+import io.mosip.kernel.biometrics.spi.IBioApiV2;
 import io.mosip.kernel.core.logger.spi.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
@@ -35,7 +31,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
     private static final String privateKey = "";
 
     @Autowired
-    private IBioApi iBioApi;
+    private IBioApiV2 iBioApi;
 
     @Autowired
     private Utils serviceUtil;
@@ -151,13 +147,13 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
 
     @Override
     public Object convertFormat(RequestDto request) {
-        BiometricRecord biometricRecord;
+    	Response response;
         String decryptedRequest = decode(request.getRequest());
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"convertFormat: ", "decoding successful");
         ConvertFormatRequestDto convertFormatRequestDto = gson.fromJson(decryptedRequest, ConvertFormatRequestDto.class);
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"convertFormat: ", "json to dto successful");
         try {
-            biometricRecord = iBioApi.convertFormat(
+        	response = iBioApi.convertFormatV2(
                     convertFormatRequestDto.getSample(),
                     convertFormatRequestDto.getSourceFormat(),
                     convertFormatRequestDto.getTargetFormat(),
@@ -170,7 +166,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"convertFormat: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.toString()+" "+e.getMessage());
         }
-        return biometricRecord;
+        return response;
     }
 
     private String decode(String data){
