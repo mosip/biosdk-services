@@ -56,8 +56,8 @@
 
 		<!-- Mosip kernel -->
 		<kernel.biometrics.api.version>1.2.0.1-SNAPSHOT</kernel.biometrics.api.version>
-		<kernel.logger.logback.version>1.2.0.1-SNAPSHOT</kernel.logger.logback.version>
-		<kernel.core.version>1.2.0.1-SNAPSHOT</kernel.core.version>
+		<kernel.logger.logback.version>1.2.0.1-B1</kernel.logger.logback.version>
+		<kernel.core.version>1.2.0.1-B1</kernel.core.version>
 		<!-- Spring -->
 		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
 	</properties>

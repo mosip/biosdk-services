@@ -27,6 +27,11 @@ import io.mosip.kernel.biometrics.model.Response;
 import io.mosip.kernel.biometrics.model.SDKInfo;
 import io.mosip.kernel.biometrics.spi.IBioApiV2;
 import io.mosip.kernel.core.logger.spi.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
+import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
 
 @Component
 public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
