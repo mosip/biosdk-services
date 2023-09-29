@@ -9,7 +9,7 @@ import io.mosip.biosdk.services.exceptions.BioSDKException;
 import io.mosip.biosdk.services.factory.BioSdkServiceFactory;
 import io.mosip.biosdk.services.spi.BioSdkServiceProvider;
 import io.mosip.biosdk.services.utils.Utils;
-import io.mosip.kernel.biometrics.spi.IBioApi;
+import io.mosip.kernel.biometrics.spi.IBioApiV2;
 import io.mosip.kernel.core.logger.spi.Logger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,7 +46,7 @@ public class MainController {
     private Utils serviceUtil;
 
     @Autowired
-    private IBioApi iBioApi;
+    private IBioApiV2 iBioApi;
 
     @Autowired
     private BioSdkServiceFactory bioSdkServiceFactory;
@@ -97,31 +97,18 @@ public class MainController {
     public ResponseEntity<String> match(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
-        System.out.println(LOGGER_SESSIONID + LOGGER_IDTYPE+ "Match: Started");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
         ResponseDto responseDto = generateResponseTemplate(request.getVersion());
         try {
             responseDto.setVersion(request.getVersion());
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
-            logger.info(LOGGER_SESSIONID, LOGGER_IDTYPE, "Match: call");
             responseDto.setResponse(bioSdkServiceProviderImpl.match(request));
-            logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "Match: call ended");
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
             ErrorDto errorDto = new ErrorDto(e.getErrorCode(), e.getErrorText());
             responseDto.getErrors().add(errorDto);
             return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
         }
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
