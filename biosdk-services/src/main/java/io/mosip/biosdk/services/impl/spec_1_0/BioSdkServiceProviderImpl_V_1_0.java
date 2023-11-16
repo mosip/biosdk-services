@@ -3,6 +3,8 @@ package io.mosip.biosdk.services.impl.spec_1_0;
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import com.google.gson.GsonBuilder;
 
 import io.mosip.biosdk.services.config.LoggerConfig;
 import io.mosip.biosdk.services.constants.ErrorMessages;
+import io.mosip.biosdk.services.constants.ResponseStatus;
 import io.mosip.biosdk.services.dto.RequestDto;
 import io.mosip.biosdk.services.exceptions.BioSDKException;
 import io.mosip.biosdk.services.impl.spec_1_0.dto.request.CheckQualityRequestDto;
@@ -22,6 +25,7 @@ import io.mosip.biosdk.services.impl.spec_1_0.dto.request.MatchRequestDto;
 import io.mosip.biosdk.services.impl.spec_1_0.dto.request.SegmentRequestDto;
 import io.mosip.biosdk.services.spi.BioSdkServiceProvider;
 import io.mosip.biosdk.services.utils.Utils;
+import io.mosip.kernel.biometrics.entities.BIR;
 import io.mosip.kernel.biometrics.entities.BiometricRecord;
 import io.mosip.kernel.biometrics.model.Response;
 import io.mosip.kernel.biometrics.model.SDKInfo;
@@ -134,6 +138,32 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
                     extractTemplateRequestDto.getModalitiesToExtract(),
                     extractTemplateRequestDto.getFlags()
             );
+            boolean isValid = true;
+            //Validation
+            if (response != null && response.getResponse() != null)
+            {
+        		BiometricRecord biometricRecord = (BiometricRecord)response.getResponse();
+                //Should have Valid BIR Segments
+        		List<BIR> segments = biometricRecord.getSegments();
+        		if (segments == null || segments.size() == 0)
+        		{
+        			isValid = false;
+        		}
+            }
+            else
+            {
+    			isValid = false;
+            }
+            if (!isValid)
+            {
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Response Code  :: ", response.getStatusCode());        			
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Response Status :: ", response.getStatusMessage());        			
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Request :: ", request.getRequest());
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Response :: ", response.getResponse());
+				response.setStatusCode(ResponseStatus.UNKNOWN_ERROR.getStatusCode());
+	            throw new BioSDKException(ErrorMessages.UNCHECKED_EXCEPTION.toString(), ErrorMessages.UNCHECKED_EXCEPTION.getMessage());
+            } 
+            
             logResponse(response);
         } catch (Throwable e){
             e.printStackTrace();
@@ -157,6 +187,30 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
                     segmentRequestDto.getModalitiesToSegment(),
                     segmentRequestDto.getFlags()
             );
+            boolean isValid = true;
+            //Validation
+            if (response != null && response.getResponse() != null)
+            {
+        		BiometricRecord biometricRecord = (BiometricRecord)response.getResponse();
+                //Should have Valid BIR Segments
+        		List<BIR> segments = biometricRecord.getSegments();
+        		if (segments == null || segments.size() == 0)
+        		{
+        			isValid = false;
+        		}
+            }
+            else
+            {
+    			isValid = false;
+            }
+            if (!isValid)
+            {
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Response Code  :: ", response.getStatusCode());        			
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Response Status :: ", response.getStatusMessage());        			
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Request :: ", request.getRequest());
+    	        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "extractTemplate: Response :: ", response.getResponse());
+				response.setStatusCode(ResponseStatus.UNKNOWN_ERROR.getStatusCode());
+            } 
             logResponse(response);
         } catch (Throwable e){
             e.printStackTrace();
