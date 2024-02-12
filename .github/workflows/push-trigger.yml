@@ -72,7 +72,7 @@ jobs:
             SERVICE_NAME: 'biosdk-server'
             BUILD_ARTIFACT: 'biosdk-services'
       fail-fast: false
-    uses: mosip/kattu/.github/workflows/docker-build.yml@master
+    uses: abhishek8shankar/kattu/.github/workflows/docker-build.yml@develop
     name: ${{ matrix.SERVICE_NAME }}
     with:
       SERVICE_LOCATION: ${{ matrix.SERVICE_LOCATION }}
