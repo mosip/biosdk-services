@@ -37,6 +37,7 @@ import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
 @RestController
 @RequestMapping("/")
 @Api(tags = "Sdk")
+@CrossOrigin("*")
 public class MainController {
 
     private Logger logger = LoggerConfig.logConfig(MainController.class);
