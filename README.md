@@ -1,5 +1,5 @@
-[![Maven Package upon a push](https://github.com/mosip/biosdk-services/actions/workflows/push_trigger.yml/badge.svg?branch=release-1.2.0.1)](https://github.com/mosip/biosdk-services/actions/workflows/push_trigger.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=release-1.2.0.1&project=mosip_biosdk-services&metric=alert_status)](https://sonarcloud.io/dashboard?branch=release-1.2.0.1&id=mosip_biosdk-services)
+[![Maven Package upon a push](https://github.com/mosip/biosdk-services/actions/workflows/push-trigger.yml/badge.svg?branch=master)](https://github.com/mosip/biosdk-services/actions/workflows/push-trigger.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=master&project=mosip_biosdk-services&metric=alert_status)](https://sonarcloud.io/dashboard?branch=master&id=mosip_biosdk-services)
 
 
 # Bio-SDK Service
