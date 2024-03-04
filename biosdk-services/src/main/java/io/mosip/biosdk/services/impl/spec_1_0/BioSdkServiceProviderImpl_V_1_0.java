@@ -1,5 +1,10 @@
 package io.mosip.biosdk.services.impl.spec_1_0;
 
+import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
+import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.mosip.biosdk.services.config.LoggerConfig;
@@ -14,12 +19,6 @@ import io.mosip.kernel.biometrics.model.Response;
 import io.mosip.kernel.biometrics.model.SDKInfo;
 import io.mosip.kernel.biometrics.spi.IBioApiV2;
 import io.mosip.kernel.core.logger.spi.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
-import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
 
 @Component
 public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
@@ -38,7 +37,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
     private Utils serviceUtil;
 
     private Gson gson = new GsonBuilder().serializeNulls().create();
-    
+
     @Value("${mosip.biosdk.log-request-response-enabled:false}")
     private boolean isLogRequestResponse;
 
@@ -55,18 +54,17 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         InitRequestDto initRequestDto = gson.fromJson(decryptedRequest, InitRequestDto.class);
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"init: ", "json to dto successful");
         try {
-        	logRequest(initRequestDto);
+            logRequest(initRequestDto);
             sdkInfo = iBioApi.init(initRequestDto.getInitParams());
             logObject(sdkInfo);
         } catch (Throwable e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"init: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.getMessage());
         }
         return sdkInfo;
     }
 
-	@Override
+    @Override
     public Object checkQuality(RequestDto request) {
         Response response;
         String decryptedRequest = decode(request.getRequest());
@@ -74,7 +72,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         CheckQualityRequestDto checkQualityRequestDto = gson.fromJson(decryptedRequest, CheckQualityRequestDto.class);
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"checkQuality: ", "json to dto successful");
         try {
-        	logRequest(checkQualityRequestDto);
+            logRequest(checkQualityRequestDto);
             response = iBioApi.checkQuality(
                     checkQualityRequestDto.getSample(),
                     checkQualityRequestDto.getModalitiesToCheck(),
@@ -96,7 +94,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         MatchRequestDto matchRequestDto = gson.fromJson(decryptedRequest, MatchRequestDto.class);
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"match: ", "json to dto successful");
         try {
-        	logRequest(matchRequestDto);
+            logRequest(matchRequestDto);
             response = iBioApi.match(
                     matchRequestDto.getSample(),
                     matchRequestDto.getGallery(),
@@ -119,7 +117,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         ExtractTemplateRequestDto extractTemplateRequestDto = gson.fromJson(decryptedRequest, ExtractTemplateRequestDto.class);
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"extractTemplate: ", "json to dto successful");
         try {
-        	logRequest(extractTemplateRequestDto);
+            logRequest(extractTemplateRequestDto);
             response = iBioApi.extractTemplate(
                     extractTemplateRequestDto.getSample(),
                     extractTemplateRequestDto.getModalitiesToExtract(),
@@ -133,7 +131,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         return response;
     }
 
-	@Override
+    @Override
     public Object segment(RequestDto request) {
         Response response;
         String decryptedRequest = decode(request.getRequest());
@@ -141,7 +139,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         SegmentRequestDto segmentRequestDto = gson.fromJson(decryptedRequest, SegmentRequestDto.class);
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"segment: ", "json to dto successful");
         try {
-        	logRequest(segmentRequestDto);
+           logRequest(segmentRequestDto);
             response = iBioApi.segment(
                     segmentRequestDto.getSample(),
                     segmentRequestDto.getModalitiesToSegment(),
@@ -155,7 +153,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         return response;
     }
 
-	@Override
+    @Override
     public Object convertFormat(RequestDto request) {
     	Response response;
         String decryptedRequest = decode(request.getRequest());
@@ -179,8 +177,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         }
         return response;
     }
-
-	private void logRequest(ExtractTemplateRequestDto extractTemplateRequestDto) {
+private void logRequest(ExtractTemplateRequestDto extractTemplateRequestDto) {
 		if(isLogRequestResponse) {
 			logger.debug("REQUEST: " + serviceUtil.toString(extractTemplateRequestDto));
 		}
@@ -239,6 +236,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
 			logger.debug(prefix + serviceUtil.toString(biometricRecord));
     	}
 	}
+
 
     private String decode(String data){
         try {

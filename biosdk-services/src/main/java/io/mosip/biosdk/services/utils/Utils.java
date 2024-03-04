@@ -1,5 +1,4 @@
 package io.mosip.biosdk.services.utils;
-
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -28,7 +27,6 @@ import io.mosip.kernel.biometrics.entities.BIR;
 import io.mosip.kernel.biometrics.entities.BIRInfo;
 import io.mosip.kernel.biometrics.entities.BiometricRecord;
 import io.mosip.kernel.core.util.DateUtils;
-
 @Component
 public class Utils {
     @Autowired
@@ -44,11 +42,11 @@ public class Utils {
         return gson.fromJson(request, RequestDto.class);
     }
 
-	public static String base64Decode(String data){
+    public static String base64Decode(String data){
         return new String(Base64.getDecoder().decode(data), StandardCharsets.UTF_8);
     }
-	
-	public String toString(BiometricRecord biometricRecord) {
+
+public String toString(BiometricRecord biometricRecord) {
 		if(biometricRecord == null) {
 			return "null";
 		}
@@ -312,3 +310,4 @@ public class Utils {
 		return bool == null ? "null" : Boolean.toString(bool);
 	}
 }
+
