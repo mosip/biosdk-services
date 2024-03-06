@@ -65,7 +65,10 @@ ARG container_user_gid=1001
 RUN apt-get -y update \
 && apt-get install -y unzip sudo\
 && groupadd -g ${container_user_gid} ${container_user_group} \
-&& useradd -u ${container_user_uid} -g ${container_user_group} -s /bin/sh -m ${container_user}
+&& useradd -u ${container_user_uid} -g ${container_user_group} -s /bin/sh -m ${container_user} \
+&& chmod 775 biosdk-services.jar
+&& chmod +x configure_biosdk.sh \
+&& chown -R ${container_user}:${container_user} /home/${container_user}
 
 # set working directory for the user
 WORKDIR /home/${container_user}
@@ -85,13 +88,6 @@ ENV logging_level_root_env=${logging_level_root}
 ADD ./target/biosdk-services-*.jar biosdk-services.jar
 
 ADD ./configure_biosdk.sh configure_biosdk.sh
-
-RUN chmod 775 biosdk-services.jar
-
-RUN chmod +x configure_biosdk.sh
-
-# change permissions of file inside working dir
-RUN chown -R ${container_user}:${container_user} /home/${container_user}
 
 # select container user for all tasks
 USER ${container_user_uid}:${container_user_gid}
