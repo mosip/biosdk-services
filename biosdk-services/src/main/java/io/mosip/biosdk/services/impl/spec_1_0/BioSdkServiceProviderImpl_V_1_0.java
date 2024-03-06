@@ -53,7 +53,6 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         try {
             sdkInfo = iBioApi.init(initRequestDto.getInitParams());
         } catch (Throwable e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"init: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.getMessage());
         }
@@ -74,7 +73,6 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
                     checkQualityRequestDto.getFlags()
             );
         } catch (Throwable e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"checkQuality: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.toString()+" "+e.getMessage());
         }
@@ -96,7 +94,6 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
                     matchRequestDto.getFlags()
             );
         } catch (Throwable e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"match: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.toString()+" "+e.getMessage());
         }
@@ -117,7 +114,6 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
                     extractTemplateRequestDto.getFlags()
             );
         } catch (Throwable e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"extractTemplate: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.toString()+" "+e.getMessage());
         }
@@ -138,7 +134,6 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
                     segmentRequestDto.getFlags()
             );
         } catch (Throwable e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"segment: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.toString()+" "+e.getMessage());
         }
@@ -162,7 +157,6 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
                     convertFormatRequestDto.getModalitiesToConvert()
             );
         } catch (Throwable e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,"convertFormat: ", e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.BIOSDK_LIB_EXCEPTION.toString(), ErrorMessages.BIOSDK_LIB_EXCEPTION.getMessage()+": "+e.toString()+" "+e.getMessage());
         }
@@ -173,7 +167,6 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         try {
             return Utils.base64Decode(data);
         } catch (RuntimeException e){
-            e.printStackTrace();
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE,ErrorMessages.INVALID_REQUEST_BODY.toString(), e.toString()+" "+e.getMessage());
             throw new BioSDKException(ErrorMessages.INVALID_REQUEST_BODY.toString(), ErrorMessages.INVALID_REQUEST_BODY.getMessage()+": "+e.toString()+" "+e.getMessage());
         }
