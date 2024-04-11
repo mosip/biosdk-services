@@ -1,32 +1,15 @@
 FROM openjdk:11
 
-ARG SOURCE
-ARG COMMIT_HASH
-ARG COMMIT_ID
-ARG BUILD_TIME
-LABEL source=${SOURCE}
-LABEL commit_hash=${COMMIT_HASH}
-LABEL commit_id=${COMMIT_ID}
-LABEL build_time=${BUILD_TIME}
-
 # can be passed during Docker build as build time environment for github branch to pickup configuration from, spring profiles active,config server URL,application name, config name and context path respectively.
 ARG spring_config_url
 ARG spring_application_name
 ARG spring_cloud_config_name
 ARG server_servlet_context
-
-# can be passed during Docker build as build time environment for github branch to pickup configuration from.
 ARG biosdk_zip_url
 ARG biosdk_local_dir=biosdk-client
 ARG sdk_impl
 
-# can be passed during Docker build as build time environment for github branch to pickup configuration from.
-ARG container_user=mosip
-ARG container_user_group=mosip
-ARG container_user_uid=1001
-ARG container_user_gid=1001
-
-# environment variable to pass github branch to pickup configuration from, at docker runtime
+# environment variable to pass github branch to pickup configuration from, at docker runtime 
 ENV spring_config_label_env=${spring_config_label}
 # environment variable to pass active profile such as DEV, QA etc at docker runtime
 ENV active_profile_env=${active_profile}
@@ -43,9 +26,6 @@ ENV biosdk_zip_file_path=${biosdk_zip_url}
 # environment variable to pass biosdk local directory name, at docker runtime
 ENV biosdk_local_dir_name=${biosdk_local_dir}
 
-# environment variable to pass biosdk bioapi implementation, at docker runtime
-ARG sdk_impl
-
 ARG service_context=/biosdk-service
 
 ENV service_context_env=${service_context}
@@ -53,6 +33,21 @@ ENV service_context_env=${service_context}
 #ENV biosdk_zip_url=$biosdk_zip_url
 
 ENV biosdk_bioapi_impl=${sdk_impl}
+
+ARG SOURCE
+ARG COMMIT_HASH
+ARG COMMIT_ID
+ARG BUILD_TIME
+LABEL source=${SOURCE}
+LABEL commit_hash=${COMMIT_HASH}
+LABEL commit_id=${COMMIT_ID}
+LABEL build_time=${BUILD_TIME}
+
+# can be passed during Docker build as build time environment for github branch to pickup configuration from.
+ARG container_user=mosip
+ARG container_user_group=mosip
+ARG container_user_uid=1001
+ARG container_user_gid=1001
 
 # set working directory for the user
 WORKDIR /home/${container_user}
