@@ -1,13 +1,37 @@
 FROM openjdk:11
 
-# can be passed during Docker build as build time environment for github branch to pickup configuration from, spring profiles active,config server URL,application name, config name and context path respectively.
+# can be passed during Docker build as build time environment for github branch to pickup configuration from.
+ARG spring_config_label
+
+# can be passed during Docker build as build time environment for spring profiles active 
+ARG active_profile
+
+# can be passed during Docker build as build time environment for config server URL
 ARG spring_config_url
+
+# can be passed during Docker build as build time environment for application name
 ARG spring_application_name
+
+# can be passed during Docker build as build time environment for config name
 ARG spring_cloud_config_name
+
+# can be passed during Docker build as build time environment for context path
 ARG server_servlet_context
+
 ARG biosdk_zip_url
 ARG biosdk_local_dir=biosdk-client
 ARG sdk_impl
+ARG SOURCE
+ARG COMMIT_HASH
+ARG COMMIT_ID
+ARG BUILD_TIME
+ARG service_context=/biosdk-service
+
+# can be passed during Docker build as build time environment for github branch to pickup configuration from.
+ARG container_user=mosip
+ARG container_user_group=mosip
+ARG container_user_uid=1001
+ARG container_user_gid=1001
 
 # environment variable to pass github branch to pickup configuration from, at docker runtime 
 ENV spring_config_label_env=${spring_config_label}
@@ -26,28 +50,16 @@ ENV biosdk_zip_file_path=${biosdk_zip_url}
 # environment variable to pass biosdk local directory name, at docker runtime
 ENV biosdk_local_dir_name=${biosdk_local_dir}
 
-ARG service_context=/biosdk-service
-
 ENV service_context_env=${service_context}
 
 #ENV biosdk_zip_url=$biosdk_zip_url
 
 ENV biosdk_bioapi_impl=${sdk_impl}
 
-ARG SOURCE
-ARG COMMIT_HASH
-ARG COMMIT_ID
-ARG BUILD_TIME
 LABEL source=${SOURCE}
 LABEL commit_hash=${COMMIT_HASH}
 LABEL commit_id=${COMMIT_ID}
 LABEL build_time=${BUILD_TIME}
-
-# can be passed during Docker build as build time environment for github branch to pickup configuration from.
-ARG container_user=mosip
-ARG container_user_group=mosip
-ARG container_user_uid=1001
-ARG container_user_gid=1001
 
 # set working directory for the user
 WORKDIR /home/${container_user}
@@ -56,7 +68,7 @@ WORKDIR /home/${container_user}
 ADD ./target/biosdk-services-*.jar biosdk-services.jar
 ADD ./configure_biosdk.sh configure_biosdk.sh
 
-#vinstall packages create user and change permissions of jar and script files
+#install packages create user and change permissions of jar and script files
 RUN apt-get -y update \
 && apt-get install -y unzip sudo \
 && groupadd -g ${container_user_gid} ${container_user_group} \
