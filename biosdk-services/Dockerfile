@@ -18,20 +18,27 @@ ARG spring_cloud_config_name
 # can be passed during Docker build as build time environment for context path
 ARG server_servlet_context
 
+# can be passed during Docker build as build time environment for biosdk zip url
 ARG biosdk_zip_url
+
+# can be passed during Docker build as build time environment for biosdk locak dir
 ARG biosdk_local_dir=biosdk-client
+
+# can be passed during Docker build as build time environment for sdk impl
 ARG sdk_impl
-ARG SOURCE
-ARG COMMIT_HASH
-ARG COMMIT_ID
-ARG BUILD_TIME
-ARG service_context=/biosdk-service
 
 # can be passed during Docker build as build time environment for github branch to pickup configuration from.
 ARG container_user=mosip
 ARG container_user_group=mosip
 ARG container_user_uid=1001
 ARG container_user_gid=1001
+
+# can be passed during Docker build as build time environment for label related addition to docker.
+ARG SOURCE
+ARG COMMIT_HASH
+ARG COMMIT_ID
+ARG BUILD_TIME
+ARG service_context=/biosdk-service
 
 # environment variable to pass github branch to pickup configuration from, at docker runtime 
 ENV spring_config_label_env=${spring_config_label}
@@ -56,6 +63,7 @@ ENV service_context_env=${service_context}
 
 ENV biosdk_bioapi_impl=${sdk_impl}
 
+# can be passed during Docker build as build time environment for label.
 LABEL source=${SOURCE}
 LABEL commit_hash=${COMMIT_HASH}
 LABEL commit_id=${COMMIT_ID}
