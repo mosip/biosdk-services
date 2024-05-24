@@ -29,14 +29,15 @@ import io.mosip.kernel.biometrics.spi.IBioApiV2;
 import io.mosip.kernel.core.logger.spi.Logger;
 
 @Component
-public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
+public class BioSdkServiceProviderImpl_V_1_0 // NOSONAR
+		implements BioSdkServiceProvider {
 
 	private Logger logger = LoggerConfig.logConfig(BioSdkServiceProviderImpl_V_1_0.class);
 
 	private static final String BIOSDK_SERVICE_SPEC_VERSION = "1.0";
 	private static final String INIT = "init";
 	private static final String CHECK_QUALITY = "checkQuality";
-	private static final String EXTRACT_TEMPLATE = "extractTemplate";	
+	private static final String EXTRACT_TEMPLATE = "extractTemplate";
 	private static final String MATCH = "match";
 	private static final String SEGMENT = "segment";
 	private static final String CONVERT_FORMAT = "convertFormat";
@@ -57,7 +58,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
 		this.utils = utils;
 		gson = new GsonBuilder().serializeNulls().create();
 	}
-	
+
 	@Override
 	public String getSpecVersion() {
 		return BIOSDK_SERVICE_SPEC_VERSION;
@@ -188,7 +189,8 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
 
 	private void logRequest(ExtractTemplateRequestDto extractTemplateRequestDto) {
 		if (isLogRequestResponse) {
-			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST::ExtractTemplateRequestDto", utils.toString(extractTemplateRequestDto));
+			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST::ExtractTemplateRequestDto",
+					utils.toString(extractTemplateRequestDto));
 		}
 	}
 
@@ -206,19 +208,22 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
 
 	private void logRequest(CheckQualityRequestDto checkQualityRequestDto) {
 		if (isLogRequestResponse) {
-			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST:: CheckQualityRequestDto", utils.toString(checkQualityRequestDto));
+			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST:: CheckQualityRequestDto",
+					utils.toString(checkQualityRequestDto));
 		}
 	}
 
 	private void logRequest(SegmentRequestDto segmentRequestDto) {
 		if (isLogRequestResponse) {
-			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST:: SegmentRequestDto", utils.toString(segmentRequestDto));
+			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST:: SegmentRequestDto",
+					utils.toString(segmentRequestDto));
 		}
 	}
 
 	private void logRequest(ConvertFormatRequestDto convertFormatRequestDto) {
 		if (isLogRequestResponse) {
-			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST:: ConvertFormatRequestDto", utils.toString(convertFormatRequestDto));
+			logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE, "REQUEST:: ConvertFormatRequestDto",
+					utils.toString(convertFormatRequestDto));
 		}
 	}
 
