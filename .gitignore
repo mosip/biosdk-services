@@ -1,3 +1,7 @@
 .idea
 */target*
 */logs
+/.metadata/
+*/.classpath
+*/.project
+*/.settings/
