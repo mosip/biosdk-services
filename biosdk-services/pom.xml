@@ -38,7 +38,7 @@
 		<git.commit.id.plugin.version>3.0.1</git.commit.id.plugin.version>
 
 		<!-- Swagger -->
-		<springdoc.openapi.starter.webmvc.ui.version>2.5.0</springdoc.openapi.starter.webmvc.ui.version>
+		<springdoc.openapi.starter.webmvc.ui.version>2.6.0</springdoc.openapi.starter.webmvc.ui.version>
 
 		<!-- Mosip kernel -->
 		<kernel.bom.version>1.2.1-java21-SNAPSHOT</kernel.bom.version>
