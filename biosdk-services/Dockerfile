@@ -1,5 +1,21 @@
 FROM openjdk:11
 
+ARG SOURCE
+ARG COMMIT_HASH
+ARG COMMIT_ID
+ARG BUILD_TIME
+
+# can be passed during Docker build as build time environment for github branch to pickup configuration from.
+ARG container_user=mosip
+ARG container_user_group=mosip
+ARG container_user_uid=1001
+ARG container_user_gid=1001
+
+LABEL source=${SOURCE}
+LABEL commit_hash=${COMMIT_HASH}
+LABEL commit_id=${COMMIT_ID}
+LABEL build_time=${BUILD_TIME}
+
 # can be passed during Docker build as build time environment for github branch to pickup configuration from.
 ARG spring_config_label
 
@@ -32,18 +48,6 @@ ENV service_context_env=${service_context}
 
 #ENV biosdk_zip_url=$biosdk_zip_url
 ENV biosdk_bioapi_impl=${sdk_impl}
-
-# can be passed during Docker build as build time environment for github branch to pickup configuration from.
-ARG container_user=mosip
-
-# can be passed during Docker build as build time environment for github branch to pickup configuration from.
-ARG container_user_group=mosip
-
-# can be passed during Docker build as build time environment for github branch to pickup configuration from.
-ARG container_user_uid=1001
-
-# can be passed during Docker build as build time environment for github branch to pickup configuration from.
-ARG container_user_gid=1001
 
 # install packages and create user
 RUN apt-get -y update \
