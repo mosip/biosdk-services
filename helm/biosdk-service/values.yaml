@@ -241,7 +241,7 @@ updateStrategy:
 ##     value: "bar"
 ##
 extraEnvVars:
-  - name: service_context_env
+  - name: server_servlet_context_path_env
     value: /biosdk-service
   - name: spring_application_name_env
     value: biosdk-service
