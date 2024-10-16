@@ -83,34 +83,35 @@ jobs:
       ACTOR_DOCKER_HUB: ${{ secrets.ACTOR_DOCKER_HUB }}
       RELEASE_DOCKER_HUB: ${{ secrets.RELEASE_DOCKER_HUB }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
   trivy_scan:
-  needs: build-dockers
-  runs-on: ubuntu-latest
-  steps:
-    - name: Set environment variables
-      run: |
-        echo "SERVICE_NAME=biosdk-server" >> $GITHUB_ENV
-        echo "VERSION=latest" >> $GITHUB_ENV
-        echo "IMAGE_REF=docker.io/${{ env.SERVICE_NAME }}:${{ env.VERSION }}" >> $GITHUB_ENV
+    needs: build-dockers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment variables
+        run: |
+          echo "SERVICE_NAME=biosdk-server" >> $GITHUB_ENV
+          echo "VERSION=latest" >> $GITHUB_ENV
+          echo "IMAGE_REF=docker.io/${{ env.SERVICE_NAME }}:${{ env.VERSION }}" >> $GITHUB_ENV
 
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@v0.30.1
-      with:
-        image-ref: '${{ env.IMAGE_REF }}'
-        format: 'sarif'
-        output: 'trivy-results.sarif'
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.30.1
+        with:
+          image-ref: '${{ env.IMAGE_REF }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
 
-    - name: Verify Trivy report generation
-      run: |
-        if [ ! -f "trivy-results.sarif" ]; then
-          echo "Trivy SARIF report not found!"
-          exit 1
-        fi
+      - name: Verify Trivy report generation
+        run: |
+          if [ ! -f "trivy-results.sarif" ]; then
+            echo "Trivy SARIF report not found!"
+            exit 1
+          fi
 
-    - name: Upload Trivy scan results to GitHub security tab
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: 'trivy-results.sarif'
+      - name: Upload Trivy scan results to GitHub security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
