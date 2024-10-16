@@ -84,31 +84,29 @@ jobs:
       RELEASE_DOCKER_HUB: ${{ secrets.RELEASE_DOCKER_HUB }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
-  trivy_scan:
-    needs: build-dockers
-    strategy:
-      matrix:
-        include:
-          - SERVICE_NAME: 'biosdk-server'
+  trivy-scan:
     runs-on: ubuntu-latest
+    env:
+      NAMESPACE: ${{ secrets.dev_namespace_docker_hub }}
+      SERVICE_NAME: biosdk-server
+      VERSION: latest  # Modify this as needed or set dynamically based on your versioning scheme
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v2
+        
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          image-ref: 'docker.io/${{ matrix.SERVICE_NAME }}:latest'
+          image-ref: 'docker.io/${{ env.SERVICE_NAME }}:${{ env.VERSION }}'
           format: 'sarif'
           output: 'trivy-results.sarif'
+          
 
-      - name: Verify Trivy report generation
-        run: |
-          if [ ! -f "trivy-results.sarif" ]; then
-            echo "Trivy SARIF report not found!"
-            exit 1
-          fi
-
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
       - name: Upload Trivy scan results to GitHub security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
