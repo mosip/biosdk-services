@@ -86,6 +86,10 @@ jobs:
 
   trivy_scan:
     needs: build-dockers
+    strategy:
+      matrix:
+        include:
+          - SERVICE_NAME: 'biosdk-server'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
