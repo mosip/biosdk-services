@@ -88,19 +88,13 @@ jobs:
     needs: build-dockers
     runs-on: ubuntu-latest
     steps:
-      - name: Set environment variables
-        run: |
-          echo "SERVICE_NAME=biosdk-server" >> $GITHUB_ENV
-          echo "VERSION=latest" >> $GITHUB_ENV
-          echo "IMAGE_REF=docker.io/${{ env.SERVICE_NAME }}:${{ env.VERSION }}" >> $GITHUB_ENV
-
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          image-ref: '${{ env.IMAGE_REF }}'
+          image-ref: 'docker.io/${{ env.SERVICE_NAME }}:${{ env.VERSION }}'
           format: 'sarif'
           output: 'trivy-results.sarif'
 
