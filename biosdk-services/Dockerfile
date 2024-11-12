@@ -1,4 +1,4 @@
-FROM mosipdev/openjdk-21-jre:latest
+FROM mosipid/openjdk-21-jre:21.0.4
 
 # label to be assigned along with  Docker build [Mandatory]
 ARG SOURCE
