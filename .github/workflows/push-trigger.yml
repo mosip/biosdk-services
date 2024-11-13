@@ -84,12 +84,3 @@ jobs:
       RELEASE_DOCKER_HUB: ${{ secrets.RELEASE_DOCKER_HUB }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
-  call-trivy-scan:
-     uses: mosip/kattu/.github/workflows/trivy.yml@develop
-     strategy:
-      matrix:
-       include:
-        - SERVICE_NAME: 'biosdk-server'   
-     with:
-      service_name: ${{ matrix.SERVICE_NAME }}
-      version: $'{{ github.ref_name }}'
