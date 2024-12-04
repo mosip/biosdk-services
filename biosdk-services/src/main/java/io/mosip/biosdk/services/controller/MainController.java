@@ -49,8 +49,10 @@ import io.swagger.v3.oas.annotations.Parameter;
  * APIs. It utilizes Spring annotations for dependency injection, request
  * mapping, and security.
  * 
+ *  CrossOrigin can be enabled for local testing 
  * @since 1.0.0
  */
+//@SuppressWarnings({ "java:S5122" })
 @RestController
 @RequestMapping("/")
 @Api(tags = "Sdk")

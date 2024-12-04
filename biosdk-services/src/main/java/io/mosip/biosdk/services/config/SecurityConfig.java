@@ -59,6 +59,7 @@ public class SecurityConfig {
 	 * @throws Exception if an error occurs while configuring the security filter
 	 *                   chain.
 	 */
+	//@SuppressWarnings({ "java:S4502" })
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.httpBasic(AbstractHttpConfigurer::disable);
