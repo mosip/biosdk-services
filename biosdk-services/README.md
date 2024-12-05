@@ -2,7 +2,7 @@
 
 ## Overview
 
-This service offers a mock implementation of the Bio-SDK REST Service. By default, it initializes the [Mock BIO SDK](https://github.com/mosip/mosip-mock-services/tree/master/mock-sdk) during startup and exposes endpoints for performing 1:N matching, segmentation, and extraction, adhering to the [IBioAPI](https://github.com/mosip/commons/blob/master/kernel/kernel-biometrics-api/src/main/java/io/mosip/kernel/biometrics/spi/IBioApi.java) specification. 
+This service offers a mock implementation of the Bio-SDK REST Service. By default, it initializes the [Mock BIO SDK](https://github.com/mosip/mosip-mock-services/tree/master/mock-sdk) during startup and exposes endpoints for performing 1:N matching, segmentation, and extraction, adhering to the [IBioAPIV2](https://github.com/mosip/bio-utils/blob/master/kernel-biometrics-api/src/main/java/io/mosip/kernel/biometrics/spi/IBioApiV2.java) specification. 
 
 Additionally, the service is configurable to load an alternative JAR implementing `IBioAPIV2`, provided all necessary dependencies are satisfied. This flexibility allows users to integrate customized implementations seamlessly. 
 
@@ -36,8 +36,8 @@ Ensure you have the following installed before proceeding:
 Clone the repository from GitHub to your local machine:
 
 ```bash
-git clone https://github.com/mosip/biosdk-services.git
-cd biosdk-services
+	git clone https://github.com/mosip/biosdk-services.git
+	cd biosdk-services
 ```
 
 2. **Build the project**
@@ -45,7 +45,7 @@ cd biosdk-services
 Use Maven to build the project and resolve dependencies.
 
 ```bash
-	mvn clean install
+	mvn clean install -Dgpg.skip=true
 ```
    
 
@@ -54,7 +54,7 @@ Use Maven to build the project and resolve dependencies.
 Run the application using the following command:
 
 ```java
-java -Dloader.path=<biosdk jar provided by third-party vendors> -Dbiosdk_bioapi_impl=<classpath of class that implements IBioApi interface> --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED  -jar biosdk-services-<version>.jar
+java -Dloader.path=<biosdk jar provided by third-party vendors> -Dbiosdk_bioapi_impl=<classpath of class that implements IBioApiV2 interface> --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED  -jar biosdk-services-<version>.jar
 ```
 
 For example:
@@ -98,7 +98,7 @@ You can run the application with Docker for easier deployment and environment is
 Before building the image, set the following environment variables:
 
 * biosdk_zip_url - The URL pointing to the third-party BioSDK library ZIP file.
-* biosdk_bioapi_impl - The fully qualified class name implementing the IBioApi interface.
+* biosdk_bioapi_impl - The fully qualified class name implementing the IBioApiV2 interface.
 
 Run the below command to build the Docker image:
 
@@ -143,14 +143,12 @@ If the setup is successful, you will see a response similar to below:
 ---
 
 ## Configurations
+BioSdk Service uses the following configuration files that are accessible in this [repository](https://github.com/mosip/mosip-config/tree/master).
+Please refer to the required released tagged version for configuration.
+1. [Configuration-Application](https://github.com/mosip/mosip-config/blob/master/application-default.properties)
+2. [Configuration-Biosdk-Service](https://github.com/mosip/mosip-config/blob/master/biosdk-service-default.properties)
 
-Configurations can be customized in the `application.properties` file located in the `src/main/resources` directory. Common properties include:
-
-| Property Name                          | Description                                      | Default Value                        |
-|----------------------------------------|---------------------------------------------------|--------------------------------------|
-| `sdk_check_iso_timestamp_format`       | if we want to check ISO Dateformat                | `true`                                         |
-| `biosdk_class`                         | class that implements IBioApi interface methods    | `io.mosip.mock.sdk.impl.SampleSDKV2` |
-| `biosdk_bioapi_impl`                   | class that implements IBioApi interface methods               | `io.mosip.mock.sdk.impl.SampleSDKV2` |
+Need to run the config-server along with the files mentioned above in order to run the BioSdk service.
 
 ---
 
@@ -166,7 +164,6 @@ BioSDK-Services provides the following key endpoints:
 | `/biosdk-service/extract-template` | POST    | Extract the template for the given biometric record      |
 | `/biosdk-service/convert-format` | POST    | Convert biometric record ISO to JPEG/PNG using  [here](https://github.com/mosip/converters/tree/develop).       |
 | `/biosdk-service/check-quality` | POST    | Check the quality for the a given biometric record      |
-
 
 
 ## Documentation
