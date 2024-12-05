@@ -45,7 +45,7 @@ Clone the repository from GitHub to your local machine:
 Use Maven to build the project and resolve dependencies.
 
 ```bash
-	mvn clean install
+	mvn clean install -Dgpg.skip=true
 ```
    
 
