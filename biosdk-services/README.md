@@ -54,7 +54,7 @@ Use Maven to build the project and resolve dependencies.
 Run the application using the following command:
 
 ```java
-java -Dloader.path=<biosdk jar provided by third-party vendors> -Dbiosdk_bioapi_impl=<classpath of class that implements IBioApi interface> --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED  -jar biosdk-services-<version>.jar
+java -Dloader.path=<biosdk jar provided by third-party vendors> -Dbiosdk_bioapi_impl=<classpath of class that implements IBioApiV2 interface> --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED  -jar biosdk-services-<version>.jar
 ```
 
 For example:
@@ -98,7 +98,7 @@ You can run the application with Docker for easier deployment and environment is
 Before building the image, set the following environment variables:
 
 * biosdk_zip_url - The URL pointing to the third-party BioSDK library ZIP file.
-* biosdk_bioapi_impl - The fully qualified class name implementing the IBioApi interface.
+* biosdk_bioapi_impl - The fully qualified class name implementing the IBioApiV2 interface.
 
 Run the below command to build the Docker image:
 
@@ -149,8 +149,8 @@ Configurations can be customized in the `application.properties` file located in
 | Property Name                          | Description                                      | Default Value                        |
 |----------------------------------------|---------------------------------------------------|--------------------------------------|
 | `sdk_check_iso_timestamp_format`       | if we want to check ISO Dateformat                | `true`                                         |
-| `biosdk_class`                         | class that implements IBioApi interface methods    | `io.mosip.mock.sdk.impl.SampleSDKV2` |
-| `biosdk_bioapi_impl`                   | class that implements IBioApi interface methods               | `io.mosip.mock.sdk.impl.SampleSDKV2` |
+| `biosdk_class`                         | class that implements IBioApiV2 interface methods    | `io.mosip.mock.sdk.impl.SampleSDKV2` |
+| `biosdk_bioapi_impl`                   | class that implements IBioApiV2 interface methods               | `io.mosip.mock.sdk.impl.SampleSDKV2` |
 
 ---
 
