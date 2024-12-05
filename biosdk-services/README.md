@@ -36,8 +36,8 @@ Ensure you have the following installed before proceeding:
 Clone the repository from GitHub to your local machine:
 
 ```bash
-git clone https://github.com/mosip/biosdk-services.git
-cd biosdk-services
+	git clone https://github.com/mosip/biosdk-services.git
+	cd biosdk-services
 ```
 
 2. **Build the project**
