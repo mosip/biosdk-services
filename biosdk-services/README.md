@@ -143,14 +143,12 @@ If the setup is successful, you will see a response similar to below:
 ---
 
 ## Configurations
+BioSdk Service uses the following configuration files that are accessible in this [repository](https://github.com/mosip/mosip-config/tree/master).
+Please refer to the required released tagged version for configuration.
+1. [Configuration-Application](https://github.com/mosip/mosip-config/blob/master/application-default.properties)
+2. [Configuration-Biosdk-Service](https://github.com/mosip/mosip-config/blob/master/biosdk-service-default.properties)
 
-Configurations can be customized in the `application.properties` file located in the `src/main/resources` directory. Common properties include:
-
-| Property Name                          | Description                                      | Default Value                        |
-|----------------------------------------|---------------------------------------------------|--------------------------------------|
-| `sdk_check_iso_timestamp_format`       | if we want to check ISO Dateformat                | `true`                                         |
-| `biosdk_class`                         | class that implements IBioApiV2 interface methods    | `io.mosip.mock.sdk.impl.SampleSDKV2` |
-| `biosdk_bioapi_impl`                   | class that implements IBioApiV2 interface methods               | `io.mosip.mock.sdk.impl.SampleSDKV2` |
+Need to run the config-server along with the files mentioned above in order to run the BioSdk service.
 
 ---
 
@@ -166,7 +164,6 @@ BioSDK-Services provides the following key endpoints:
 | `/biosdk-service/extract-template` | POST    | Extract the template for the given biometric record      |
 | `/biosdk-service/convert-format` | POST    | Convert biometric record ISO to JPEG/PNG using  [here](https://github.com/mosip/converters/tree/develop).       |
 | `/biosdk-service/check-quality` | POST    | Check the quality for the a given biometric record      |
-
 
 
 ## Documentation
