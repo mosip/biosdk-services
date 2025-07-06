@@ -134,10 +134,10 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
     public Object extractTemplate(RequestDto request) {
         Response response;
         String decryptedRequest = decode(request.getRequest());
-        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"extractTemplate: ", "decoding successful" + (System.currentTimeMillis() - startTime) + " ms");
+        logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"extractTemplate: ", "decoding successful");
         try {
             ExtractTemplateRequestDto extractTemplateRequestDto =  utils.getObjectMapper().readValue(decryptedRequest, new TypeReference<ExtractTemplateRequestDto>() {});
-            logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"extractTemplate: ", "json to dto successful"  + (System.currentTimeMillis() - startTime) + " ms");
+            logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"extractTemplate: ", "json to dto successful");
             logRequest(extractTemplateRequestDto);
             response = iBioApi.extractTemplate(
                     extractTemplateRequestDto.getSample(),

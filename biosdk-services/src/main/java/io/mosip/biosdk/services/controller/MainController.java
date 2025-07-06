@@ -141,6 +141,7 @@ public class MainController {
     public ResponseEntity<String> checkQuality(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
+        Long startTime = System.currentTimeMillis();
         ResponseDto responseDto = generateResponseTemplate(request.getVersion());
         try {
             responseDto.setVersion(request.getVersion());
@@ -180,6 +181,7 @@ public class MainController {
     public ResponseEntity<String> extractTemplate(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
+        Long startTime = System.currentTimeMillis();
         ResponseDto responseDto = generateResponseTemplate(request.getVersion());
         try {
             responseDto.setVersion(request.getVersion());
