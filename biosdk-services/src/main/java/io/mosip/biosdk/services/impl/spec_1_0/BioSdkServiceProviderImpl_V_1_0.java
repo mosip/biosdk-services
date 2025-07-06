@@ -3,21 +3,11 @@ package io.mosip.biosdk.services.impl.spec_1_0;
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
-import io.mosip.biosdk.services.utils.CustomLocalDateTimeDeSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import io.mosip.biosdk.services.config.LoggerConfig;
 import io.mosip.biosdk.services.constants.ErrorMessages;
@@ -36,8 +26,6 @@ import io.mosip.kernel.biometrics.model.Response;
 import io.mosip.kernel.biometrics.model.SDKInfo;
 import io.mosip.kernel.biometrics.spi.IBioApiV2;
 import io.mosip.kernel.core.logger.spi.Logger;
-
-import java.time.LocalDateTime;
 
 @Component
 public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {

@@ -19,10 +19,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.google.gson.Gson;
 
 import io.mosip.biosdk.services.dto.RequestDto;
 import io.mosip.biosdk.services.impl.spec_1_0.dto.request.CheckQualityRequestDto;
