@@ -9,6 +9,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +39,7 @@ import io.mosip.kernel.core.util.DateUtils;
 
 @Component
 public class Utils {
-    @Autowired
-    private Gson gson;
+	private ObjectMapper mapper;
 
     private String utcDateTimePattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
@@ -40,8 +47,8 @@ public class Utils {
         return DateUtils.formatDate(new Date(System.currentTimeMillis()), utcDateTimePattern);
     }
 
-    public RequestDto getRequestInfo(String request) throws ParseException {
-        return gson.fromJson(request, RequestDto.class);
+    public RequestDto getRequestInfo(String request) throws ParseException, JsonProcessingException {
+        return getObjectMapper().readValue(request, new TypeReference<RequestDto>() {});
     }
 
 	public static String base64Decode(String data){
@@ -80,9 +87,13 @@ public class Utils {
 			stringBuilder.append(" }");
 		}
 	}
-    
+
     private String stringOf(Object obj) {
-    	return obj == null ? "null" : gson.toJson(obj);
+        try {
+            return obj == null ? "null" : getObjectMapper().writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
     }
 
 	private <T> void appendString(Iterator<T> iterator, StringBuilder stringBuilder, BiConsumer<T, StringBuilder> appendBiConsumer) {
@@ -311,4 +322,22 @@ public class Utils {
 	private static String booleanAsString(Boolean bool) {
 		return bool == null ? "null" : Boolean.toString(bool);
 	}
+
+	public ObjectMapper getObjectMapper() {
+		if(mapper == null) {
+			mapper = new ObjectMapper().registerModule(new AfterburnerModule());
+			SimpleModule module = new SimpleModule();
+			module.addDeserializer(LocalDateTime.class, new CustomLocalDateTimeDeSerializer());
+			module.addSerializer(LocalDateTime.class, new CustomLocalDateTimeSerializer());
+			module.addSerializer(byte[].class, new BytesToStringSerializer());
+			mapper.registerModule(module);
+			mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+			mapper.enable(SerializationFeature.INDENT_OUTPUT);
+			mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+			mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		}
+		return mapper;
+	}
+
 }
