@@ -141,16 +141,12 @@ public class MainController {
     public ResponseEntity<String> checkQuality(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
-        Long startTime = System.currentTimeMillis();
         ResponseDto responseDto = generateResponseTemplate(request.getVersion());
         try {
             responseDto.setVersion(request.getVersion());
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.checkQuality(request));
-            Long sleepTime = 1000 - (System.currentTimeMillis() - startTime);
-            if(sleepTime > 0)
-                Thread.sleep(sleepTime);
             return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
@@ -170,8 +166,6 @@ public class MainController {
             } catch (JsonProcessingException ex) {
                 throw new RuntimeException(ex);
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -181,18 +175,13 @@ public class MainController {
     public ResponseEntity<String> extractTemplate(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
-        Long startTime = System.currentTimeMillis();
         ResponseDto responseDto = generateResponseTemplate(request.getVersion());
         try {
             responseDto.setVersion(request.getVersion());
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.extractTemplate(request));
-            Long sleepTime = 2000 - (System.currentTimeMillis() - startTime);
-            if(sleepTime > 0)
-                Thread.sleep(sleepTime);
             String response = serviceUtil.getObjectMapper().writeValueAsString(responseDto);
-
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
@@ -212,8 +201,6 @@ public class MainController {
             } catch (JsonProcessingException ex) {
                 throw new RuntimeException(ex);
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 
