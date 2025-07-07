@@ -1,7 +1,6 @@
 package io.mosip.biosdk.services.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.mosip.biosdk.services.config.LoggerConfig;
 import io.mosip.biosdk.services.constants.ErrorMessages;
 import io.mosip.biosdk.services.dto.*;
@@ -51,8 +50,6 @@ public class MainController {
     @Autowired
     private BioSdkServiceFactory bioSdkServiceFactory;
 
-    private Gson gson = new GsonBuilder().serializeNulls().create();;
-
     @GetMapping(path = "/")
     @ApiOperation(value = "Service status")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Service is running...") })
@@ -82,13 +79,26 @@ public class MainController {
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.init(request));
+            return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
             ErrorDto errorDto = new ErrorDto(e.getErrorCode(), e.getErrorText());
             responseDto.getErrors().add(errorDto);
-            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (JsonProcessingException e) {
+            logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "JsonProcessingException: ", e.getMessage());
+            ErrorDto errorDto = new ErrorDto(e.getMessage(), e.getMessage());
+            responseDto.getErrors().add(errorDto);
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
     @PostMapping(path = "/match", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -103,13 +113,26 @@ public class MainController {
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.match(request));
+            return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
             ErrorDto errorDto = new ErrorDto(e.getErrorCode(), e.getErrorText());
             responseDto.getErrors().add(errorDto);
-            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (JsonProcessingException e) {
+            logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "JsonProcessingException: ", e.getMessage());
+            ErrorDto errorDto = new ErrorDto(e.getMessage(), e.getMessage());
+            responseDto.getErrors().add(errorDto);
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
     @PostMapping(path = "/check-quality", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -124,13 +147,26 @@ public class MainController {
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.checkQuality(request));
+            return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
             ErrorDto errorDto = new ErrorDto(e.getErrorCode(), e.getErrorText());
             responseDto.getErrors().add(errorDto);
-            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (JsonProcessingException e) {
+            logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "JsonProcessingException: ", e.getMessage());
+            ErrorDto errorDto = new ErrorDto(e.getMessage(), e.getMessage());
+            responseDto.getErrors().add(errorDto);
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
     @PostMapping(path = "/extract-template", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -145,13 +181,27 @@ public class MainController {
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.extractTemplate(request));
+            String response = serviceUtil.getObjectMapper().writeValueAsString(responseDto);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
             ErrorDto errorDto = new ErrorDto(e.getErrorCode(), e.getErrorText());
             responseDto.getErrors().add(errorDto);
-            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (JsonProcessingException e) {
+            logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "JsonProcessingException: ", e.getMessage());
+            ErrorDto errorDto = new ErrorDto(e.getMessage(), e.getMessage());
+            responseDto.getErrors().add(errorDto);
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
     @PostMapping(path = "/convert-format", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -166,13 +216,26 @@ public class MainController {
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.convertFormat(request));
+            return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
             ErrorDto errorDto = new ErrorDto(e.getErrorCode(), e.getErrorText());
             responseDto.getErrors().add(errorDto);
-            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (JsonProcessingException e) {
+            logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "JsonProcessingException: ", e.getMessage());
+            ErrorDto errorDto = new ErrorDto(e.getMessage(), e.getMessage());
+            responseDto.getErrors().add(errorDto);
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
     @PostMapping(path = "/segment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -187,13 +250,26 @@ public class MainController {
             BioSdkServiceProvider bioSdkServiceProviderImpl = null;
             bioSdkServiceProviderImpl = bioSdkServiceFactory.getBioSdkServiceProvider(request.getVersion());
             responseDto.setResponse(bioSdkServiceProviderImpl.segment(request));
+            return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
         } catch (BioSDKException e) {
             logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "BioSDKException: ", e.getMessage());
             ErrorDto errorDto = new ErrorDto(e.getErrorCode(), e.getErrorText());
             responseDto.getErrors().add(errorDto);
-            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (JsonProcessingException e) {
+            logger.error(LOGGER_SESSIONID, LOGGER_IDTYPE, "JsonProcessingException: ", e.getMessage());
+            ErrorDto errorDto = new ErrorDto(e.getMessage(), e.getMessage());
+            responseDto.getErrors().add(errorDto);
+            try {
+                return ResponseEntity.status(HttpStatus.OK).body(serviceUtil.getObjectMapper().writeValueAsString(responseDto));
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
     private ResponseDto generateResponseTemplate(String version){
