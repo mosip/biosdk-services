@@ -5,49 +5,49 @@ This project includes third-party packages that are distributed under various op
 ================================================================================
 Package: mosip/kattu – GitHub Actions Workflow: tag.yml
 Version: master
-License: Not specified (Inferred from project’s official repository: MIT License)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://github.com/mosip/kattu
 ================================================================================
 
 ================================================================================
 Package: mosip/kattu – GitHub Actions Workflow: chart-lint-publish.yml
 Version: master
-License: Not specified (Inferred from project’s official repository: MIT License)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://github.com/mosip/kattu
 ================================================================================
 
 ================================================================================
 Package: mosip/kattu – GitHub Actions Workflow: maven-build.yml
 Version: master-java21
-License: Not specified (Inferred from project’s official repository: MIT License)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://github.com/mosip/kattu
 ================================================================================
 
 ================================================================================
 Package: mosip/kattu – GitHub Actions Workflow: maven-publish-to-nexus.yml
 Version: master-java21
-License: Not specified (Inferred from project’s official repository: MIT License)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://github.com/mosip/kattu
 ================================================================================
 
 ================================================================================
 Package: mosip/kattu – GitHub Actions Workflow: maven-sonar-analysis.yml
 Version: master-java21
-License: Not specified (Inferred from project’s official repository: MIT License)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://github.com/mosip/kattu
 ================================================================================
 
 ================================================================================
 Package: mosip/kattu – GitHub Actions Workflow: docker-build.yml
 Version: master-java21
-License: Not specified (Inferred from project’s official repository: MIT License)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://github.com/mosip/kattu
 ================================================================================
 
 ================================================================================
 Package: mosip/kattu – GitHub Actions Workflow: release-changes.yml
 Version: master
-License: Not specified (Inferred from project’s official repository: MIT License)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://github.com/mosip/kattu
 ================================================================================
 
