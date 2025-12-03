@@ -143,7 +143,7 @@ Homepage: https://github.com/FasterXML/jackson-dataformat-xml
 Package: Jakarta Transaction API
 Name: jakarta.transaction:jakarta.transaction-api
 Version: Not specified
-License: EPL 2.0 (Inferred)
+License: EPL 2.0 OR GPL-2.0 with Classpath Exception
 Homepage: https://github.com/eclipse-ee4j/jta-api
 ================================================================================
 
@@ -167,7 +167,7 @@ Homepage: https://github.com/google/gson
 Package: Lombok
 Name: org.projectlombok:lombok
 Version: Not specified
-License: MIT License (Inferred)
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
 Homepage: https://projectlombok.org
 ================================================================================
 
@@ -175,7 +175,7 @@ Homepage: https://projectlombok.org
 Package: Git Commit ID Plugin
 Name: pl.project13.maven:git-commit-id-plugin
 Version: 3.0.1
-License: Apache License 2.0
+License: GNU Lesser General Public License 3.0 (LGPL-3.0)
 Homepage: https://github.com/git-commit-id/git-commit-id-maven-plugin
 ================================================================================
 
@@ -218,7 +218,7 @@ Homepage: https://maven.apache.org/plugins
 Package: JUnit Vintage Engine
 Name: org.junit.vintage:junit-vintage-engine
 Version: Not specified
-License: EPL-1.0 (Inferred)
+License: Eclipse Public License 2.0
 Homepage: https://junit.org
 ================================================================================
 
