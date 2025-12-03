@@ -167,7 +167,7 @@ Homepage: https://github.com/google/gson
 Package: Lombok
 Name: org.projectlombok:lombok
 Version: Not specified
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+License: MIT License
 Homepage: https://projectlombok.org
 ================================================================================
 
