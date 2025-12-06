@@ -1,0 +1,498 @@
+================================================================================
+COPYRIGHT NOTICES
+================================================================================
+
+This file contains the copyright notices and license information for all
+third-party packages used in this project. Each package's copyright holder,
+year range, and license terms are listed below.
+
+================================================================================
+1. COPYLEFT LICENSES (GNU LGPL)
+================================================================================
+
+Argon2 JVM (de.mkammerer:argon2-jvm)
+Version: 2.9.1
+Copyright (c) 2016-2025 Moritz Kammerer
+License: GNU Lesser General Public License v3.0 (LGPL-3.0)
+Full License: https://www.gnu.org/licenses/lgpl-3.0.html
+
+SonarQube Maven Plugin (org.sonarsource.scanner.maven:sonar-maven-plugin)
+Version: 3.7.0.1746
+Copyright (C) 2011-2025 SonarSource SA
+License: GNU Lesser General Public License v3.0 (LGPL-3.0)
+Full License: https://www.gnu.org/licenses/lgpl-3.0.html
+
+Hibernate ORM (org.hibernate:hibernate-core)
+Version: 5.2.17
+Copyright (c) 2001-2025 Hibernate Authors and Contributors
+License: GNU Lesser General Public License v2.1 or later (LGPL-2.1-or-later)
+Note: Hibernate ORM 5.x uses LGPL-2.1. Version 6.0+ relicensed to Apache-2.0
+Full License: https://www.gnu.org/licenses/lgpl-2.1.html
+
+================================================================================
+2. ECLIPSE PUBLIC LICENSE (EPL)
+================================================================================
+
+JaCoCo Maven Plugin (org.jacoco:jacoco-maven-plugin)
+Version: 0.8.11
+Copyright (c) 2009-2023 Mountainminds GmbH & Co. KG and Contributors
+License: Eclipse Public License 2.0 (EPL-2.0)
+Full License: https://www.eclipse.org/legal/epl-2.0/
+
+JUnit 4 (junit:junit)
+Version: (Managed by BOM)
+Copyright (c) 2002-2023 JUnit Contributors and Eclipse Foundation
+License: Eclipse Public License 1.0 (EPL-1.0)
+Full License: https://www.eclipse.org/legal/epl-v10.html
+
+================================================================================
+3. APACHE LICENSE 2.0
+================================================================================
+
+Spring Boot & Spring Framework (org.springframework.boot:spring-boot-starter-batch, org.springframework:*)
+Version: (Managed by Spring Boot BOM)
+Copyright (c) 2002-2025 VMware, Inc. (formerly Pivotal Software, Inc.)
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache Maven Plugins (org.apache.maven.plugins:*)
+- maven-compiler-plugin (3.8.0)
+  Copyright 2001-2018 The Apache Software Foundation
+- maven-surefire-plugin (Managed by BOM)
+- maven-source-plugin (2.2.1)
+  Copyright 2002-2012 The Apache Software Foundation
+- maven-shade-plugin (3.2.4)
+  Copyright 2002-2020 The Apache Software Foundation
+- maven-jar-plugin (3.0.2)
+- maven-war-plugin (3.1.0)
+- maven-javadoc-plugin (3.2.0)
+  Copyright 2005, MyCompany, Inc.
+- maven-gpg-plugin (1.5)
+- maven-antrun-plugin (3.0.0)
+- maven-assembly-plugin (3.1.0)
+Copyright 2001-2025 The Apache Software Foundation (where not specified above)
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Jackson (com.fasterxml.jackson.core:jackson-databind, com.fasterxml.jackson.core:jackson-core, com.fasterxml.jackson.core:jackson-annotations, com.fasterxml.jackson.dataformat:jackson-dataformat-xml, com.fasterxml.jackson.datatype:jackson-datatype-jsr310)
+Version: (Managed by Spring Boot BOM)
+Copyright (c) 2007-2025 FasterXML, LLC
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Google Gson (com.google.code.gson:gson)
+Version: (Managed by BOM)
+Copyright (c) 2008-2025 Google Inc.
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache Commons (commons-beanutils:commons-beanutils, commons-codec:commons-codec, commons-io:commons-io, org.apache.commons:commons-collections4)
+Version: 1.10.1 (beanutils), 1.15 (codec), Managed (others)
+Copyright 2000-2025 The Apache Software Foundation
+Copyright (c) 2002 Kevin Atkinson (kevina@gnu.org) [codec]
+Copyright (c) 2008 Alexander Beider & Stephen P. Morse [codec]
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache Velocity (org.apache.velocity:velocity)
+Version: 1.7
+Copyright (c) 2000-2007 The Apache Software Foundation
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache Hadoop Client (org.apache.hadoop:hadoop-client)
+Version: 2.8.1
+Copyright: Multiple contributors (extensive copyright list including Apache Software Foundation, JSON.org, Tim Fennell, James Murty, Google Inc., FuseSource Corp., Netty Project, jQuery Foundation, and many others - see SBOM for complete list)
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache HttpComponents (org.apache.httpcomponents:httpclient, org.apache.httpcomponents:httpcore, org.apache.httpcomponents:httpmime)
+Version: 4.5.14 (httpmime), Managed (others)
+Copyright 1999-2022 The Apache Software Foundation
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache Log4j API (org.apache.logging.log4j:log4j-api)
+Version: (Managed by Spring Boot BOM)
+Copyright (c) 1999-2025 The Apache Software Foundation
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache Maven Model (org.apache.maven:maven-model)
+Version: 3.3.9
+Copyright (c) 2001-2025 The Apache Software Foundation
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache ActiveMQ (org.apache.activemq:activemq-broker)
+Version: (Managed by BOM)
+Copyright (c) 2005-2025 The Apache Software Foundation
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Apache Wink (org.apache.wink:wink-json4j-provider)
+Version: 1.1.2-incubating
+Copyright (c) 2009-2025 The Apache Software Foundation
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Keycloak Admin Client (org.keycloak:keycloak-admin-client)
+Version: 17.0.1
+Copyright 2016 Red Hat, Inc. and/or its affiliates and other contributors
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+TestNG (org.testng:testng)
+Version: 7.11.0
+Copyright (c) OpenJS Foundation and other contributors
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Rest-Assured (io.rest-assured:rest-assured)
+Version: (Managed by BOM)
+Copyright (c) 2010-2025 Johan Haleby and contributors
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Hibernate Validator (org.hibernate.validator:hibernate-validator)
+Version: (Managed by Spring Boot BOM)
+Copyright (c) 2007-2025 Hibernate Validator Authors and Contributors
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Central Publishing Maven Plugin (org.sonatype.central:central-publishing-maven-plugin)
+Version: 0.7.0
+Copyright (c) 2022-present Sonatype, Inc.
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Google ZXing (com.google.zxing:core, com.google.zxing:javase)
+Version: 3.3.3 (core), 2.0 (javase)
+Copyright (c) 2007-2025 ZXing authors
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Slack API Client (com.slack.api:slack-api-client)
+Version: 1.6.1-RC1
+Copyright (c) 2017-2025 Slack Technologies, Inc.
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Generex (com.github.mifmif:generex)
+Version: 1.0.2
+Copyright (c) 2014-2025 Mifmif
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Java XMLBuilder (com.jamesmurty.utils:java-xmlbuilder)
+Version: 1.3
+Copyright (c) 2008-2025 James Murty
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Zip4j (net.lingala.zip4j:zip4j)
+Version: 2.11.5
+Copyright (c) 2010-2025 Srikanth Reddy Lingala
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Handlebars.java (com.github.jknack:handlebars)
+Version: 3.0.0
+Copyright (c) 2012-2025 Edgar Espina
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+ZT-Zip (org.zeroturnaround:zt-zip)
+Version: 1.13
+Copyright (c) 2012-2025 ZeroTurnaround LLC
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+ZJsonPatch (com.flipkart.zjsonpatch:zjsonpatch)
+Version: 0.4.7
+Copyright (c) 2016-2025 Flipkart
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+JavaFaker (com.github.javafaker:javafaker)
+Version: 1.0.2
+Copyright (c) 2009 Iulian Dogariu
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+OpenCSV (com.opencsv:opencsv)
+Version: 4.1
+Copyright 2017 Andrew Rucker Jones
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+AWS Java SDK (com.amazonaws:aws-java-sdk)
+Version: 1.11.368
+Copyright (c) 2010-2025 Amazon.com, Inc. or its affiliates
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Swagger Annotations (io.swagger:swagger-annotations)
+Version: (Managed by BOM)
+Copyright (c) 2015-2025 SmartBear Software
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+JSON-Simple (com.googlecode.json-simple:json-simple)
+Version: (Managed by BOM)
+Copyright (c) 2006 Yidong Fang
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+Google Guava (com.google.guava:guava)
+Version: (Managed by BOM)
+Copyright (c) The Guava Authors
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+JSON Path (com.jayway.jsonpath:json-path)
+Version: (Managed by BOM)
+Copyright (c) 2011-2025 Jayway
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+================================================================================
+4. BSD LICENSE
+================================================================================
+
+PostgreSQL JDBC Driver (org.postgresql:postgresql)
+Version: (Managed by BOM)
+Copyright (c) 1997-2025 PostgreSQL Global Development Group
+License: BSD 2-Clause License
+Full License: https://jdbc.postgresql.org/about/license.html
+
+ExtentReports (com.relevantcodes:extentreports, com.aventstack:extentreports)
+Version: 2.41.2, 3.0.0
+Copyright (c) 2015-2025 Anshoo Arora
+License: BSD 3-Clause License
+Full License: https://opensource.org/licenses/BSD-3-Clause
+
+Hamcrest (org.hamcrest:hamcrest-all)
+Version: 1.3
+Copyright (c) 2000-2006, www.hamcrest.org
+License: BSD 3-Clause License
+Full License: https://opensource.org/licenses/BSD-3-Clause
+
+================================================================================
+5. MIT LICENSE
+================================================================================
+
+SLF4J API (org.slf4j:slf4j-log4j12, org.slf4j:slf4j-api - implied)
+Version: (Managed by BOM)
+Copyright (c) 2004-2025 QOS.ch
+License: MIT License
+Full License: https://www.slf4j.org/license.html
+
+Bouncy Castle (org.bouncycastle:bcprov-jdk15on, org.bouncycastle:bcpkix-jdk15on)
+Version: 1.70
+Copyright (c) 2000-2021 The Legion of the Bouncy Castle Inc. (https://www.bouncycastle.org)
+License: MIT License (Bouncy Castle License)
+Full License: https://www.bouncycastle.org/licence.html
+
+Project Lombok (org.projectlombok:lombok)
+Version: (Managed by BOM)
+Copyright (C) 2009-2021 The Project Lombok Authors
+License: MIT License
+Full License: https://github.com/projectlombok/lombok/blob/master/LICENSE
+
+Checker Framework Qualifiers (org.checkerframework:checker-qual)
+Version: 2.9.0
+Copyright (c) 2004-2025 Checker Framework developers
+License: MIT License
+Full License: https://checkerframework.org/manual/#license
+
+Auth0 Java JWT (com.auth0:java-jwt)
+Version: 4.4.0
+Copyright (c) 2015-2025 Auth0, Inc.
+License: MIT License
+Full License: https://github.com/auth0/java-jwt/blob/master/LICENSE
+
+Mockito (org.mockito:mockito-core, org.mockito:mockito-inline - if used)
+Version: (Managed by BOM)
+Copyright (c) 2007-2025 Mockito contributors
+License: MIT License
+Full License: https://github.com/mockito/mockito/blob/main/LICENSE
+
+================================================================================
+6. MOZILLA PUBLIC LICENSE (MPL)
+================================================================================
+
+MOSIP Kernel Modules (io.mosip.kernel:*)
+Including:
+- kernel-bom
+- kernel-core
+- kernel-templatemanager-velocity
+- kernel-keymanager-service
+- kernel-websubclient-api
+Version: 1.3.0-beta.1
+Copyright (c) 2018-2025 MOSIP Contributors
+License: Mozilla Public License 2.0 (MPL-2.0)
+Full License: https://mozilla.org/MPL/2.0/
+
+MOSIP Authentication Core (io.mosip.authentication:authentication-core)
+Version: 1.2.0.1-B3
+Copyright (c) 2018-2025 MOSIP Contributors
+License: Mozilla Public License 2.0 (MPL-2.0)
+Full License: https://mozilla.org/MPL/2.0/
+
+MOSIP Mock MDS (io.mosip.mock.mds:mock-mds)
+Version: 1.3.0-beta.1
+Copyright (c) 2018-2025 MOSIP Contributors
+License: Mozilla Public License 2.0 (MPL-2.0)
+Full License: https://mozilla.org/MPL/2.0/
+
+================================================================================
+7. COPYLEFT LICENSE (AGPL)
+================================================================================
+
+iText PDF (com.itextpdf:itextpdf)
+Version: 5.5.13.4
+Copyright: Multiple contributors including Adobe Systems Incorporated (1985-2000), Sam Leffler (1988-1997), Silicon Graphics Inc. (1991-1997), Unicode Inc. (1991-2007), Sun Microsystems (2005), and others
+License: GNU Affero General Public License 3.0 (AGPL-3.0-only)
+Note: Commercial license available from iText Software
+Full License: https://www.gnu.org/licenses/agpl-3.0.html
+
+iText HTML2PDF (com.itextpdf:html2pdf)
+Version: 2.0.0
+Copyright (c) 2017-2025 iText Group NV
+License: GNU Affero General Public License 3.0 (AGPL-3.0-only)
+Note: Commercial license available from iText Software
+Full License: https://www.gnu.org/licenses/agpl-3.0.html
+
+================================================================================
+8. DUAL LICENSE (CDDL/GPL)
+================================================================================
+
+JavaMail API (javax.mail:javax.mail-api)
+Version: 1.6.2
+Copyright (c) 1997-2018 Oracle and/or its affiliates
+Copyright (c) 1989, 1991 Free Software Foundation, Inc.
+License: CDDL 1.1 OR GPL-2.0-only WITH Classpath-exception-2.0
+Full License (CDDL): https://opensource.org/licenses/CDDL-1.0
+Full License (GPL): https://www.gnu.org/licenses/gpl-2.0.html
+
+JAXB API (javax.xml.bind:jaxb-api)
+Version: (Managed by Spring Boot BOM)
+Copyright (c) 2018, 2021 Oracle and/or its affiliates, Eclipse Foundation
+License: Eclipse Distribution License (EDL) v1.0 (BSD-3-Clause), OR EPL-2.0, OR GPL-2.0 with Classpath Exception [multi-licensed]
+Full License: https://projects.eclipse.org/projects/ee4j.jaxb
+
+Bean Validation API (javax.validation:validation-api)
+Version: (Managed by BOM)
+Copyright (c) 2007-2025 Red Hat, Inc. and/or its affiliates
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+================================================================================
+9. OTHER LICENSES
+================================================================================
+
+Javassist (org.javassist:javassist)
+Version: (Managed by BOM)
+Copyright (c) 1999-2025 Shigeru Chiba
+License: Apache License 2.0 OR LGPL-2.1-or-later OR MPL-1.1 [triple-licensed]
+Full License: https://www.javassist.org/
+
+ICU4J (com.ibm.icu:icu4j)
+Version: 63.1
+Copyright (c) 1995-2025 IBM Corporation and others
+License: ICU License (permissive, similar to MIT/BSD)
+Full License: https://unicode-org.github.io/icu/userguide/icu4j/
+
+Tyrus Standalone Client (org.glassfish.tyrus.bundles:tyrus-standalone-client)
+Version: 1.13.1
+Copyright (c) 2007-2017 Oracle and/or its affiliates
+Copyright (c) 2005-2010, The Dojo Foundation
+License: Eclipse Public License 2.0 (EPL-2.0) OR GPL-2.0 with Classpath Exception [dual-licensed]
+Full License: https://www.eclipse.org/legal/epl-2.0/
+
+JJWT (io.jsonwebtoken:jjwt)
+Version: (Managed by BOM)
+Copyright (c) 2014-2025 Les Hazlewood, JJWT Contributors
+License: Apache License 2.0
+Full License: https://www.apache.org/licenses/LICENSE-2.0
+
+JSON (org.json:json)
+Version: (Managed by BOM)
+Copyright (c) 2002 JSON.org
+License: The JSON License (permissive, with "Good, not Evil" clause)
+Full License: https://www.json.org/license.html
+
+Git Commit ID Maven Plugin (pl.project13.maven:git-commit-id-plugin)
+Version: 3.0.1
+Copyright (c) 2013-2025 Konrad Malawski and Contributors
+License: GNU Lesser General Public License 3.0 (LGPL-3.0)
+Full License: https://www.gnu.org/licenses/lgpl-3.0.html
+
+================================================================================
+10. GITHUB ACTIONS WORKFLOWS
+================================================================================
+
+mosip/kattu Workflows (mosip/kattu/.github/workflows/*)
+Including:
+- maven-build.yml (master-java21)
+- maven-publish-to-nexus.yml (master-java21)
+- maven-sonar-analysis.yml (master-java21)
+- chart-lint-publish.yml (master)
+Version: master, master-java21
+Copyright (c) 2020-2025 MOSIP Contributors
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal - Public Domain Dedication)
+Note: No copyright attribution required for CC0-licensed works
+Full License: https://creativecommons.org/publicdomain/zero/1.0/
+
+GitHub Actions (actions/checkout, github/codeql-action/*)
+Version: 4.*.*, 3.*.*
+Copyright (c) 2019-2025 GitHub, Inc.
+License: MIT License
+Full License: https://github.com/actions/checkout/blob/main/LICENSE
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+1. All licenses listed above (except CC0-1.0) require preservation of copyright 
+   notices when distributing the software.
+
+2. For Apache License 2.0 dependencies: You must include the LICENSE file and 
+   preserve copyright notices. If a NOTICE file exists, it must be included in 
+   your distribution.
+
+3. For LGPL dependencies (Sonar plugin, Argon2, Hibernate, Git Commit ID plugin): 
+   Usage of unmodified binaries as dependencies is unrestricted. If you modify 
+   and redistribute LGPL-licensed code, source code must be made available under 
+   the LGPL.
+
+4. For EPL dependencies (JaCoCo, JUnit): Similar to LGPL - unmodified binaries 
+   can be used freely. Modified versions must be distributed under EPL terms.
+
+5. For MIT/BSD dependencies: Copyright notice and license text must be included 
+   in all copies or substantial portions of the software.
+
+6. For MPL dependencies (MOSIP modules): Source code for any modifications to 
+   MPL-licensed files must be made available. Files not modified remain under 
+   their original license.
+
+7. For AGPL dependencies (iText): This is a strong copyleft license. If you 
+   distribute or provide network access to modified versions, you must make the 
+   complete source code available under AGPL. Consider commercial licensing from 
+   iText Software if AGPL terms are incompatible with your use case.
+
+8. Version numbers marked as "(Managed by BOM)" are controlled by parent 
+   dependency management (Spring Boot BOM, Spring Cloud BOM, or kernel-bom).
+
+9. Some packages have dual or triple licensing options. You may choose the 
+   license that best fits your use case, but must comply with all terms of the 
+   chosen license.
+
+10. The JSON License contains the controversial "shall be used for Good, not Evil"
+    clause. While generally permissive, some organizations consider this 
+    non-compliant with their policies.
+
+================================================================================
+END OF COPYRIGHT NOTICES
+================================================================================
