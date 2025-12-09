@@ -25,7 +25,7 @@ Full License: https://www.gnu.org/licenses/lgpl-3.0.html
 Hibernate ORM (org.hibernate:hibernate-core)
 Version: 5.2.17
 Copyright (c) 2001-2025 Hibernate Authors and Contributors
-License: GNU Lesser General Public License v2.1 
+License: GNU Lesser General Public License v2.1 or later (LGPL-2.1-or-later)
 Note: Hibernate ORM 5.x uses LGPL-2.1. Version 6.0+ relicensed to Apache-2.0
 Full License: https://www.gnu.org/licenses/lgpl-2.1.html
 
@@ -372,14 +372,14 @@ JavaMail API (javax.mail:javax.mail-api)
 Version: 1.6.2
 Copyright (c) 1997-2018 Oracle and/or its affiliates
 Copyright (c) 1989, 1991 Free Software Foundation, Inc.
-License: CDDL 1.1 
+License: CDDL 1.1 OR GPL-2.0-only WITH Classpath-exception-2.0
 Full License (CDDL): https://opensource.org/licenses/CDDL-1.0
 Full License (GPL): https://www.gnu.org/licenses/gpl-2.0.html
 
 JAXB API (javax.xml.bind:jaxb-api)
 Version: (Managed by Spring Boot BOM)
 Copyright (c) 2018, 2021 Oracle and/or its affiliates, Eclipse Foundation
-License: Eclipse Distribution License (EDL) v1.0 (BSD-3-Clause)
+License: Eclipse Distribution License (EDL) v1.0 (BSD-3-Clause), OR EPL-2.0, OR GPL-2.0 with Classpath Exception [multi-licensed]
 Full License: https://projects.eclipse.org/projects/ee4j.jaxb
 
 Bean Validation API (javax.validation:validation-api)
@@ -395,7 +395,7 @@ Full License: https://www.apache.org/licenses/LICENSE-2.0
 Javassist (org.javassist:javassist)
 Version: (Managed by BOM)
 Copyright (c) 1999-2025 Shigeru Chiba
-License: Apache License 2.0 
+License: Apache License 2.0 OR LGPL-2.1-or-later OR MPL-1.1 [triple-licensed]
 Full License: https://www.javassist.org/
 
 ICU4J (com.ibm.icu:icu4j)
@@ -408,7 +408,7 @@ Tyrus Standalone Client (org.glassfish.tyrus.bundles:tyrus-standalone-client)
 Version: 1.13.1
 Copyright (c) 2007-2017 Oracle and/or its affiliates
 Copyright (c) 2005-2010, The Dojo Foundation
-License: Eclipse Public License 2.0 (EPL-2.0) 
+License: Eclipse Public License 2.0 (EPL-2.0) OR GPL-2.0 with Classpath Exception [dual-licensed]
 Full License: https://www.eclipse.org/legal/epl-2.0/
 
 JJWT (io.jsonwebtoken:jjwt)
