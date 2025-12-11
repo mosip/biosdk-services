@@ -88,7 +88,7 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
 
 
     @Test(expected = BioSDKException.class)
-    public void testInitException() {
+    public void testInit_Exception() {
         // Arrange
         String base64Request = "mockBase64Request"; // Example Base64 request
         when(mockRequestDto.getRequest()).thenReturn(base64Request);
@@ -131,7 +131,7 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
     }
 
     @Test
-    public void testCheckQualitySuccess() {
+    public void testCheckQuality_Success() {
         // Arrange: valid Base64 → JSON
         String base64Request = buildValidBase64CheckQualityRequestJson();
         when(mockRequestDto.getRequest()).thenReturn(base64Request);
@@ -150,7 +150,7 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
     }
 
     @Test(expected = BioSDKException.class)
-    public void testCheckQualityInvalidBase64ThrowsBioSDKException() {
+    public void testCheckQuality_InvalidBase64_ThrowsBioSDKException() {
 
         when(mockRequestDto.getRequest()).thenReturn("not_base64!");
 
@@ -161,7 +161,7 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
     }
 
     @Test(expected = BioSDKException.class)
-    public void testCheckQualitySdkThrowsWrappedAsBioSDKException() {
+    public void testCheckQuality_SdkThrows_WrappedAsBioSDKException() {
         // Arrange: valid Base64 → JSON
         String base64Request = buildValidBase64CheckQualityRequestJson();
         when(mockRequestDto.getRequest()).thenReturn(base64Request);
