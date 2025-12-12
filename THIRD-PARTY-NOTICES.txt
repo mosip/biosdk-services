@@ -172,14 +172,6 @@ Homepage: https://projectlombok.org
 ================================================================================
 
 ================================================================================
-Package: Git Commit ID Plugin
-Name: pl.project13.maven:git-commit-id-plugin
-Version: 3.0.1
-License: GNU Lesser General Public License 3.0 (LGPL-3.0)
-Homepage: https://github.com/git-commit-id/git-commit-id-maven-plugin
-================================================================================
-
-================================================================================
 Package: Apache Maven Compiler Plugin
 Version: 3.11.0
 License: Apache License 2.0
