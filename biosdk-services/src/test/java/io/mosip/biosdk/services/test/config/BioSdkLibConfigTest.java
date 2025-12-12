@@ -25,14 +25,14 @@ class BioSdkLibConfigTest {
     }
 
     @Test
-    void testValidateBioSdkLib_WithValidClass() {
+    void testValidateBioSdkLibWithValidClass() {
         // Simulate a valid class name
         when(env.getProperty("biosdk_bioapi_impl")).thenReturn("java.lang.String");
         assertDoesNotThrow(() -> config.validateBioSdkLib());
     }
 
     @Test
-    void testValidateBioSdkLib_WithBlankClass() {
+    void testValidateBioSdkLibWithBlankClass() {
         // Simulate blank class name
         when(env.getProperty("biosdk_bioapi_impl")).thenReturn("");
         assertDoesNotThrow(() -> config.validateBioSdkLib());
@@ -42,13 +42,13 @@ class BioSdkLibConfigTest {
     }
 
     @Test
-    void testValidateBioSdkLib_WithNullClass() {
+    void testValidateBioSdkLibWithNullClass() {
         when(env.getProperty("biosdk_bioapi_impl")).thenReturn(null);
         assertDoesNotThrow(() -> config.validateBioSdkLib());
     }
 
     @Test
-    void testIBioApi_NoClassProvided() {
+    void testIBioApiNoClassProvided() {
         when(env.getProperty("biosdk_bioapi_impl")).thenReturn(null);
 
         BioSDKException exception = assertThrows(BioSDKException.class, () -> config.iBioApi());
@@ -56,7 +56,7 @@ class BioSdkLibConfigTest {
     }
 
     @Test
-    void testIBioApi_ClassNotFound() {
+    void testIBioApiClassNotFound() {
         when(env.getProperty("biosdk_bioapi_impl")).thenReturn("non.existing.ClassName");
 
         assertThrows(ClassNotFoundException.class, () -> config.iBioApi());
