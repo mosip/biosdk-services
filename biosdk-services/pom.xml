@@ -45,6 +45,8 @@
 		<kernel.core.version>1.2.1-SNAPSHOT</kernel.core.version>
 		<kernel.biometrics.api.version>1.2.1-SNAPSHOT</kernel.biometrics.api.version>
 		<kernel.logger.logback.version>1.2.1-SNAPSHOT</kernel.logger.logback.version>
+		<sonar.coverage.exclusions>**/dto/**, **/config/**, **/constants/**, **/Status/**
+		</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencyManagement>
