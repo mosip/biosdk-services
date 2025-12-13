@@ -195,6 +195,7 @@ http://localhost:9099/biosdk-service/swagger-ui.html
 • If you have questions or encounter issues, visit the [MOSIP Community](https://community.mosip.io/) for support.
 
 • For any GitHub issues: [Report here](https://github.com/mosip/biosdk-services/issues)
+
 ## License
 
 This project is licensed under the terms of [Mozilla Public License 2.0](https://github.com/mosip/admin-services/blob/develop/LICENSE).
