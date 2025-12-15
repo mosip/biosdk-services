@@ -379,7 +379,7 @@ Full License (GPL): https://www.gnu.org/licenses/gpl-2.0.html
 JAXB API (javax.xml.bind:jaxb-api)
 Version: (Managed by Spring Boot BOM)
 Copyright (c) 2018, 2021 Oracle and/or its affiliates, Eclipse Foundation
-License: Eclipse Distribution License (EDL) v1.0 (BSD-3-Clause), OR EPL-2.0, OR GPL-2.0 with Classpath Exception [multi-licensed]
+License: Eclipse Distribution License (EDL) v1.0 (BSD-3-Clause)
 Full License: https://projects.eclipse.org/projects/ee4j.jaxb
 
 Bean Validation API (javax.validation:validation-api)
@@ -395,7 +395,7 @@ Full License: https://www.apache.org/licenses/LICENSE-2.0
 Javassist (org.javassist:javassist)
 Version: (Managed by BOM)
 Copyright (c) 1999-2025 Shigeru Chiba
-License: Apache License 2.0 OR LGPL-2.1-or-later OR MPL-1.1 [triple-licensed]
+License: Apache License 2.0 
 Full License: https://www.javassist.org/
 
 ICU4J (com.ibm.icu:icu4j)
@@ -408,7 +408,7 @@ Tyrus Standalone Client (org.glassfish.tyrus.bundles:tyrus-standalone-client)
 Version: 1.13.1
 Copyright (c) 2007-2017 Oracle and/or its affiliates
 Copyright (c) 2005-2010, The Dojo Foundation
-License: Eclipse Public License 2.0 (EPL-2.0) OR GPL-2.0 with Classpath Exception [dual-licensed]
+License: Eclipse Public License 2.0 (EPL-2.0) 
 Full License: https://www.eclipse.org/legal/epl-2.0/
 
 JJWT (io.jsonwebtoken:jjwt)
