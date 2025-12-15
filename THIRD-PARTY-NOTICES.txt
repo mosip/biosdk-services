@@ -143,7 +143,7 @@ Homepage: https://github.com/FasterXML/jackson-dataformat-xml
 Package: Jakarta Transaction API
 Name: jakarta.transaction:jakarta.transaction-api
 Version: Not specified
-License: EPL 2.0 OR GPL-2.0 with Classpath Exception
+License: EPL 2.0
 Homepage: https://github.com/eclipse-ee4j/jta-api
 ================================================================================
 
