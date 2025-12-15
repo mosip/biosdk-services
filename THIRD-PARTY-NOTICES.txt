@@ -55,7 +55,7 @@ Homepage: https://github.com/mosip/kattu
 Package: Java Servlet API
 Name: javax.servlet:javax.servlet-api
 Version: Not specified
-License: CDDL 1.1 OR GPLv2 with Classpath Exception (Inferred)
+License: CDDL 1.1
 Homepage: https://github.com/eclipse-ee4j/servlet-api
 ================================================================================
 
