@@ -25,7 +25,7 @@ The following components are included in this product.
    kernel-biometrics-api and related modules)
 
 ===============================
- CDDL 1.1 OR GPLv2 with Classpath Exception
+GPLv2 with Classpath Exception
 ===============================
 • Java Servlet API  
   (javax.servlet:javax.servlet-api)
