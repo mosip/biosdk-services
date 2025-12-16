@@ -7,5 +7,16 @@ This is reference service and provides a mock implementation of Bio-SDK REST Ser
 
 To know more about Biometric SDK, refer [biometric-sdk](https://docs.mosip.io/1.2.0/biometrics/biometric-sdk).
 
+To know more about implementation, [refer here](biosdk-services/README.md).
+
+## Contribution & Community
+
+• To learn how you can contribute code to this application, [click here](https://docs.mosip.io/1.2.0/community/code-contributions).
+
+• If you have questions or encounter issues, visit the [MOSIP Community](https://community.mosip.io/) for support.
+
+• For any GitHub issues: [Report here](https://github.com/mosip/biosdk-services/issues)
+
+
 ### License
 This project is licensed under the terms of [Mozilla Public License 2.0](LICENSE).
