@@ -35,7 +35,7 @@ Ensure you have the following installed before proceeding:
 
 Clone the repository from GitHub to your local machine:
 
-```bash
+```text
 	git clone https://github.com/mosip/biosdk-services.git
 	cd biosdk-services
 ```
@@ -44,8 +44,8 @@ Clone the repository from GitHub to your local machine:
 
 Use Maven to build the project and resolve dependencies.
 
-```bash
-	mvn clean install -Dgpg.skip=true
+```text
+   mvn clean install -Dgpg.skip=true
 ```
    
 
@@ -54,13 +54,13 @@ Use Maven to build the project and resolve dependencies.
 Run the application using the following command:
 
 ```java
-java -Dloader.path=<biosdk jar provided by third-party vendors> -Dbiosdk_bioapi_impl=<classpath of class that implements IBioApiV2 interface> --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED  -jar biosdk-services-<version>.jar
+   java -Dloader.path=<biosdk jar provided by third-party vendors> -Dbiosdk_bioapi_impl=<classpath of class that implements IBioApiV2 interface> --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED  -jar biosdk-services-<version>.jar
 ```
 
 For example:
 
 ```java
-java -Dloader.path=mock-sdk-1.3.0-SNAPSHOT-jar-with-dependencies.jar -Dbiosdk_bioapi_impl=io.mosip.mock.sdk.impl.SampleSDKV2 --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED -jar biosdk-services-1.3.0-SNAPSHOT.jar
+   java -Dloader.path=mock-sdk-1.3.0-jar-with-dependencies.jar -Dbiosdk_bioapi_impl=io.mosip.mock.sdk.impl.SampleSDKV2 --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED -jar biosdk-services-1.3.0.jar
 ```
 
 4. **Verify the setup**
@@ -102,7 +102,7 @@ Before building the image, set the following environment variables:
 
 Run the below command to build the Docker image:
 
-```bash
+```text
    docker build -t mosip/biosdk-services .
 ```
 
@@ -110,7 +110,7 @@ Run the below command to build the Docker image:
 
 Run the below command:
 
-```bash
+```text
    docker run -d -p 8080:8080 mosip/biosdk-services
 ```
 
@@ -122,14 +122,14 @@ Ensure the application is running correctly by following these steps:
 
 Use the docker ps command to verify that the container is up and running:
 
-```bash
+```text
    docker ps
 ```
 * **Test the health endpoint:**
 
 Use curl to check the application's health:
 
-```bash
+```text
    curl http://localhost:9099/health
 ```
 
@@ -138,7 +138,7 @@ Use curl to check the application's health:
 If the setup is successful, you will see a response similar to below:
 
 ```text
-	Service is running... Fri Jan 29 08:49:28 UTC 2021
+   Service is running... Fri Jan 29 08:49:28 UTC 2021
 ```
 ---
 
@@ -188,6 +188,13 @@ In case of localhost:
 http://localhost:9099/biosdk-service/swagger-ui.html
 ```
 ---
+## Contribution & Community
+
+• To learn how you can contribute code to this application, [click here](https://docs.mosip.io/1.2.0/community/code-contributions).
+
+• If you have questions or encounter issues, visit the [MOSIP Community](https://community.mosip.io/) for support.
+
+• For any GitHub issues: [Report here](https://github.com/mosip/biosdk-services/issues)
 
 ## License
 
