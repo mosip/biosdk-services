@@ -1,0 +1,217 @@
+THIRD-PARTY-NOTICES
+
+This project includes third-party packages that are distributed under various open-source licenses. Below is a list of packages and their associated licenses.
+
+================================================================================
+Package: mosip/kattu – GitHub Actions Workflow: tag.yml
+Version: master
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+Homepage: https://github.com/mosip/kattu
+================================================================================
+
+================================================================================
+Package: mosip/kattu – GitHub Actions Workflow: chart-lint-publish.yml
+Version: master
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+Homepage: https://github.com/mosip/kattu
+================================================================================
+
+================================================================================
+Package: mosip/kattu – GitHub Actions Workflow: maven-build.yml
+Version: master-java21
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+Homepage: https://github.com/mosip/kattu
+================================================================================
+
+================================================================================
+Package: mosip/kattu – GitHub Actions Workflow: maven-publish-to-nexus.yml
+Version: master-java21
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+Homepage: https://github.com/mosip/kattu
+================================================================================
+
+================================================================================
+Package: mosip/kattu – GitHub Actions Workflow: maven-sonar-analysis.yml
+Version: master-java21
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+Homepage: https://github.com/mosip/kattu
+================================================================================
+
+================================================================================
+Package: mosip/kattu – GitHub Actions Workflow: docker-build.yml
+Version: master-java21
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+Homepage: https://github.com/mosip/kattu
+================================================================================
+
+================================================================================
+Package: mosip/kattu – GitHub Actions Workflow: release-changes.yml
+Version: master
+License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+Homepage: https://github.com/mosip/kattu
+================================================================================
+
+================================================================================
+Package: Java Servlet API
+Name: javax.servlet:javax.servlet-api
+Version: Not specified
+License: CDDL 1.1
+Homepage: https://github.com/eclipse-ee4j/servlet-api
+================================================================================
+
+================================================================================
+Package: MOSIP Kernel Core
+Name: io.mosip.kernel:kernel-core
+Version: 1.3.0-SNAPSHOT
+License: MPL-2.0 (Inferred from MOSIP repo)
+Homepage: https://mosip.io
+================================================================================
+
+================================================================================
+Package: MOSIP Kernel BOM
+Name: io.mosip.kernel:kernel-bom
+Version: 1.3.0-SNAPSHOT
+License: MPL-2.0 (Inferred)
+Homepage: https://mosip.io
+================================================================================
+
+================================================================================
+Package: MOSIP Kernel Logger (Logback)
+Name: io.mosip.kernel:kernel-logger-logback
+Version: 1.3.0-SNAPSHOT
+License: MPL-2.0 (Inferred)
+Homepage: https://mosip.io
+================================================================================
+
+================================================================================
+Package: MOSIP Biometrics API
+Name: io.mosip.kernel:kernel-biometrics-api
+Version: 1.3.0-SNAPSHOT
+License: MPL-2.0 (Inferred)
+Homepage: https://mosip.io
+================================================================================
+
+================================================================================
+Package: Spring Boot Starter Actuator
+Name: org.springframework.boot:spring-boot-starter-actuator
+Version: Not specified
+License: Apache License 2.0 (Inferred)
+Homepage: https://spring.io/projects/spring-boot
+================================================================================
+
+================================================================================
+Package: Spring Boot Starter Web
+Name: org.springframework.boot:spring-boot-starter-web
+Version: Not specified
+License: Apache License 2.0
+Homepage: https://spring.io/projects/spring-boot
+================================================================================
+
+================================================================================
+Package: Spring Boot Maven Plugin
+Name: org.springframework.boot:spring-boot-maven-plugin
+Version: 3.2.3
+License: Apache License 2.0
+Homepage: https://spring.io/projects/spring-boot
+================================================================================
+
+================================================================================
+Package: Spring Data Commons
+Name: org.springframework.data:spring-data-commons
+Version: Not specified
+License: Apache License 2.0 (Inferred)
+Homepage: https://spring.io/projects/spring-data
+================================================================================
+
+================================================================================
+Package: SpringDoc OpenAPI WebMVC UI
+Name: org.springdoc:springdoc-openapi-starter-webmvc-ui
+Version: 2.5.0
+License: Apache License 2.0
+Homepage: https://springdoc.org
+================================================================================
+
+================================================================================
+Package: Jackson Dataformat XML
+Name: com.fasterxml.jackson.dataformat:jackson-dataformat-xml
+Version: Not specified
+License: Apache License 2.0 (Inferred)
+Homepage: https://github.com/FasterXML/jackson-dataformat-xml
+================================================================================
+
+================================================================================
+Package: Jakarta Transaction API
+Name: jakarta.transaction:jakarta.transaction-api
+Version: Not specified
+License: EPL 2.0
+Homepage: https://github.com/eclipse-ee4j/jta-api
+================================================================================
+
+================================================================================
+Package: JSON-Simple
+Name: com.googlecode.json-simple:json-simple
+Version: Not specified
+License: Apache License 2.0 (Inferred)
+Homepage: https://github.com/fangyidong/json-simple
+================================================================================
+
+================================================================================
+Package: Gson
+Name: com.google.code.gson:gson
+Version: Not specified
+License: Apache License 2.0
+Homepage: https://github.com/google/gson
+================================================================================
+
+================================================================================
+Package: Lombok
+Name: org.projectlombok:lombok
+Version: Not specified
+License: MIT License
+Homepage: https://projectlombok.org
+================================================================================
+
+================================================================================
+Package: Apache Maven Compiler Plugin
+Version: 3.11.0
+License: Apache License 2.0
+Homepage: https://maven.apache.org/plugins
+================================================================================
+
+================================================================================
+Package: Apache Maven Surefire Plugin
+Version: 3.1.2
+License: Apache License 2.0
+Homepage: https://maven.apache.org/plugins
+================================================================================
+
+================================================================================
+Package: Apache Maven Source Plugin
+Version: 3.3.1
+License: Apache License 2.0
+Homepage: https://maven.apache.org/plugins
+================================================================================
+
+================================================================================
+Package: Apache Maven Javadoc Plugin
+Version: 3.2.0
+License: Apache License 2.0
+Homepage: https://maven.apache.org/plugins
+================================================================================
+
+================================================================================
+Package: Apache Maven GPG Plugin
+Version: 3.2.3
+License: Apache License 2.0
+Homepage: https://maven.apache.org/plugins
+================================================================================
+
+================================================================================
+Package: JUnit Vintage Engine
+Name: org.junit.vintage:junit-vintage-engine
+Version: Not specified
+License: Eclipse Public License 2.0
+Homepage: https://junit.org
+================================================================================
+
+Full license texts and additional details for each of the above packages are available in the license/ directory of this repository. Please refer to those files or the original source of each package for complete legal terms and conditions.
