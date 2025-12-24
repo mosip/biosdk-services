@@ -1,0 +1,50 @@
+THIRD-PARTY NOTICES
+
+Copyright © MOSIP.
+All rights reserved.
+
+This project includes third-party components whose licenses require attribution.
+The following components are included in this product.
+
+===============================
+ MIT License
+===============================
+• mosip/kattu GitHub Actions Workflows
+  (tag.yml, chart-lint-publish.yml, maven-build.yml,
+   maven-publish-to-nexus.yml, maven-sonar-analysis.yml,
+   docker-build.yml, release-changes.yml)
+  Inferred License: MIT
+
+• Lombok (org.projectlombok:lombok)
+
+===============================
+ Mozilla Public License 2.0
+===============================
+• MOSIP Kernel Components  
+  (kernel-core, kernel-bom, kernel-logger-logback,
+   kernel-biometrics-api and related modules)
+
+===============================
+GPLv2 with Classpath Exception
+===============================
+• Java Servlet API  
+  (javax.servlet:javax.servlet-api)
+
+===============================
+ Eclipse Public License
+===============================
+• Jakarta Transaction API  
+  (jakarta.transaction:jakarta.transaction-api) – EPL 2.0
+
+• JUnit Vintage Engine  
+  (org.junit.vintage:junit-vintage-engine) – EPL 1.0
+
+===============================
+ JSON License
+===============================
+• JSON.org (if indirectly used via JSON processing APIs)
+
+===============================
+
+Full license texts for these components are available in the `license/`
+directory of this repository.
