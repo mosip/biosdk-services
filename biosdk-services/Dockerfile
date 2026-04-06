@@ -93,7 +93,8 @@ ADD ./target/biosdk-services-*.jar biosdk-services.jar
 RUN chmod +x /home/${container_user}/configure_biosdk.sh \
     && chmod a-w /home/${container_user}/configure_biosdk.sh \
     && chmod 775 biosdk-services.jar \
-    && chown -R ${container_user}:${container_user} /home/${container_user}
+    && chown -R ${container_user}:${container_user} /home/${container_user} \
+    && chmod +x configure_biosdk.sh
 
 # select container user for all tasks
 USER ${container_user_uid}:${container_user_gid}
