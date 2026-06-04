@@ -62,7 +62,7 @@ Homepage: https://github.com/eclipse-ee4j/servlet-api
 ================================================================================
 Package: MOSIP Kernel Core
 Name: io.mosip.kernel:kernel-core
-Version: 1.3.0-SNAPSHOT
+Version: 1.4.0-SNAPSHOT
 License: MPL-2.0 (Inferred from MOSIP repo)
 Homepage: https://mosip.io
 ================================================================================
@@ -70,7 +70,7 @@ Homepage: https://mosip.io
 ================================================================================
 Package: MOSIP Kernel BOM
 Name: io.mosip.kernel:kernel-bom
-Version: 1.3.0-SNAPSHOT
+Version: 1.4.0-SNAPSHOT
 License: MPL-2.0 (Inferred)
 Homepage: https://mosip.io
 ================================================================================
@@ -78,7 +78,7 @@ Homepage: https://mosip.io
 ================================================================================
 Package: MOSIP Kernel Logger (Logback)
 Name: io.mosip.kernel:kernel-logger-logback
-Version: 1.3.0-SNAPSHOT
+Version: 1.4.0-SNAPSHOT
 License: MPL-2.0 (Inferred)
 Homepage: https://mosip.io
 ================================================================================
@@ -86,7 +86,7 @@ Homepage: https://mosip.io
 ================================================================================
 Package: MOSIP Biometrics API
 Name: io.mosip.kernel:kernel-biometrics-api
-Version: 1.3.0-SNAPSHOT
+Version: 1.4.0-SNAPSHOT
 License: MPL-2.0 (Inferred)
 Homepage: https://mosip.io
 ================================================================================
