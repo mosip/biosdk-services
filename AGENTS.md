@@ -1,7 +1,6 @@
 # AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
+This file provides guidance to AI agents when working with code in this repository.
 ## Project Overview
 
 `biosdk-services` is a Spring Boot REST service that wraps MOSIP's `IBioApiV2` biometric SDK interface and exposes it over HTTP. It is used by the MOSIP registration processor to perform biometric operations (match, segment, extract, quality check, format convert). The service loads a third-party SDK JAR at startup via `-Dloader.path` and `-Dbiosdk_bioapi_impl`, so the actual biometric logic lives outside this repo.
