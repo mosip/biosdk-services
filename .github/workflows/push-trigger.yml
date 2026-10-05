@@ -20,6 +20,7 @@ on:
       - 1.*
       - develop*
       - MOSIP*
+      - issue*
 
 jobs:
   build-biosdk-services:
@@ -27,6 +28,8 @@ jobs:
     with:
       SERVICE_LOCATION: ./biosdk-services
       BUILD_ARTIFACT: biosdk-services
+      # ZIP-layout Boot JAR is often not +x; kattu executable-find then uploads nothing.
+      MAVEN_NON_EXEC_ARTIFACTS: biosdk-services.jar
     secrets:
       OSSRH_USER: ${{ secrets.OSSRH_USER }}
       OSSRH_SECRET: ${{ secrets.OSSRH_SECRET }}
