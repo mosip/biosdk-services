@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2018-2026 MOSIP.
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-
 package io.mosip.biosdk.services.factory;
 
 import java.util.List;
@@ -28,7 +21,6 @@ import io.mosip.biosdk.services.utils.ErrorCode;
  *
  *
  * @since 1.0.0
- * @copyright 2018-2026 MOSIP
  */
 @Component
 public class BioSdkServiceFactory {

@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2018-2026 MOSIP.
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-
 package io.mosip.biosdk.services.controller;
 
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
@@ -61,9 +54,6 @@ import io.swagger.v3.oas.annotations.Parameter;
  * @since 1.0.0
  */
 //@SuppressWarnings({ "java:S5122" })
-/**
- * @copyright 2018-2026 MOSIP
- */
 @RestController
 @RequestMapping("/")
 @Api(tags = "Sdk")

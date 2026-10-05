@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2018-2026 MOSIP.
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-
 package io.mosip.biosdk.services.test.impl.spec_1_0;
 
 import static org.mockito.Mockito.*;
@@ -33,9 +26,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.nio.charset.StandardCharsets;
 
-/**
- * @copyright 2018-2026 MOSIP
- */
 public class BioSdkServiceProviderImpl_V_1_0Test {
 
     @Mock

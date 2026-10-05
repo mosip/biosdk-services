@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2018-2026 MOSIP.
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-
 package io.mosip.biosdk.services.test.config;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,9 +11,6 @@ import org.springframework.core.env.Environment;
 
 import io.mosip.biosdk.services.exceptions.BioSDKException;
 
-/**
- * @copyright 2018-2026 MOSIP
- */
 class BioSdkLibConfigTest {
 
     @Mock

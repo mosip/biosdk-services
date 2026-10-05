@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2018-2026 MOSIP.
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-
 package io.mosip.biosdk.services.test.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,9 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import io.mosip.biosdk.services.dto.RequestDto;
 
-/**
- * @copyright 2018-2026 MOSIP
- */
 public class UtilsTest {
 
     private Utils utils;

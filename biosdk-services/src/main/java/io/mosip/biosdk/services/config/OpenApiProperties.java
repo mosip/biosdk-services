@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2018-2026 MOSIP.
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-
 package io.mosip.biosdk.services.config;
 
 import java.util.List;
@@ -21,7 +14,6 @@ import lombok.Data;
  * specification such as information (title, description, version, license),
  * service details (servers), and API grouping (group name and paths).
  * @since 1.0.0
- * @copyright 2018-2026 MOSIP
  */
 @Configuration
 @ConfigurationProperties(prefix = "openapi")
@@ -45,7 +37,6 @@ public class OpenApiProperties {
 
 /**
  * Information properties class for OpenAPI specification.
- * @copyright 2018-2026 MOSIP
  */
 @Data
 class InfoProperty {
@@ -73,7 +64,6 @@ class InfoProperty {
 
 /**
  * License properties class for OpenAPI specification.
- * @copyright 2018-2026 MOSIP
  */
 @Data
 class LicenseProperty {
@@ -91,7 +81,6 @@ class LicenseProperty {
 
 /**
  * Service properties class for OpenAPI specification.
- * @copyright 2018-2026 MOSIP
  */
 @Data
 class Service {
@@ -104,7 +93,6 @@ class Service {
 
 /**
  * Server configuration class for OpenAPI specification.
- * @copyright 2018-2026 MOSIP
  */
 @Data
 class Server {
@@ -122,7 +110,6 @@ class Server {
 
 /**
  * Group properties class for OpenAPI specification.
- * @copyright 2018-2026 MOSIP
  */
 @Data
 class Group {
