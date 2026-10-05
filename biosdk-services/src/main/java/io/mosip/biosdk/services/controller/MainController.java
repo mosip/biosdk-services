@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.controller;
 
 import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_IDTYPE;
@@ -43,27 +50,46 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Parameter;
 
 /**
- * Main controller class handling incoming requests for the BioSDK service.
- * 
- * This controller class exposes various BioSDK functionalities through RESTful
- * APIs. It utilizes Spring annotations for dependency injection, request
- * mapping, and security.
- * 
- *  CrossOrigin can be enabled for local testing 
+ * Main REST controller for the BioSDK service ({@code /biosdk-service/}).
+ * <p>
+ * Public health is {@code GET /}. Operation endpoints accept a {@link RequestDto}
+ * envelope ({@code version} plus Base64 {@code request}) and always return HTTP
+ * 200 with top-level {@code errors}. {@code convert-format} calls
+ * {@link io.mosip.kernel.biometrics.spi.IBioApiV2#convertFormatV2}.
+ * </p>
+ *
  * @since 1.0.0
  */
 //@SuppressWarnings({ "java:S5122" })
+/**
+ * @copyright 2018-2026 MOSIP
+ */
 @RestController
 @RequestMapping("/")
 @Api(tags = "Sdk")
 @CrossOrigin("*")
 public class MainController {
 
-	private Logger logger = LoggerConfig.logConfig(MainController.class);
+	/**
+	 * MOSIP kernel logger for this controller. Shared for all HTTP requests.
+	 */
+	private static final Logger logger = LoggerConfig.logConfig(MainController.class);
 
+	/**
+	 * Shared helpers for UTC response timestamps and JSON parsing.
+	 */
 	private Utils serviceUtil;
+
+	/**
+	 * Selects the {@link BioSdkServiceProvider} whose spec version matches
+	 * {@link RequestDto#getVersion()}.
+	 */
 	private BioSdkServiceFactory bioSdkServiceFactory;
-	private Gson gson = null;
+
+	/**
+	 * JSON serializer used for HTTP bodies. Null fields are serialized.
+	 */
+	private Gson gson;
 
 	/**
 	 * Constructor for MainController.
@@ -340,6 +366,14 @@ public class MainController {
 		return responseDto;
 	}
 
+	/**
+	 * Parses {@code version} from a raw JSON request body. Unused by the REST
+	 * methods (they read {@link RequestDto#getVersion()} after Jackson binding).
+	 *
+	 * @param request JSON string that must contain a {@code version} field
+	 * @return the version string from the JSON
+	 * @throws BioSDKException if the body is not valid JSON
+	 */
 	@SuppressWarnings({ "unused" })
 	private String getVersion(String request) throws BioSDKException {
 		JSONParser parser = new JSONParser();

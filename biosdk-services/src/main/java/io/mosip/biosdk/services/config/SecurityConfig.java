@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.config;
 
 import org.springframework.context.annotation.Bean;
@@ -12,20 +19,13 @@ import org.springframework.security.web.firewall.HttpFirewall;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Configuration class for setting up security configurations for the MOSIP
- * Biometric SDK service. This class defines beans for configuring HTTP
- * security, a custom HTTP firewall, and an authentication entry point.
- *
- * <pre>
- * {@code
- * @Configuration
- * public class SecurityConfig {
- * 	// Security configuration details
- * }
- * }
- * </pre>
+ * HTTP security for the BioSDK service. CSRF and HTTP Basic are disabled; all
+ * requests are permitted. Token-based auth is expected from the gateway when
+ * deployed. A permissive {@link DefaultHttpFirewall} and a 401 entry point are
+ * registered as beans.
  *
  * @since 1.0.0
+ * @copyright 2018-2026 MOSIP
  */
 @Configuration
 public class SecurityConfig {

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.constants;
 
 /**
@@ -20,6 +27,7 @@ package io.mosip.biosdk.services.constants;
  * </pre>
  *
  * @since 1.0
+ * @copyright 2018-2026 MOSIP
  */
 public enum ResponseStatus {
 	 /**
@@ -52,7 +60,14 @@ public enum ResponseStatus {
      */
     UNKNOWN_ERROR(500, "UNKNOWN_ERROR");
 
+    /**
+     * Numeric status associated with this outcome (not always an HTTP status).
+     */
     private final int statusCode;
+
+    /**
+     * Message template; some values contain {@code %s} for a field name.
+     */
     private final String statusMessage;
 
     /**

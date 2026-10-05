@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.dto;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +22,7 @@ import lombok.ToString;
  *
  *
  * @since 1.0.0
+ * @copyright 2018-2026 MOSIP
  */
 @Data
 @NoArgsConstructor
@@ -22,12 +30,13 @@ import lombok.ToString;
 @ToString
 public class ErrorDto {
 	/**
-	 * The error code.
+	 * Error code (for example {@link io.mosip.biosdk.services.constants.ErrorMessages}
+	 * name or {@link io.mosip.biosdk.services.utils.ErrorCode#getErrorCode()}).
 	 */
 	private String code;
 
 	/**
-	 * The error message.
+	 * Human-readable explanation of {@link #code}.
 	 */
 	private String message;
 }

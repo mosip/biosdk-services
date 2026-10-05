@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.config;
 
 import org.slf4j.Logger;
@@ -20,11 +27,19 @@ import io.swagger.v3.oas.models.servers.Server;
  * provided {@link OpenApiProperties}. It initializes an {@link OpenAPI} bean
  * and a {@link GroupedOpenApi} bean to customize and group API documentation
  * according to specified properties.
+ * @since 1.0.0
+ * @copyright 2018-2026 MOSIP
  */
 @Configuration
 public class SwaggerConfig {
+	/**
+	 * SLF4J logger used when the OpenAPI bean has been built.
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(SwaggerConfig.class);
 
+	/**
+	 * Bound {@code openapi.*} properties (title, servers, group, paths).
+	 */
 	private OpenApiProperties openApiProperties;
 
 	/**

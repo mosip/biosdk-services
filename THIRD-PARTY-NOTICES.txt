@@ -1,217 +1,626 @@
 THIRD-PARTY-NOTICES
 
-This project includes third-party packages that are distributed under various open-source licenses. Below is a list of packages and their associated licenses.
+This project is licensed under Mozilla Public License 2.0 (LICENSE).
+Third-party license texts live in licenses/. Dual-licensed libraries are used
+only under the MOSIP-approved option.
+
+A license must be both Compatible with MPL 2.0 AND Use with MOSIP: Yes to be
+treated as approved for this product. Two runtime JARs (aspectjweaver,
+jakarta.annotation-api) are transitives whose licenses are not on that list;
+they are called out at the end and are not relicensed.
+Runtime JARs below were resolved with Maven dependency:go-offline on 2026-09-30
+from biosdk-services 1.4.1-SNAPSHOT (compile + runtime, after POM exclusions).
 
 ================================================================================
-Package: mosip/kattu – GitHub Actions Workflow: tag.yml
-Version: master
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
-Homepage: https://github.com/mosip/kattu
+MOSIP open-source license compatibility
 ================================================================================
 
-================================================================================
-Package: mosip/kattu – GitHub Actions Workflow: chart-lint-publish.yml
-Version: master
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
-Homepage: https://github.com/mosip/kattu
-================================================================================
+License                        Compatible with MPL 2.0?  Use with MOSIP?
+BSD (2-Clause, 3-Clause)       Yes                       Yes
+MIT                            Yes                       Yes
+Apache 2.0                     Yes                       Yes
+MPL 2.0                        Yes                       Yes
+EPL                            No                        No
+LGPLv3                         Yes                       No
+GPLv2                          No                        No
+GPLv3                          Yes                       No
+AGPLv3                         Yes                       No
+Creative Commons Licenses      No                        No
+ISC                            Yes                       Yes
+Python 2.0                     Yes                       Yes
+Academic Free License v2.0     No                        No
+Academic Free License v2.1     Yes                       Yes
+ODC-By-1.0                     No                        No
+CDDL-1.0                       Yes                       Yes
+Unicode-DFS-2016               Yes                       Yes
+BlueOak-1.0.0                  Yes                       Yes
+OFL-1.1                        Yes                       Yes
+CC-BY-4.0                      To be reviewed            To be reviewed
+Zlib                           Yes                       Yes
+0BSD                           Yes                       Yes
+
+--------------------------------------------------------------------------------
+MOSIP comments
+--------------------------------------------------------------------------------
+
+BSD (2-Clause, 3-Clause)
+  Code can be combined freely.
+
+MIT
+  Code can be combined freely.
+
+Apache 2.0
+  Both licenses are permissive and compatible. Ensure attribution requirements
+  are met.
+
+MPL 2.0
+  Code can be combined freely.
+
+EPL
+  EPL is generally incompatible with MPL due to differing requirements.
+  Do not combine EPL with this product.
+
+LGPLv3
+  LGPLv3 works can be included, but LGPLv3 terms may apply to the combined
+  work. Not used with MOSIP.
+
+GPLv2
+  GPLv2 lacks explicit compatibility with MPL 2.0. Not used with MOSIP.
+
+GPLv3
+  MPL 2.0 can be included with GPLv3 in larger works, but the resulting
+  combined work must be GPLv3. Not used with MOSIP.
+
+AGPLv3
+  Similar compatibility as GPLv3. Combined work must adhere to AGPLv3.
+  Not used with MOSIP.
+
+Creative Commons Licenses
+  Not designed for software. Not used with MOSIP.
+
+ISC
+  Permissive. ISC code remains under ISC; the overall project can be
+  distributed under MPL 2.0. Include the ISC license text and attribution.
+
+Python 2.0
+  Python-2.0 licensed code may be included and the project distributed as
+  MPL 2.0, with compliance to both licenses.
+
+Academic Free License v2.0 (AFL v2.0)
+  Clauses conflict with MPL 2.0 and make them incompatible for
+  redistribution under a unified license. Not used with MOSIP.
+
+Academic Free License v2.1 (AFL v2.1)
+  Permissive terms allow inclusion in projects under other licenses if
+  original terms (attribution and disclaimers) are kept. Include the AFL 2.1
+  notice and license. AFL 2.1 code stays AFL 2.1; MOSIP code stays MPL 2.0.
+
+ODC-By-1.0
+  Designed for databases; conditions are incompatible with MPL 2.0.
+  Not used with MOSIP.
+
+CDDL-1.0
+  Both are weak copyleft. Each file retains its original license when
+  distributed. Identify licensing per file, include both license texts, and
+  explain which parts are MPL 2.0 vs CDDL-1.0.
+
+Unicode-DFS-2016
+  Each part retains its original license. Keep Unicode-DFS-2016 files
+  identified, do not strip headers, include the full license, and keep the
+  Unicode notice and disclaimers.
+
+BlueOak-1.0.0
+  Permissive. Include the original license text or a link to it with the
+  distributed software.
+
+OFL-1.1
+  SIL Open Font License 1.1. When distributing fonts (modified or not),
+  include the full OFL-1.1 license text.
+
+CC-BY-4.0
+  Creative Commons Attribution 4.0 International. Designed for creative
+  works (text, images, music). To be reviewed before use with MOSIP.
+
+Zlib
+  Distributed copies or substantial portions must include the original zlib
+  License text.
+
+0BSD
+  Permissive; broad use, modification, and distribution without significant
+  restrictions.
 
 ================================================================================
-Package: mosip/kattu – GitHub Actions Workflow: maven-build.yml
-Version: master-java21
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
-Homepage: https://github.com/mosip/kattu
+Mozilla Public License 2.0 — Use with MOSIP: Yes
 ================================================================================
-
-================================================================================
-Package: mosip/kattu – GitHub Actions Workflow: maven-publish-to-nexus.yml
-Version: master-java21
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
-Homepage: https://github.com/mosip/kattu
-================================================================================
-
-================================================================================
-Package: mosip/kattu – GitHub Actions Workflow: maven-sonar-analysis.yml
-Version: master-java21
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
-Homepage: https://github.com/mosip/kattu
-================================================================================
-
-================================================================================
-Package: mosip/kattu – GitHub Actions Workflow: docker-build.yml
-Version: master-java21
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
-Homepage: https://github.com/mosip/kattu
-================================================================================
-
-================================================================================
-Package: mosip/kattu – GitHub Actions Workflow: release-changes.yml
-Version: master
-License: CC0-1.0 (Creative Commons Zero v1.0 Universal)
-Homepage: https://github.com/mosip/kattu
-================================================================================
-
-================================================================================
-Package: Java Servlet API
-Name: javax.servlet:javax.servlet-api
-Version: Not specified
-License: CDDL 1.1
-Homepage: https://github.com/eclipse-ee4j/servlet-api
-================================================================================
-
-================================================================================
-Package: MOSIP Kernel Core
-Name: io.mosip.kernel:kernel-core
+Package: io.mosip.kernel:kernel-biometrics-api
 Version: 1.4.0-SNAPSHOT
-License: MPL-2.0 (Inferred from MOSIP repo)
-Homepage: https://mosip.io
-================================================================================
+
+Package: io.mosip.kernel:kernel-core
+Version: 1.4.1-SNAPSHOT
+
+Package: org.mozilla:rhino
+Version: 1.8.1
 
 ================================================================================
-Package: MOSIP Kernel BOM
-Name: io.mosip.kernel:kernel-bom
-Version: 1.4.0-SNAPSHOT
-License: MPL-2.0 (Inferred)
-Homepage: https://mosip.io
+Apache License 2.0 — Use with MOSIP: Yes (attribution required)
 ================================================================================
+Package: com.fasterxml.jackson.core:jackson-annotations
+Version: 2.21
+
+Package: com.fasterxml.jackson.core:jackson-core
+Version: 2.21.5
+
+Package: com.fasterxml.jackson.core:jackson-databind
+Version: 2.21.5
+
+Package: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml
+Version: 2.21.5
+
+Package: com.fasterxml.jackson.datatype:jackson-datatype-jdk8
+Version: 2.21.5
+
+Package: com.fasterxml.jackson.datatype:jackson-datatype-jsr310
+Version: 2.21.5
+
+Package: com.fasterxml.jackson.module:jackson-module-afterburner
+Version: 2.21.5
+
+Package: com.fasterxml.jackson.module:jackson-module-parameter-names
+Version: 2.21.5
+
+Package: com.fasterxml:classmate
+Version: 1.7.3
+
+Package: com.google.code.gson:gson
+Version: 2.13.2
+
+Package: com.google.errorprone:error_prone_annotations
+Version: 2.41.0
+
+Package: com.google.guava:failureaccess
+Version: 1.0.3
+
+Package: com.google.guava:guava
+Version: 33.7.1-jre
+
+Package: com.google.guava:listenablefuture
+Version: 9999.0-empty-to-avoid-conflict-with-guava
+
+Package: com.google.j2objc:j2objc-annotations
+Version: 3.1
+
+Package: com.googlecode.json-simple:json-simple
+Version: 1.1.1
+
+Package: commons-codec:commons-codec
+Version: 1.21.0
+
+Package: commons-io:commons-io
+Version: 2.22.0
+
+Package: commons-logging:commons-logging
+Version: 1.3.6
+
+Package: io.micrometer:context-propagation
+Version: 1.2.1
+
+Package: io.micrometer:micrometer-commons
+Version: 1.17.1
+
+Package: io.micrometer:micrometer-core
+Version: 1.17.1
+
+Package: io.micrometer:micrometer-jakarta9
+Version: 1.17.1
+
+Package: io.micrometer:micrometer-observation
+Version: 1.17.1
+
+Package: io.micrometer:micrometer-registry-prometheus
+Version: 1.17.1
+
+Package: io.micrometer:micrometer-tracing
+Version: 1.7.1
+
+Package: io.micrometer:micrometer-tracing-bridge-brave
+Version: 1.7.1
+
+Package: io.prometheus:prometheus-metrics-config
+Version: 1.7.0
+
+Package: io.prometheus:prometheus-metrics-core
+Version: 1.7.0
+
+Package: io.prometheus:prometheus-metrics-exposition-formats
+Version: 1.7.0
+
+Package: io.prometheus:prometheus-metrics-exposition-textformats
+Version: 1.7.0
+
+Package: io.prometheus:prometheus-metrics-model
+Version: 1.7.0
+
+Package: io.prometheus:prometheus-metrics-tracer-common
+Version: 1.7.0
+
+Package: io.swagger.core.v3:swagger-annotations-jakarta
+Version: 2.2.55
+
+Package: io.swagger.core.v3:swagger-core-jakarta
+Version: 2.2.55
+
+Package: io.swagger.core.v3:swagger-models-jakarta
+Version: 2.2.55
+
+Package: io.swagger:swagger-annotations
+Version: 1.6.14
+
+Package: io.swagger:swagger-models
+Version: 1.6.16
+
+Package: io.zipkin.aws:brave-propagation-aws
+Version: 1.4.0
+
+Package: io.zipkin.brave:brave
+Version: 6.3.1
+
+Package: io.zipkin.brave:brave-context-slf4j
+Version: 6.3.1
+
+Package: io.zipkin.brave:brave-instrumentation-http
+Version: 6.3.1
+
+Package: io.zipkin.contrib.brave-propagation-w3c:brave-propagation-tracecontext
+Version: 0.2.0
+
+Package: jakarta.validation:jakarta.validation-api
+Version: 3.1.1
+
+Package: javax.validation:validation-api
+Version: 2.0.1.Final
+
+Package: net.logstash.logback:logstash-logback-encoder
+Version: 8.1
+
+Package: org.apache.commons:commons-lang3
+Version: 3.20.0
+
+Package: org.apache.commons:commons-math3
+Version: 3.6.1
+
+Package: org.apache.httpcomponents.client5:httpclient5
+Version: 5.6.4
+
+Package: org.apache.httpcomponents.core5:httpcore5
+Version: 5.4.3
+
+Package: org.apache.httpcomponents.core5:httpcore5-h2
+Version: 5.4.3
+
+Package: org.apache.httpcomponents:httpclient
+Version: 4.5.14
+
+Package: org.apache.httpcomponents:httpcore
+Version: 4.4.16
+
+Package: org.apache.logging.log4j:log4j-api
+Version: 2.25.5
+
+Package: org.apache.logging.log4j:log4j-core
+Version: 2.25.5
+
+Package: org.apache.logging.log4j:log4j-to-slf4j
+Version: 2.25.5
+
+Package: org.apache.tomcat.embed:tomcat-embed-core
+Version: 11.0.24
+
+Package: org.apache.tomcat.embed:tomcat-embed-el
+Version: 11.0.24
+
+Package: org.apache.tomcat.embed:tomcat-embed-websocket
+Version: 11.0.24
+
+Package: org.apache.tomcat:tomcat-annotations-api
+Version: 11.0.24
+
+Package: org.hibernate.validator:hibernate-validator
+Version: 9.1.3.Final
+
+Package: org.jboss.logging:jboss-logging
+Version: 3.6.3.Final
+
+Package: org.jspecify:jspecify
+Version: 1.0.1
+
+Package: org.slf4j:jcl-over-slf4j
+Version: 2.0.18
+
+Package: org.springdoc:springdoc-openapi-starter-common
+Version: 3.1.1
+
+Package: org.springdoc:springdoc-openapi-starter-webmvc-api
+Version: 3.1.1
+
+Package: org.springdoc:springdoc-openapi-starter-webmvc-ui
+Version: 3.1.1
+
+Package: org.springframework.boot:spring-boot
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-actuator
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-actuator-autoconfigure
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-autoconfigure
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-health
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-http-converter
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-jackson
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-jackson2
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-micrometer-metrics
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-micrometer-observation
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-security
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-servlet
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-actuator
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-logging
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-micrometer-metrics
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-security
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-tomcat
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-tomcat-runtime
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-validation
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-starter-web
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-tomcat
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-validation
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-web-server
+Version: 4.1.1
+
+Package: org.springframework.boot:spring-boot-webmvc
+Version: 4.1.1
+
+Package: org.springframework.security:spring-security-config
+Version: 7.1.1
+
+Package: org.springframework.security:spring-security-core
+Version: 7.1.1
+
+Package: org.springframework.security:spring-security-crypto
+Version: 7.1.1
+
+Package: org.springframework.security:spring-security-web
+Version: 7.1.1
+
+Package: org.springframework:spring-aop
+Version: 7.0.9
+
+Package: org.springframework:spring-aspects
+Version: 7.0.9
+
+Package: org.springframework:spring-beans
+Version: 7.0.9
+
+Package: org.springframework:spring-context
+Version: 7.0.9
+
+Package: org.springframework:spring-core
+Version: 7.0.9
+
+Package: org.springframework:spring-expression
+Version: 7.0.9
+
+Package: org.springframework:spring-web
+Version: 7.0.9
+
+Package: org.springframework:spring-webmvc
+Version: 7.0.9
+
+Package: org.webjars:swagger-ui
+Version: 5.32.14
+
+Package: org.yaml:snakeyaml
+Version: 2.6
+
+Package: tools.jackson.core:jackson-core
+Version: 3.1.5
+
+Package: tools.jackson.core:jackson-databind
+Version: 3.1.5
 
 ================================================================================
-Package: MOSIP Kernel Logger (Logback)
-Name: io.mosip.kernel:kernel-logger-logback
-Version: 1.4.0-SNAPSHOT
-License: MPL-2.0 (Inferred)
-Homepage: https://mosip.io
+MIT License — Use with MOSIP: Yes
 ================================================================================
+Package: com.auth0:java-jwt
+Version: 3.19.4
+
+Package: org.bouncycastle:bcpkix-jdk18on
+Version: 1.85
+License note: POM name is Bouncy Castle Licence; jar META-INF/LICENSE.md is MIT
+
+Package: org.bouncycastle:bcprov-jdk18on
+Version: 1.85.2
+License note: POM name is Bouncy Castle Licence; jar META-INF/LICENSE.md is MIT
+
+Package: org.bouncycastle:bcutil-jdk18on
+Version: 1.85
+License note: POM name is Bouncy Castle Licence; jar META-INF/LICENSE.md is MIT
+
+Package: org.jsoup:jsoup
+Version: 1.23.2
+
+Package: org.slf4j:jul-to-slf4j
+Version: 2.0.18
+
+Package: org.slf4j:slf4j-api
+Version: 2.0.18
+
+Package: org.webjars:webjars-locator-lite
+Version: 1.1.4
 
 ================================================================================
-Package: MOSIP Biometrics API
-Name: io.mosip.kernel:kernel-biometrics-api
-Version: 1.4.0-SNAPSHOT
-License: MPL-2.0 (Inferred)
-Homepage: https://mosip.io
+BSD-3-Clause / Eclipse Distribution License 1.0 — Use with MOSIP: Yes
 ================================================================================
+Package: com.sun.activation:jakarta.activation
+Version: 1.2.2
+License note: EDL 1.0 / BSD-3-Clause
+
+Package: com.sun.istack:istack-commons-runtime
+Version: 3.0.12
+License note: EDL 1.0 / BSD-3-Clause
+
+Package: jakarta.xml.bind:jakarta.xml.bind-api
+Version: 4.0.5
+License note: EDL 1.0 / BSD-3-Clause
+
+Package: org.glassfish.jaxb:jaxb-runtime
+Version: 2.3.9
+License note: EDL 1.0 / BSD-3-Clause
+
+Package: org.glassfish.jaxb:txw2
+Version: 4.0.9
+License note: EDL 1.0 / BSD-3-Clause
+
+Package: org.owasp.encoder:encoder
+Version: 1.4.0
+License note: BSD-3-Clause
 
 ================================================================================
-Package: Spring Boot Starter Actuator
-Name: org.springframework.boot:spring-boot-starter-actuator
-Version: Not specified
-License: Apache License 2.0 (Inferred)
-Homepage: https://spring.io/projects/spring-boot
+BSD-2-Clause — Use with MOSIP: Yes
 ================================================================================
+Package: org.hdrhistogram:HdrHistogram
+Version: 2.2.2
+License note: CC0 OR BSD-2-Clause; MOSIP uses BSD-2-Clause
 
 ================================================================================
-Package: Spring Boot Starter Web
-Name: org.springframework.boot:spring-boot-starter-web
-Version: Not specified
-License: Apache License 2.0
-Homepage: https://spring.io/projects/spring-boot
+CDDL-1.0 — Use with MOSIP: Yes (file-level; CDDL files stay CDDL)
 ================================================================================
+Package: javax.activation:activation
+Version: 1.1.1
+License note: CDDL-1.0 OR GPLv2+classpath-exception; MOSIP uses CDDL-1.0
+
+Package: javax.activation:javax.activation-api
+Version: 1.2.0
+License note: CDDL-1.0 OR GPLv2+classpath-exception; MOSIP uses CDDL-1.0
+
+Package: javax.xml.bind:jaxb-api
+Version: 2.3.1
+License note: CDDL-1.0 OR GPLv2+classpath-exception; MOSIP uses CDDL-1.0
 
 ================================================================================
-Package: Spring Boot Maven Plugin
-Name: org.springframework.boot:spring-boot-maven-plugin
-Version: 3.2.3
-License: Apache License 2.0
-Homepage: https://spring.io/projects/spring-boot
+Public Domain
 ================================================================================
+Package: aopalliance:aopalliance
+Version: 1.0
+License note: Public Domain
+
+Package: org.json:json
+Version: 20260814
+License note: Public Domain
 
 ================================================================================
-Package: Spring Data Commons
-Name: org.springframework.data:spring-data-commons
-Version: Not specified
-License: Apache License 2.0 (Inferred)
-Homepage: https://spring.io/projects/spring-data
+Logging (dual-licensed; MOSIP does not combine EPL with this product)
 ================================================================================
+Package: ch.qos.logback:logback-classic
+Version: 1.5.38
+License note: EPL-2.0 OR LGPL-2.1-only; MOSIP uses LGPL-2.1
+
+Package: ch.qos.logback:logback-core
+Version: 1.5.38
+License note: EPL-2.0 OR LGPL-2.1-only; MOSIP uses LGPL-2.1
+
+Logback is a separate library. License texts: licenses/LGPL-2.1.txt.
+EPL-2.0 is not selected.
 
 ================================================================================
-Package: SpringDoc OpenAPI WebMVC UI
-Name: org.springdoc:springdoc-openapi-starter-webmvc-ui
-Version: 2.5.0
-License: Apache License 2.0
-Homepage: https://springdoc.org
+On the runtime classpath under a license that is not Use with MOSIP: Yes
 ================================================================================
+Package: jakarta.annotation:jakarta.annotation-api
+Version: 3.0.0
+License note: EPL-2.0 OR GPL-2.0-with-classpath-exception. Spring Boot starter. Neither option is Use with MOSIP: Yes.
+
+Package: org.aspectj:aspectjweaver
+Version: 1.9.25.1
+License note: EPL-2.0 only. kernel-core -> spring-aspects. Not a MOSIP-approved license.
+
+These JARs are transitives of kernel-core or Spring Boot. They are not
+relicensed as MPL. Their license text ships inside the JAR. Do not add
+new EPL or GPL dependencies.
 
 ================================================================================
-Package: Jackson Dataformat XML
-Name: com.fasterxml.jackson.dataformat:jackson-dataformat-xml
-Version: Not specified
-License: Apache License 2.0 (Inferred)
-Homepage: https://github.com/FasterXML/jackson-dataformat-xml
+Provided (compile only, not packaged in the service JAR)
 ================================================================================
+Package: org.projectlombok:lombok
+Version: 1.18.48
+License: MIT
 
 ================================================================================
-Package: Jakarta Transaction API
-Name: jakarta.transaction:jakarta.transaction-api
-Version: Not specified
-License: EPL 2.0
-Homepage: https://github.com/eclipse-ee4j/jta-api
+Build / test tools (not packaged in biosdk-services JARs)
 ================================================================================
+Resolved by dependency:resolve-plugins and the test classpath. Not combined
+into the MOSIP redistributed work.
 
-================================================================================
-Package: JSON-Simple
-Name: com.googlecode.json-simple:json-simple
-Version: Not specified
-License: Apache License 2.0 (Inferred)
-Homepage: https://github.com/fangyidong/json-simple
-================================================================================
+Apache-2.0 Maven plugins:
+  maven-clean-plugin 3.5.0, maven-compiler-plugin 3.16.0,
+  maven-dependency-plugin 3.11.0, maven-deploy-plugin 3.2.0,
+  maven-install-plugin 3.2.0, maven-jar-plugin 3.5.1,
+  maven-javadoc-plugin 3.12.0, maven-resources-plugin 3.5.0,
+  maven-source-plugin 3.4.0, maven-surefire-plugin 3.6.0,
+  maven-gpg-plugin 3.2.8, nexus-staging-maven-plugin 1.7.0,
+  central-publishing-maven-plugin 0.11.0,
+  spring-boot-maven-plugin 4.1.1
 
-================================================================================
-Package: Gson
-Name: com.google.code.gson:gson
-Version: Not specified
-License: Apache License 2.0
-Homepage: https://github.com/google/gson
-================================================================================
+Test classpath (spring-boot-starter-test 4.1.1), not redistributed:
+  JUnit Jupiter 6.0.3 (EPL-2.0) — test only
+  Mockito 5.23.0 (MIT) — test only
+  AssertJ 3.27.7, Awaitility 4.3.0, JsonPath 2.10.0, Byte Buddy 1.18.11,
+  Hamcrest 3.0, XMLUnit 2.11.0
 
-================================================================================
-Package: Lombok
-Name: org.projectlombok:lombok
-Version: Not specified
-License: MIT License
-Homepage: https://projectlombok.org
-================================================================================
+Not packaged, and not Use with MOSIP: Yes:
+  JaCoCo 0.8.15 (EPL-2.0) — coverage agent at test time only
+  git-commit-id-maven-plugin 4.9.10 (LGPLv3) — writes service-git.properties only
+  sonar-maven-plugin 5.8.0.7211 (LGPLv3) — optional sonar profile, CI only
 
-================================================================================
-Package: Apache Maven Compiler Plugin
-Version: 3.11.0
-License: Apache License 2.0
-Homepage: https://maven.apache.org/plugins
-================================================================================
-
-================================================================================
-Package: Apache Maven Surefire Plugin
-Version: 3.1.2
-License: Apache License 2.0
-Homepage: https://maven.apache.org/plugins
-================================================================================
-
-================================================================================
-Package: Apache Maven Source Plugin
-Version: 3.3.1
-License: Apache License 2.0
-Homepage: https://maven.apache.org/plugins
-================================================================================
-
-================================================================================
-Package: Apache Maven Javadoc Plugin
-Version: 3.2.0
-License: Apache License 2.0
-Homepage: https://maven.apache.org/plugins
-================================================================================
-
-================================================================================
-Package: Apache Maven GPG Plugin
-Version: 3.2.3
-License: Apache License 2.0
-Homepage: https://maven.apache.org/plugins
-================================================================================
-
-================================================================================
-Package: JUnit Vintage Engine
-Name: org.junit.vintage:junit-vintage-engine
-Version: Not specified
-License: Eclipse Public License 2.0
-Homepage: https://junit.org
-================================================================================
-
-Full license texts and additional details for each of the above packages are available in the license/ directory of this repository. Please refer to those files or the original source of each package for complete legal terms and conditions.
+License texts: licenses/MPL-2.0.txt, licenses/Apache-2.0.txt, licenses/MIT.txt,
+licenses/BSD-2-Clause.txt, licenses/BSD-3-Clause.txt, licenses/CDDL-1.0.txt,
+licenses/ISC.txt, licenses/LGPL-2.1.txt.

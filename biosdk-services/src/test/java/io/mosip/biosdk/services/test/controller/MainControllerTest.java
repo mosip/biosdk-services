@@ -1,14 +1,21 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.test.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 
 import io.mosip.biosdk.services.controller.MainController;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +27,9 @@ import io.mosip.biosdk.services.factory.BioSdkServiceFactory;
 import io.mosip.biosdk.services.spi.BioSdkServiceProvider;
 import io.mosip.biosdk.services.utils.Utils;
 
+/**
+ * @copyright 2018-2026 MOSIP
+ */
 public class MainControllerTest {
 
     @Mock
@@ -36,7 +46,7 @@ public class MainControllerTest {
 
     private MainController controller;
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
         controller = new MainController(mockUtils, mockFactory);
@@ -50,7 +60,7 @@ public class MainControllerTest {
     @Test
     public void testStatus() {
         ResponseEntity<String> response = controller.status();
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertTrue(response.getBody().contains("Service is running"));
     }
 
@@ -60,7 +70,7 @@ public class MainControllerTest {
     @Test
     public void testStatus1() {
         ResponseEntity<String> response = controller.status1();
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertTrue(response.getBody().contains("Service is running"));
     }
 
@@ -77,7 +87,7 @@ public class MainControllerTest {
 
         ResponseEntity<String> resp = controller.init(req, mockErrors);
 
-        assertEquals(200, resp.getStatusCodeValue());
+        assertEquals(200, resp.getStatusCode().value());
         assertTrue(resp.getBody().contains("OK"));
     }
 
@@ -94,7 +104,7 @@ public class MainControllerTest {
 
         ResponseEntity<String> resp = controller.init(req, mockErrors);
 
-        assertEquals(200, resp.getStatusCodeValue());
+        assertEquals(200, resp.getStatusCode().value());
         assertTrue(resp.getBody().contains("ERR01"));
         assertTrue(resp.getBody().contains("Init failed"));
     }
@@ -112,7 +122,7 @@ public class MainControllerTest {
 
         ResponseEntity<String> resp = controller.match(req, mockErrors);
 
-        assertEquals(200, resp.getStatusCodeValue());
+        assertEquals(200, resp.getStatusCode().value());
         assertTrue(resp.getBody().contains("MATCH_OK"));
     }
 

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.utils;
 
 import java.nio.charset.StandardCharsets;
@@ -49,13 +56,29 @@ import io.mosip.kernel.core.util.DateUtils;
  * </p>
  * 
  * @since 1.0.0
+ * @copyright 2018-2026 MOSIP
  */
 @Component
 public class Utils {
+	/**
+	 * Gson instance that serializes {@code null} fields, used for debug dumps.
+	 */
 	private Gson gson;
 
+	/**
+	 * UTC pattern for {@link #getCurrentResponseTime()} ({@code responsetime} on
+	 * {@link io.mosip.biosdk.services.dto.ResponseDto}).
+	 */
 	private String utcDateTimePattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+
+	/**
+	 * JSON fragment key for vendor flag maps on operation DTOs.
+	 */
 	private static final String FLAGS = ", \"flags\":";
+
+	/**
+	 * JSON fragment key for the probe {@link BiometricRecord}.
+	 */
 	private static final String SAMPLE = ", \"sample\":";
 
 	/**

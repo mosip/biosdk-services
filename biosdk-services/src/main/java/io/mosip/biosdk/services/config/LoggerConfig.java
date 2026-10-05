@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.config;
 
 import io.mosip.kernel.core.logger.spi.Logger;
@@ -8,20 +15,12 @@ import io.mosip.kernel.logger.logback.factory.Logfactory;
  * service. This class provides a method to configure and retrieve a logger
  * instance for a given class.
  * <p>
- * The {@code LoggerConfig} class is final and contains a private constructor to
- * prevent instantiation. The logging configuration is done using the MOSIP
- * kernel logger's {@link Logfactory}.
+ * This class is {@code final} and is not instantiable. Call {@link #logConfig(Class)}
+ * when declaring {@code private static final Logger logger} on service types.
  * </p>
  *
- * <pre>
- * {@code
- * public final class LoggerConfig {
- * 	// Logger configuration details
- * }
- * }
- * </pre>
- *
  * @since 1.0.0
+ * @copyright 2018-2026 MOSIP
  */
 public final class LoggerConfig {
 	/**

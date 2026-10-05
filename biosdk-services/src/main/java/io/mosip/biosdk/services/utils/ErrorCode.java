@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018-2026 MOSIP.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.mosip.biosdk.services.utils;
 
 /**
@@ -10,6 +17,7 @@ package io.mosip.biosdk.services.utils;
  *
  *
  * @since 1.0.0
+ * @copyright 2018-2026 MOSIP
  */
 public enum ErrorCode {
 
@@ -19,8 +27,15 @@ public enum ErrorCode {
 	 */
 	NO_PROVIDERS("BIO_SDK_001", "No Bio SDK service provider implementations found for given version");
 
+	/**
+	 * Machine-readable code returned to clients (for example {@code BIO_SDK_001}).
+	 */
 	@SuppressWarnings({ "java:S1700" })
 	private String errorCode;
+
+	/**
+	 * Human-readable description paired with {@link #errorCode}.
+	 */
 	private String errorMessage;
 
 	/**
