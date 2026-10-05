@@ -488,6 +488,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<layout>ZIP</layout>
+					<!-- kattu maven-build zips only +x JARs as artifact biosdk-services -->
+					<executable>true</executable>
 				</configuration>
 				<executions>
 					<execution>
