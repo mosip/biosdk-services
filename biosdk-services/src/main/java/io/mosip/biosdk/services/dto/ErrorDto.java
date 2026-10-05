@@ -22,12 +22,13 @@ import lombok.ToString;
 @ToString
 public class ErrorDto {
 	/**
-	 * The error code.
+	 * Error code (for example {@link io.mosip.biosdk.services.constants.ErrorMessages}
+	 * name or {@link io.mosip.biosdk.services.utils.ErrorCode#getErrorCode()}).
 	 */
 	private String code;
 
 	/**
-	 * The error message.
+	 * Human-readable explanation of {@link #code}.
 	 */
 	private String message;
 }

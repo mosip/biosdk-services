@@ -4,105 +4,341 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>biosdk-services</artifactId>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.1.1</version>
+		<relativePath />
+	</parent>
+
 	<groupId>io.mosip.biosdk</groupId>
-	<version>1.4.0-SNAPSHOT</version>
+	<artifactId>biosdk-services</artifactId>
+	<version>1.4.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>biosdk-services</name>
-	<description>Sample implementation of biometrics SDK services</description>
+	<description>MOSIP REST wrapper for IBioApiV2. Loads a vendor or mock SDK from -Dloader.path (biosdk_bioapi_impl) and exposes init, match, check-quality, extract-template, segment, and convert-format (convertFormatV2) under /biosdk-service/. JSON envelope is a Base64 request with top-level errors. Spring Boot ZIP layout (PropertiesLauncher). JDK 21, Boot 4.1.1, Jackson 2 via spring-boot-jackson2. kernel-core and kernel-biometrics-api; no kernel-bom.</description>
 	<url>https://github.com/mosip/biosdk-services</url>
 
+	<!--
+		Boot process (ZIP layout + loader.path for vendor/mock IBioApiV2).
+		Listen :9099 /biosdk-service/. Health GET /. Swagger /swagger-ui.html.
+		Spec version "1.0" (BioSdkServiceProviderImpl_V_1_0). Factory selects by RequestDto.version.
+		Build: mvn clean install -Dgpg.skip=true  (PowerShell: quote "-D...")
+		Local: run-local.bat|sh init|test|run|all. -Dspring.cloud.config.enabled=false -Dspring.profiles.active=local.
+		Fat mock-sdk shades Boot 3; run-local rebuilds .local/mock-sdk-loader.jar without Spring/Tomcat/Logback.
+		No kernel-bom. kernel-core = kernel + commons (logger). kernel-biometrics-api = IBioApiV2 SPI.
+		Do not add mosip.kernel.version / mosip.commons.version. Do not jump to Jackson 3, JAXB 4, logstash 9.
+		Exclusions on kernel-core drop unused transitives (JPA/PDF/JUnit) for size and MPL-compatible licenses.
+		git-commit-id-plugin writes target/classes/service-git.properties (not git.properties).
+		dotGitDirectory is ${project.basedir}/../.git because this POM is a subdirectory of the repo.
+	-->
+	<!-- Standalone module: versions live here. Do not reintroduce kernel-bom. -->
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- ── Java ─────────────────────────────────────────────────────────── -->
 		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- maven -->
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<maven.compiler.version>3.11.0</maven.compiler.version>
-		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
-		<maven.war.plugin.version>3.1.0</maven.war.plugin.version>
-		<maven.javadoc.plugin.version>3.2.0</maven.javadoc.plugin.version>
-		<maven.shade.plugin.version>2.3</maven.shade.plugin.version>
-		<jacoco.maven.plugin.version>0.8.11</jacoco.maven.plugin.version>
-		<maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
-		<maven.source.plugin.version>3.3.1</maven.source.plugin.version>
-		<maven.gpg.plugin.version>3.2.3</maven.gpg.plugin.version>
-		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
-		<maven.war.plugin.version>3.1.0</maven.war.plugin.version>
-		<maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
-		<maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
-		<spring.boot.maven.plugin.version>3.2.3</spring.boot.maven.plugin.version>
-		<central.publishing.maven.plugin.version>0.7.0</central.publishing.maven.plugin.version>
-		<maven.sonar.plugin.version>3.7.0.1746</maven.sonar.plugin.version>
-		<!-- git -->
-		<git.commit.id.plugin.version>3.0.1</git.commit.id.plugin.version>
+		<!-- ── Maven plugins & build tooling (Maven 3.9 + JDK 21; not 4.x plugin betas) ─ -->
+		<maven.jar.plugin.version>3.5.1</maven.jar.plugin.version>
+		<maven.surefire.plugin.version>3.6.0</maven.surefire.plugin.version>
+		<maven.jacoco.version>0.8.15</maven.jacoco.version>
+		<maven.compiler.plugin.version>3.16.0</maven.compiler.plugin.version>
+		<maven.sonar.plugin.version>5.8.0.7211</maven.sonar.plugin.version>
+		<maven.javadoc.version>3.12.0</maven.javadoc.version>
+		<maven.deploy.plugin.version>3.2.0</maven.deploy.plugin.version>
+		<maven.install.plugin.version>3.2.0</maven.install.plugin.version>
+		<maven.dependency.plugin.version>3.11.0</maven.dependency.plugin.version>
+		<maven.resources.plugin.version>3.5.0</maven.resources.plugin.version>
+		<maven.clean.plugin.version>3.5.0</maven.clean.plugin.version>
+		<nexus.staging.maven.plugin.version>1.7.0</nexus.staging.maven.plugin.version>
+		<maven.source.plugin.version>3.4.0</maven.source.plugin.version>
+		<maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
+		<!-- kattu maven-build greps pl.project13.maven:git-commit-id-plugin; do not rename. -->
+		<git.commit.id.plugin.version>4.9.10</git.commit.id.plugin.version>
+		<central.publishing.maven.plugin.version>0.11.0</central.publishing.maven.plugin.version>
+		<sonar.coverage.exclusions>**/constants/**,**/dto/**,**/config/**,**/Status/**</sonar.coverage.exclusions>
+		<sonar.cpd.exclusions>**/dto/**,**/config/**</sonar.cpd.exclusions>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
-		<!-- Swagger -->
-		<springdoc.openapi.starter.webmvc.ui.version>2.5.0</springdoc.openapi.starter.webmvc.ui.version>
+		<!-- JAXB 2.3.x (JDK 21 has none). Encoder 8.x (9.x needs Jackson 3). springdoc 3.x = Boot 4. -->
+		<lombok.version>1.18.48</lombok.version>
+		<json.simple.version>1.1.1</json.simple.version>
+		<jaxb.runtime.version>2.3.9</jaxb.runtime.version>
+		<logstash.logback.encoder.version>8.1</logstash.logback.encoder.version>
+		<springdoc.openapi.starter.webmvc.ui.version>3.1.1</springdoc.openapi.starter.webmvc.ui.version>
+		<swagger.annotations.version>1.6.14</swagger.annotations.version>
 
-		<!-- Mosip kernel -->
-		<kernel.bom.version>1.3.1-rc.1</kernel.bom.version>
-		<kernel.core.version>1.3.1-rc.1</kernel.core.version>
-		<kernel.biometrics.api.version>1.3.1</kernel.biometrics.api.version>
-		<kernel.logger.logback.version>1.3.1-rc.1</kernel.logger.logback.version>
-		<sonar.coverage.exclusions>**/dto/**, **/config/**, **/constants/**, **/Status/**
-		</sonar.coverage.exclusions>
+		<!-- ── MOSIP (kernel + commons folded into kernel-core; no kernel-bom) ─ -->
+		<kernel.core.version>1.4.1-SNAPSHOT</kernel.core.version>
+		<mosip.biometrics.util.version>1.4.0-SNAPSHOT</mosip.biometrics.util.version>
 	</properties>
 
+	<!-- Versions only. Spring/jackson2 come from Boot parent. -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>io.mosip.kernel</groupId>
-				<artifactId>kernel-bom</artifactId>
-				<version>${kernel.bom.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+				<artifactId>kernel-core</artifactId>
+				<version>${kernel.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mosip.kernel</groupId>
+				<artifactId>kernel-biometrics-api</artifactId>
+				<version>${mosip.biometrics.util.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.json-simple</groupId>
+				<artifactId>json-simple</artifactId>
+				<version>${json.simple.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>${logstash.logback.encoder.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jaxb</groupId>
+				<artifactId>jaxb-runtime</artifactId>
+				<version>${jaxb.runtime.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>${springdoc.openapi.starter.webmvc.ui.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-annotations</artifactId>
+				<version>${swagger.annotations.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- ── MOSIP SPI + logger (kernel-core folds logger; no kernel-logger-logback) ─ -->
+		<dependency>
+			<groupId>io.mosip.kernel</groupId>
+			<artifactId>kernel-biometrics-api</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-security</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.mosip.kernel</groupId>
+					<artifactId>kernel-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.module</groupId>
+					<artifactId>jackson-module-afterburner</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- kernel-core: compile. Exclusions = unused folded deps (JPA, PDF, JUnit, EPL-ish APIs). -->
+		<dependency>
+			<groupId>io.mosip.kernel</groupId>
+			<artifactId>kernel-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-data-jpa</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.data</groupId>
+					<artifactId>spring-data-jpa</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.retry</groupId>
+					<artifactId>spring-retry</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>spring-cloud-starter-bootstrap</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>spring-cloud-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate.orm</groupId>
+					<artifactId>hibernate-hikaricp</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.module</groupId>
+					<artifactId>jackson-module-afterburner</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jaxb</groupId>
+					<artifactId>jaxb-runtime</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>net.logstash.logback</groupId>
+					<artifactId>logstash-logback-encoder</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.java-json-tools</groupId>
+					<artifactId>json-schema-validator</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.java-json-tools</groupId>
+					<artifactId>json-schema-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.code.findbugs</groupId>
+					<artifactId>annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.openhtmltopdf</groupId>
+					<artifactId>openhtmltopdf-pdfbox</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.openhtmltopdf</groupId>
+					<artifactId>openhtmltopdf-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.pdfbox</groupId>
+					<artifactId>pdfbox</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.pdfbox</groupId>
+					<artifactId>pdfbox-tools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.pdfbox</groupId>
+					<artifactId>fontbox</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.velocity</groupId>
+					<artifactId>velocity-engine-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ma.glasnost.orika</groupId>
+					<artifactId>orika-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.zxing</groupId>
+					<artifactId>javase</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.ibm.icu</groupId>
+					<artifactId>icu4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mvel</groupId>
+					<artifactId>mvel2</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.quartz-scheduler</groupId>
+					<artifactId>quartz</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.mchange</groupId>
+					<artifactId>mchange-commons-java</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.persistence</groupId>
+					<artifactId>javax.persistence-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>jakarta.persistence</groupId>
+					<artifactId>jakarta.persistence-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>javax.transaction-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.interceptor</groupId>
+					<artifactId>javax.interceptor-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Boot web + Jackson 2 (not starter-jackson / Jackson 3). Layout ZIP for loader.path. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-json</artifactId>
+					<artifactId>spring-boot-starter-jackson</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-jackson2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-afterburner</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${springdoc.openapi.starter.webmvc.ui.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.mosip.kernel</groupId>
-			<artifactId>kernel-biometrics-api</artifactId>
-			<version>${kernel.biometrics.api.version}</version>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+		</dependency>
+		<!-- ── Logging / JAXB 2.3 (JDK 21 has no JAXB; encoder 8.x not 9.x) ─ -->
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.mosip.kernel</groupId>
-			<artifactId>kernel-logger-logback</artifactId>
-			<version>${kernel.logger.logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.mosip.kernel</groupId>
-			<artifactId>kernel-core</artifactId>
-			<version>${kernel.core.version}</version>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -110,55 +346,201 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<!-- json-simple 1.1.1 wrongly depends on junit at compile — exclude it. -->
+		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
+		<!-- Test: JUnit 5. Vintage engine excluded. -->
 		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.transaction</groupId>
-			<artifactId>jakarta.transaction-api</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://central.sonatype.com/api/v1/publisher</url>
-		</repository>
-	</distributionManagement>
+
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${maven.sonar.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven.dependency.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven.install.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven.clean.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven.resources.plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>${central.publishing.maven.plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>ossrh</publishingServerId>
+					<autoPublish>false</autoPublish>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.version}</version>
+				<version>${maven.compiler.plugin.version}</version>
 				<configuration>
-					<release>${java.version}</release>
-					<compilerArgs>
-						<arg>--enable-preview</arg>
-						<arg>-Xlint:unchecked</arg>
-						<arg>-Xlint:deprecation</arg>
-					</compilerArgs>
+					<parameters>true</parameters>
+					<annotationProcessorPathsUseDepMgmt>true</annotationProcessorPathsUseDepMgmt>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<!-- @{argLine}: JaCoCo prepare-agent injects the coverage agent. -->
+				<version>${maven.surefire.plugin.version}</version>
+				<configuration>
+					<skipTests>false</skipTests>
+					<skip>false</skip>
+					<argLine>
+						@{argLine}
+						--add-modules=ALL-SYSTEM
+						--add-opens java.xml/jdk.xml.internal=ALL-UNNAMED
+						--add-opens java.base/java.lang.reflect=ALL-UNNAMED
+						--add-opens java.base/java.lang.stream=ALL-UNNAMED
+						--add-opens java.base/java.time=ALL-UNNAMED
+						--add-opens java.base/java.time.LocalDate=ALL-UNNAMED
+						--add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED
+						--add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED
+					</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${maven.jacoco.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/constants/**</exclude>
+						<exclude>**/config/**</exclude>
+						<exclude>**/dto/**</exclude>
+						<exclude>**/Status/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<layout>ZIP</layout>
+					<!-- kattu maven-build zips only +x JARs as artifact biosdk-services -->
+					<executable>true</executable>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>chmod-boot-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<chmod perm="755">
+									<fileset dir="${project.build.directory}" includes="${project.build.finalName}.jar" />
+								</chmod>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Project-Name>${project.name}</Project-Name>
+							<Project-Version>${project.version}</Project-Version>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<inherited>true</inherited>
 				<version>${maven.source.plugin.version}</version>
 				<executions>
 					<execution>
@@ -172,7 +554,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven.javadoc.plugin.version}</version>
+				<version>${maven.javadoc.version}</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -183,6 +565,39 @@
 				</executions>
 				<configuration>
 					<doclint>none</doclint>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven.deploy.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>${nexus.staging.maven.plugin.version}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -206,127 +621,9 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven.surefire.plugin.version}</version>
-				<configuration>
-					<skipTests>${skipTests}</skipTests>
-					<skip>false</skip>
-					<argLine>
-						${argLine}
-						--add-modules=ALL-SYSTEM
-						--add-opens java.xml/jdk.xml.internal=ALL-UNNAMED
-						--add-opens java.base/java.lang.reflect=ALL-UNNAMED
-						--add-opens java.base/java.lang.stream=ALL-UNNAMED
-						--add-opens java.base/java.time=ALL-UNNAMED
-						--add-opens java.base/java.time.LocalDate=ALL-UNNAMED
-						--add-opens
-						java.base/java.time.LocalDateTime=ALL-UNNAMED
-						--add-opens
-						java.base/java.time.LocalDateTime.date=ALL-UNNAMED
-						--enable-preview
-					</argLine>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.maven.plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.boot.maven.plugin.version}</version>
-				<configuration>
-					<layout>ZIP</layout>
-					<executable>true</executable>
-					<jvmArguments>
-						<source>${maven.compiler.source}</source>
-						<target>${maven.compiler.target}</target>
-						<!-- -Dspring.application.admin.enabled=true-->
-					</jvmArguments>
-				</configuration>
-
-				<executions>
-					<execution>
-						<goals>
-							<goal>build-info</goal>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<attach>false</attach>
-						</configuration>
-					</execution>
-					<!--
-					<execution>
-						<id>pre-integration-test</id>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>post-integration-test</id>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>-->
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>${maven.deploy.plugin.version}</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-				<executions>
-					<execution>
-						<id>default-deploy</id>
-						<phase>none</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-						<configuration>
-							<skip>true</skip>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.central</groupId>
-				<artifactId>central-publishing-maven-plugin</artifactId>
-				<version>${central.publishing.maven.plugin.version}</version>
-				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<id>default-publish</id>
-						<phase>none</phase>
-						<goals>
-							<goal>publish</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<publishingServerId>ossrh</publishingServerId>
-					<autoPublish>false</autoPublish>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<artifactId>git-commit-id-plugin</artifactId>
+				<!-- .git is repo root (this POM is in a subdirectory). -->
 				<version>${git.commit.id.plugin.version}</version>
 				<executions>
 					<execution>
@@ -339,20 +636,19 @@
 				</executions>
 				<configuration>
 					<generateGitPropertiesFile>true</generateGitPropertiesFile>
-					<generateGitPropertiesFilename>
-						${project.build.outputDirectory}/service-git.properties</generateGitPropertiesFilename>
+					<generateGitPropertiesFilename>${project.build.outputDirectory}/service-git.properties</generateGitPropertiesFilename>
 					<includeOnlyProperties>
 						<includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
 						<includeOnlyProperty>^git.commit.id.(abbrev|full)$</includeOnlyProperty>
 					</includeOnlyProperties>
 					<commitIdGenerationMode>full</commitIdGenerationMode>
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	
 	<profiles>
+		<!-- CI: mvn verify -Psonar — scanner is not packaged in the JAR. -->
 		<profile>
 			<id>sonar</id>
 			<properties>
@@ -369,7 +665,6 @@
 					<plugin>
 						<groupId>org.sonarsource.scanner.maven</groupId>
 						<artifactId>sonar-maven-plugin</artifactId>
-						<version>${maven.sonar.plugin.version}</version>
 						<executions>
 							<execution>
 								<phase>verify</phase>
@@ -384,12 +679,55 @@
 		</profile>
 	</profiles>
 
-	<licenses>
-		<license>
-			<name>MPL 2.0</name>
-			<url>https://www.mozilla.org/en-US/MPL/2.0/</url>
-		</license>
-	</licenses>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Central Plugins</name>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!-- Snapshots of kernel-core / kernel-biometrics-api from Central Snapshots (ossrh). -->
+	<repositories>
+		<repository>
+			<id>ossrh</id>
+			<name>Central Snapshots</name>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>MavenCentral</name>
+			<layout>default</layout>
+			<url>https://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://central.sonatype.com/api/v1/publisher</url>
+		</repository>
+	</distributionManagement>
 
 	<scm>
 		<connection>scm:git:git://github.com/mosip/biosdk-services.git</connection>
@@ -397,13 +735,18 @@
 		<url>https://github.com/mosip/biosdk-services</url>
 		<tag>HEAD</tag>
 	</scm>
-
+	<licenses>
+		<license>
+			<name>MPL 2.0</name>
+			<url>https://www.mozilla.org/en-US/MPL/2.0/</url>
+		</license>
+	</licenses>
 	<developers>
 		<developer>
 			<name>Mosip</name>
 			<email>mosip.emailnotifier@gmail.com</email>
 			<organization>io.mosip</organization>
-			<organizationUrl>https://mosip.io</organizationUrl>
+			<organizationUrl>https://github.com/mosip/biosdk-services</organizationUrl>
 		</developer>
 	</developers>
 </project>

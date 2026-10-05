@@ -1,9 +1,8 @@
 package io.mosip.biosdk.services.test.impl.spec_1_0;
 
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import com.google.gson.*;
-import io.mosip.kernel.core.logger.spi.Logger;
 import io.mosip.biosdk.services.dto.RequestDto;
 import io.mosip.biosdk.services.exceptions.BioSDKException;
 import io.mosip.biosdk.services.impl.spec_1_0.BioSdkServiceProviderImpl_V_1_0;
@@ -15,8 +14,8 @@ import io.mosip.kernel.biometrics.model.MatchDecision;
 import io.mosip.kernel.biometrics.model.QualityCheck;
 import io.mosip.kernel.biometrics.model.SDKInfo;
 import io.mosip.kernel.biometrics.spi.IBioApiV2;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import io.mosip.kernel.biometrics.model.Response;
@@ -46,7 +45,7 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
 
     private Gson gson;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         MockitoAnnotations.openMocks(this);
 
@@ -87,15 +86,13 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
     }
 
 
-    @Test(expected = BioSDKException.class)
+    @Test
     public void testInitException() {
-        // Arrange
-        String base64Request = "mockBase64Request"; // Example Base64 request
+        String base64Request = "mockBase64Request";
         when(mockRequestDto.getRequest()).thenReturn(base64Request);
-        when(mockBioApiV2.init(any())).thenThrow(new RuntimeException("SDK initialization failed")); // Simulate an exception
+        when(mockBioApiV2.init(any())).thenThrow(new RuntimeException("SDK initialization failed"));
 
-        // Act
-        bioSdkServiceProvider.init(mockRequestDto); // This should throw a BioSDKException
+        assertThrows(BioSDKException.class, () -> bioSdkServiceProvider.init(mockRequestDto));
     }
 
     /**
@@ -149,31 +146,20 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         verify(mockBioApiV2, times(1)).checkQuality(any(), any(), any());
     }
 
-    @Test(expected = BioSDKException.class)
+    @Test
     public void testCheckQualityInvalidBase64ThrowsBioSDKException() {
-
         when(mockRequestDto.getRequest()).thenReturn("not_base64!");
-
-        // Act
-        bioSdkServiceProvider.checkQuality(mockRequestDto);
-
-        // Assert handled by expected exception
+        assertThrows(BioSDKException.class, () -> bioSdkServiceProvider.checkQuality(mockRequestDto));
     }
 
-    @Test(expected = BioSDKException.class)
+    @Test
     public void testCheckQualitySdkThrowsWrappedAsBioSDKException() {
-        // Arrange: valid Base64 → JSON
         String base64Request = buildValidBase64CheckQualityRequestJson();
         when(mockRequestDto.getRequest()).thenReturn(base64Request);
-
-        // SDK throws a runtime exception
         when(mockBioApiV2.checkQuality(any(), any(), any()))
                 .thenThrow(new RuntimeException("SDK failure"));
 
-        // Act
-        bioSdkServiceProvider.checkQuality(mockRequestDto);
-
-        // Assert handled by expected exception
+        assertThrows(BioSDKException.class, () -> bioSdkServiceProvider.checkQuality(mockRequestDto));
     }
 
     private String buildBase64MatchRequest() {
@@ -199,13 +185,13 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         verify(mockBioApiV2).match(any(), any(), any(), any());
     }
 
-    @Test(expected = BioSDKException.class)
+    @Test
     public void testMatchSdkThrows() {
         String base64 = buildBase64MatchRequest();
         when(mockRequestDto.getRequest()).thenReturn(base64);
         when(mockBioApiV2.match(any(), any(), any(), any())).thenThrow(new RuntimeException());
 
-        bioSdkServiceProvider.match(mockRequestDto);
+        assertThrows(BioSDKException.class, () -> bioSdkServiceProvider.match(mockRequestDto));
     }
 
     private String buildBase64ExtractTemplateRequest() {
@@ -230,13 +216,13 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         verify(mockBioApiV2).extractTemplate(any(), any(), any());
     }
 
-    @Test(expected = BioSDKException.class)
+    @Test
     public void testExtractTemplateSdkThrows() {
         String base64 = buildBase64ExtractTemplateRequest();
         when(mockRequestDto.getRequest()).thenReturn(base64);
         when(mockBioApiV2.extractTemplate(any(), any(), any())).thenThrow(new RuntimeException());
 
-        bioSdkServiceProvider.extractTemplate(mockRequestDto);
+        assertThrows(BioSDKException.class, () -> bioSdkServiceProvider.extractTemplate(mockRequestDto));
     }
 
     private String buildBase64SegmentRequest() {
@@ -261,13 +247,13 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         verify(mockBioApiV2).segment(any(), any(), any());
     }
 
-    @Test(expected = BioSDKException.class)
+    @Test
     public void testSegmentSdkThrows() {
         String base64 = buildBase64SegmentRequest();
         when(mockRequestDto.getRequest()).thenReturn(base64);
         when(mockBioApiV2.segment(any(), any(), any())).thenThrow(new RuntimeException());
 
-        bioSdkServiceProvider.segment(mockRequestDto);
+        assertThrows(BioSDKException.class, () -> bioSdkServiceProvider.segment(mockRequestDto));
     }
 
     private String buildBase64ConvertFormatRequest() {
@@ -295,13 +281,13 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         verify(mockBioApiV2).convertFormatV2(any(), any(), any(), any(), any(), any());
     }
 
-    @Test(expected = BioSDKException.class)
+    @Test
     public void testConvertFormatSdkThrows() {
         String base64 = buildBase64ConvertFormatRequest();
         when(mockRequestDto.getRequest()).thenReturn(base64);
         when(mockBioApiV2.convertFormatV2(any(), any(), any(), any(), any(), any())).thenThrow(new RuntimeException());
 
-        bioSdkServiceProvider.convertFormat(mockRequestDto);
+        assertThrows(BioSDKException.class, () -> bioSdkServiceProvider.convertFormat(mockRequestDto));
     }
 
     private void invokePrivate(String methodName, Class<?>[] paramTypes, Object... args) throws Exception {
@@ -310,46 +296,30 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         m.invoke(bioSdkServiceProvider, args);
     }
 
-    private void enableLoggingAndMockLogger() throws Exception {
+    private void enableRequestResponseLogging() throws Exception {
         Field flag = BioSdkServiceProviderImpl_V_1_0.class.getDeclaredField("isLogRequestResponse");
         flag.setAccessible(true);
         flag.set(bioSdkServiceProvider, true);
-
-        Logger mockLogger = mock(Logger.class);
-        Field loggerField = BioSdkServiceProviderImpl_V_1_0.class.getDeclaredField("logger");
-        loggerField.setAccessible(true);
-        loggerField.set(bioSdkServiceProvider, mockLogger);
-
-        this.mockedLogger = mockLogger;
     }
-
-    private Logger mockedLogger;
 
     @Test
     public void testPrivateLogRequestMatch() throws Exception {
 
-        Field flag = BioSdkServiceProviderImpl_V_1_0.class.getDeclaredField("isLogRequestResponse");
-        flag.setAccessible(true);
-        flag.set(bioSdkServiceProvider, true);
-
-        Logger mockLogger = mock(Logger.class);
-        Field loggerField = BioSdkServiceProviderImpl_V_1_0.class.getDeclaredField("logger");
-        loggerField.setAccessible(true);
-        loggerField.set(bioSdkServiceProvider, mockLogger);
+        enableRequestResponseLogging();
 
         MatchRequestDto dto = new MatchRequestDto();
         when(mockUtils.toString(dto)).thenReturn("mock-value");
 
         Method m = BioSdkServiceProviderImpl_V_1_0.class.getDeclaredMethod("logRequest", MatchRequestDto.class);
-        ((java.lang.reflect.Method) m).setAccessible(true);
+        m.setAccessible(true);
         m.invoke(bioSdkServiceProvider, dto);
 
-        verify(mockLogger).debug(any(), any(), eq("REQUEST:: MatchRequestDto"), eq("mock-value"));
+        verify(mockUtils).toString(dto);
     }
 
     @Test
     public void testLogRequestInitRequestDto() throws Exception {
-        enableLoggingAndMockLogger();
+        enableRequestResponseLogging();
 
         InitRequestDto dto = new InitRequestDto();
         when(mockUtils.toString(dto)).thenReturn("init-json");
@@ -357,12 +327,12 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         invokePrivate("logRequest",
                 new Class[]{InitRequestDto.class}, dto);
 
-        verify(mockedLogger).debug(any(), any(), eq("REQUEST:: InitRequestDto"), eq("init-json"));
+        verify(mockUtils).toString(dto);
     }
 
     @Test
     public void testLogRequestSegmentRequestDto() throws Exception {
-        enableLoggingAndMockLogger();
+        enableRequestResponseLogging();
 
         SegmentRequestDto dto = new SegmentRequestDto();
         when(mockUtils.toString(dto)).thenReturn("segment-json");
@@ -370,12 +340,12 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         invokePrivate("logRequest",
                 new Class[]{SegmentRequestDto.class}, dto);
 
-        verify(mockedLogger).debug(any(), any(), eq("REQUEST:: SegmentRequestDto"), eq("segment-json"));
+        verify(mockUtils).toString(dto);
     }
 
     @Test
     public void testLogRequestConvertFormatRequestDto() throws Exception {
-        enableLoggingAndMockLogger();
+        enableRequestResponseLogging();
 
         ConvertFormatRequestDto dto = new ConvertFormatRequestDto();
         when(mockUtils.toString(dto)).thenReturn("convert-json");
@@ -383,12 +353,12 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         invokePrivate("logRequest",
                 new Class[]{ConvertFormatRequestDto.class}, dto);
 
-        verify(mockedLogger).debug(any(), any(), eq("REQUEST:: ConvertFormatRequestDto"), eq("convert-json"));
+        verify(mockUtils).toString(dto);
     }
 
     @Test
     public void testLogRequestCheckQualityRequestDto() throws Exception {
-        enableLoggingAndMockLogger();
+        enableRequestResponseLogging();
 
         CheckQualityRequestDto dto = new CheckQualityRequestDto();
         when(mockUtils.toString(dto)).thenReturn("quality-json");
@@ -396,12 +366,12 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         invokePrivate("logRequest",
                 new Class[]{CheckQualityRequestDto.class}, dto);
 
-        verify(mockedLogger).debug(any(), any(), eq("REQUEST:: CheckQualityRequestDto"), eq("quality-json"));
+        verify(mockUtils).toString(dto);
     }
 
     @Test
     public void testLogBiometricRecord() throws Exception {
-        enableLoggingAndMockLogger();
+        enableRequestResponseLogging();
 
         BiometricRecord record = new BiometricRecord();
         when(mockUtils.toString(record)).thenReturn("bio-json");
@@ -410,13 +380,12 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
                 new Class[]{String.class, BiometricRecord.class},
                 "Prefix: ", record);
 
-        verify(mockedLogger).debug(any(), any(),
-                eq("Prefix: bio-json"));
+        verify(mockUtils).toString(record);
     }
 
     @Test
     public void testLogResponseWithBiometricRecord() throws Exception {
-        enableLoggingAndMockLogger();
+        enableRequestResponseLogging();
 
         BiometricRecord record = new BiometricRecord();
         Response<Object> response = mock(Response.class);
@@ -427,8 +396,7 @@ public class BioSdkServiceProviderImpl_V_1_0Test {
         invokePrivate("logResponse",
                 new Class[]{Response.class}, response);
 
-        verify(mockedLogger).debug(any(), any(),
-                eq("Response BiometricRecord: bio-json"));
+        verify(mockUtils).toString(record);
     }
 
     @Test

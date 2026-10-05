@@ -13,6 +13,7 @@ import lombok.Data;
  * This class defines properties to configure various aspects of the OpenAPI
  * specification such as information (title, description, version, license),
  * service details (servers), and API grouping (group name and paths).
+ * @since 1.0.0
  */
 @Configuration
 @ConfigurationProperties(prefix = "openapi")

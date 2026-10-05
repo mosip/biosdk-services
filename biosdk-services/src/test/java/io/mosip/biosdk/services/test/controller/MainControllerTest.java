@@ -1,14 +1,14 @@
 package io.mosip.biosdk.services.test.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 
 import io.mosip.biosdk.services.controller.MainController;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +36,7 @@ public class MainControllerTest {
 
     private MainController controller;
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
         controller = new MainController(mockUtils, mockFactory);
@@ -50,7 +50,7 @@ public class MainControllerTest {
     @Test
     public void testStatus() {
         ResponseEntity<String> response = controller.status();
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertTrue(response.getBody().contains("Service is running"));
     }
 
@@ -60,7 +60,7 @@ public class MainControllerTest {
     @Test
     public void testStatus1() {
         ResponseEntity<String> response = controller.status1();
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertTrue(response.getBody().contains("Service is running"));
     }
 
@@ -77,7 +77,7 @@ public class MainControllerTest {
 
         ResponseEntity<String> resp = controller.init(req, mockErrors);
 
-        assertEquals(200, resp.getStatusCodeValue());
+        assertEquals(200, resp.getStatusCode().value());
         assertTrue(resp.getBody().contains("OK"));
     }
 
@@ -94,7 +94,7 @@ public class MainControllerTest {
 
         ResponseEntity<String> resp = controller.init(req, mockErrors);
 
-        assertEquals(200, resp.getStatusCodeValue());
+        assertEquals(200, resp.getStatusCode().value());
         assertTrue(resp.getBody().contains("ERR01"));
         assertTrue(resp.getBody().contains("Init failed"));
     }
@@ -112,7 +112,7 @@ public class MainControllerTest {
 
         ResponseEntity<String> resp = controller.match(req, mockErrors);
 
-        assertEquals(200, resp.getStatusCodeValue());
+        assertEquals(200, resp.getStatusCode().value());
         assertTrue(resp.getBody().contains("MATCH_OK"));
     }
 

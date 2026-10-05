@@ -20,11 +20,18 @@ import io.swagger.v3.oas.models.servers.Server;
  * provided {@link OpenApiProperties}. It initializes an {@link OpenAPI} bean
  * and a {@link GroupedOpenApi} bean to customize and group API documentation
  * according to specified properties.
+ * @since 1.0.0
  */
 @Configuration
 public class SwaggerConfig {
+	/**
+	 * SLF4J logger used when the OpenAPI bean has been built.
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(SwaggerConfig.class);
 
+	/**
+	 * Bound {@code openapi.*} properties (title, servers, group, paths).
+	 */
 	private OpenApiProperties openApiProperties;
 
 	/**

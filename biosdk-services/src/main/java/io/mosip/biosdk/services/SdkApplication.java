@@ -1,46 +1,38 @@
 package io.mosip.biosdk.services;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * The {@code SdkApplication} class serves as the entry point for the MOSIP
- * Biometric SDK service application. This class is responsible for
- * bootstrapping the Spring Boot application.
+ * Spring Boot entry point for the MOSIP BioSDK HTTP service.
  * <p>
- * The application is configured to exclude the automatic configuration of the
- * data source by using {@link EnableAutoConfiguration} with
- * {@link DataSourceAutoConfiguration} excluded. This is useful in scenarios
- * where the application does not interact with a database or when a custom data
- * source configuration is required.
+ * This process is a REST wrapper around {@link io.mosip.kernel.biometrics.spi.IBioApiV2}.
+ * The vendor (or mock) implementation is loaded at runtime from {@code -Dloader.path}
+ * using the class named by {@code biosdk_bioapi_impl}. The packaged artifact uses
+ * Spring Boot ZIP layout ({@code PropertiesLauncher}) so that extra SDK JARs can
+ * be added without rebuilding this service.
+ * </p>
  * <p>
- * To run the application, the {@code main} method invokes
- * {@link SpringApplication#run(Class, String[])} with
- * {@code SdkApplication.class} and the command-line arguments passed to it.
+ * There is no JDBC datasource. Boot does not start a {@code DataSource} unless a
+ * JDBC starter is on the classpath. Unused kernel-core auto-configurations
+ * (ID generators, websub, PDF, applicant-type) are excluded in
+ * {@code application.properties}.
  * </p>
  *
- * <pre>
- * {@code
- * public static void main(String[] args) {
- * 	SpringApplication.run(SdkApplication.class, args);
- * }
- * }
- * </pre>
- * 
  * @since 1.0
+ * @see io.mosip.biosdk.services.controller.MainController
+ * @see io.mosip.biosdk.services.config.BioSdkLibConfig
  */
-@EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 @SpringBootApplication
 public class SdkApplication {
 
 	/**
-	 * The main method serves as the entry point for the Spring Boot application. It
-	 * delegates to {@link SpringApplication#run(Class, String[])} to launch the
-	 * application.
+	 * Launches the BioSDK service. Typical local flags:
+	 * {@code -Dloader.path}, {@code -Dbiosdk_bioapi_impl},
+	 * {@code -Dspring.cloud.config.enabled=false},
+	 * {@code -Dspring.profiles.active=local}.
 	 *
-	 * @param args Command-line arguments passed to the application.
+	 * @param args command-line arguments forwarded to Spring Boot
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(SdkApplication.class, args);

@@ -40,6 +40,9 @@ public enum ErrorMessages {
      */
     UNCHECKED_EXCEPTION("UNCHECKED_EXCEPTION");
 
+    /**
+     * Client-facing message stored on {@link io.mosip.biosdk.services.exceptions.BioSDKException}.
+     */
     private final String message;
 
     /**

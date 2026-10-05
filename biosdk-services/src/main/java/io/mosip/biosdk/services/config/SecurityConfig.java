@@ -12,18 +12,10 @@ import org.springframework.security.web.firewall.HttpFirewall;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Configuration class for setting up security configurations for the MOSIP
- * Biometric SDK service. This class defines beans for configuring HTTP
- * security, a custom HTTP firewall, and an authentication entry point.
- *
- * <pre>
- * {@code
- * @Configuration
- * public class SecurityConfig {
- * 	// Security configuration details
- * }
- * }
- * </pre>
+ * HTTP security for the BioSDK service. CSRF and HTTP Basic are disabled; all
+ * requests are permitted. Token-based auth is expected from the gateway when
+ * deployed. A permissive {@link DefaultHttpFirewall} and a 401 entry point are
+ * registered as beans.
  *
  * @since 1.0.0
  */

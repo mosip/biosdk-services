@@ -24,6 +24,10 @@ import io.mosip.biosdk.services.utils.ErrorCode;
  */
 @Component
 public class BioSdkServiceFactory {
+	/**
+	 * All Spring {@link BioSdkServiceProvider} beans. Spec {@code "1.0"} is
+	 * {@link io.mosip.biosdk.services.impl.spec_1_0.BioSdkServiceProviderImpl_V_1_0}.
+	 */
 	private List<BioSdkServiceProvider> bioSdkServiceProviders;
 
 	/**

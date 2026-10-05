@@ -8,18 +8,9 @@ import io.mosip.kernel.logger.logback.factory.Logfactory;
  * service. This class provides a method to configure and retrieve a logger
  * instance for a given class.
  * <p>
- * The {@code LoggerConfig} class is final and contains a private constructor to
- * prevent instantiation. The logging configuration is done using the MOSIP
- * kernel logger's {@link Logfactory}.
+ * This class is {@code final} and is not instantiable. Call {@link #logConfig(Class)}
+ * when declaring {@code private static final Logger logger} on service types.
  * </p>
- *
- * <pre>
- * {@code
- * public final class LoggerConfig {
- * 	// Logger configuration details
- * }
- * }
- * </pre>
  *
  * @since 1.0.0
  */

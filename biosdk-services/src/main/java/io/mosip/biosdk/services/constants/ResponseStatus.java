@@ -52,7 +52,14 @@ public enum ResponseStatus {
      */
     UNKNOWN_ERROR(500, "UNKNOWN_ERROR");
 
+    /**
+     * Numeric status associated with this outcome (not always an HTTP status).
+     */
     private final int statusCode;
+
+    /**
+     * Message template; some values contain {@code %s} for a field name.
+     */
     private final String statusMessage;
 
     /**

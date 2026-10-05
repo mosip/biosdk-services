@@ -58,23 +58,59 @@ import io.mosip.kernel.core.logger.spi.Logger;
 @SuppressWarnings({ "java:S101" })
 public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
 
-	private Logger logger = LoggerConfig.logConfig(BioSdkServiceProviderImpl_V_1_0.class);
+	/**
+	 * MOSIP kernel logger for spec {@code "1.0"} operations. Shared across calls.
+	 */
+	private static final Logger logger = LoggerConfig.logConfig(BioSdkServiceProviderImpl_V_1_0.class);
 
+	/**
+	 * Spec version this provider reports to {@link io.mosip.biosdk.services.factory.BioSdkServiceFactory}.
+	 */
 	private static final String BIOSDK_SERVICE_SPEC_VERSION = "1.0";
+
+	/** Log id for {@link #init(RequestDto)}. */
 	private static final String INIT = "init";
+
+	/** Log id for {@link #checkQuality(RequestDto)}. */
 	private static final String CHECK_QUALITY = "checkQuality";
+
+	/** Log id for {@link #extractTemplate(RequestDto)}. */
 	private static final String EXTRACT_TEMPLATE = "extractTemplate";
+
+	/** Log id for {@link #match(RequestDto)}. */
 	private static final String MATCH = "match";
+
+	/** Log id for {@link #segment(RequestDto)}. */
 	private static final String SEGMENT = "segment";
+
+	/** Log id for {@link #convertFormat(RequestDto)}. */
 	private static final String CONVERT_FORMAT = "convertFormat";
 
+	/** Debug message after Base64 {@code request} decode succeeds. */
 	private static final String DECODE_SUCCESS = "decoding successful";
+
+	/** Debug message after Gson maps the decoded JSON onto a typed DTO. */
 	private static final String JSON_TO_DTO_SUCCESS = "json to dto successful";
 
+	/**
+	 * Vendor or mock {@link IBioApiV2} loaded by {@code biosdk_bioapi_impl}.
+	 */
 	private IBioApiV2 iBioApi;
+
+	/**
+	 * Helpers for Base64 decode logging of biometric payloads (hashes, not raw BDB).
+	 */
 	private Utils utils;
+
+	/**
+	 * JSON mapper for inner request DTOs. Null fields are serialized.
+	 */
 	private Gson gson;
 
+	/**
+	 * When {@code true}, request/response DTOs are written at DEBUG. Default
+	 * {@code false} via {@code mosip.biosdk.log-request-response-enabled}.
+	 */
 	@Value("${mosip.biosdk.log-request-response-enabled:false}")
 	private boolean isLogRequestResponse;
 

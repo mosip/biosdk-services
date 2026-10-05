@@ -52,10 +52,25 @@ import io.mosip.kernel.core.util.DateUtils;
  */
 @Component
 public class Utils {
+	/**
+	 * Gson instance that serializes {@code null} fields, used for debug dumps.
+	 */
 	private Gson gson;
 
+	/**
+	 * UTC pattern for {@link #getCurrentResponseTime()} ({@code responsetime} on
+	 * {@link io.mosip.biosdk.services.dto.ResponseDto}).
+	 */
 	private String utcDateTimePattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+
+	/**
+	 * JSON fragment key for vendor flag maps on operation DTOs.
+	 */
 	private static final String FLAGS = ", \"flags\":";
+
+	/**
+	 * JSON fragment key for the probe {@link BiometricRecord}.
+	 */
 	private static final String SAMPLE = ", \"sample\":";
 
 	/**

@@ -19,8 +19,15 @@ public enum ErrorCode {
 	 */
 	NO_PROVIDERS("BIO_SDK_001", "No Bio SDK service provider implementations found for given version");
 
+	/**
+	 * Machine-readable code returned to clients (for example {@code BIO_SDK_001}).
+	 */
 	@SuppressWarnings({ "java:S1700" })
 	private String errorCode;
+
+	/**
+	 * Human-readable description paired with {@link #errorCode}.
+	 */
 	private String errorMessage;
 
 	/**

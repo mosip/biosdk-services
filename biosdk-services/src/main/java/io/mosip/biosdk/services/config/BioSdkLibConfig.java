@@ -42,8 +42,14 @@ import jakarta.annotation.PostConstruct;
  */
 @Configuration
 public class BioSdkLibConfig {
+	/**
+	 * SLF4J logger for SDK class-name validation and bean creation.
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(BioSdkLibConfig.class);
 
+	/**
+	 * Spring environment used to read {@code biosdk_bioapi_impl}.
+	 */
 	private Environment env;
 
 	/**

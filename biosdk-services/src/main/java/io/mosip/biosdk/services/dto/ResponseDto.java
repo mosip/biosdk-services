@@ -37,25 +37,27 @@ import lombok.ToString;
 public class ResponseDto<T> {
 
 	/**
-	 * The version of the request.
+	 * Spec version echoed from the request ({@code "1.0"}).
 	 */
 	@ApiModelProperty(value = "request version", position = 2)
 	private String version;
 
 	/**
-	 * The time at which the response was generated.
+	 * UTC timestamp when this response was built ({@code yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}).
 	 */
 	@ApiModelProperty(value = "Response Time", position = 3)
 	private String responsetime;
 
 	/**
-	 * The response data.
+	 * Operation payload from the vendor SDK (for example {@code SDKInfo} or
+	 * {@code Response}). Empty string in the template before the provider runs.
 	 */
 	@ApiModelProperty(value = "Response", position = 4)
 	private T response;
 
 	/**
-	 * The error details, if any.
+	 * Top-level error list. Empty on success; HTTP status remains 200 when this is
+	 * populated.
 	 */
 	@ApiModelProperty(value = "Error Details", position = 5)
 	private List<ErrorDto> errors;

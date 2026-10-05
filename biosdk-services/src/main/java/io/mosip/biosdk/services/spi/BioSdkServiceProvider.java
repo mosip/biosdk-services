@@ -64,7 +64,8 @@ public interface BioSdkServiceProvider {
 	Object segment(RequestDto request);
 
 	/**
-	 * Converts biometric data format as per the request.
+	 * Converts biometric data format. Spec {@code "1.0"} delegates to
+	 * {@link io.mosip.kernel.biometrics.spi.IBioApiV2#convertFormatV2}.
 	 *
 	 * @param request the request data encapsulated in a {@link RequestDto}.
 	 * @return the result of format conversion operation.
