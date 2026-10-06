@@ -11,7 +11,8 @@ set "JAR_VERSION=1.4.1-SNAPSHOT"
 set "IMPL=io.mosip.mock.sdk.impl.SampleSDKV2"
 set "PORT=9099"
 set "CTX=/biosdk-service"
-set "MOCK_SDK_GAV=io.mosip.mock.sdk:mock-sdk:1.4.0-SNAPSHOT:jar:jar-with-dependencies"
+set "MOCK_SDK_GAV=io.mosip.mock.sdk:mock-sdk:1.4.1-SNAPSHOT:jar:jar-with-dependencies"
+set "MOCK_SDK_JAR=mock-sdk-1.4.1-SNAPSHOT-jar-with-dependencies.jar"
 set "LOCAL_DIR=%MODULE_DIR%\.local"
 
 set "CMD=%~1"
@@ -77,17 +78,23 @@ if defined BIOSDK_MOCK_SDK if exist "%BIOSDK_MOCK_SDK%" (
   set "MOCK_SDK=%BIOSDK_MOCK_SDK%"
   exit /b 0
 )
-for %%F in ("%LOCAL_DIR%\mock-sdk-*-jar-with-dependencies.jar") do (
-  if exist "%%~fF" (
-    set "MOCK_SDK=%%~fF"
-    exit /b 0
+set "MOCK_SDK=%LOCAL_DIR%\%MOCK_SDK_JAR%"
+set "SIBLING_SDK=%MODULE_DIR%\..\..\mosip-mock-services\mock-sdk\target\%MOCK_SDK_JAR%"
+if exist "%SIBLING_SDK%" (
+  if not exist "%LOCAL_DIR%" mkdir "%LOCAL_DIR%"
+  set "NEED_COPY=1"
+  if exist "%MOCK_SDK%" (
+    for %%A in ("%SIBLING_SDK%") do set "SIB_SIZE=%%~zA"
+    for %%A in ("%MOCK_SDK%") do set "LOC_SIZE=%%~zA"
+    if "!SIB_SIZE!"=="!LOC_SIZE!" set "NEED_COPY=0"
   )
+  if "!NEED_COPY!"=="1" copy /Y "%SIBLING_SDK%" "%MOCK_SDK%" >nul
+  exit /b 0
 )
-for %%F in ("%MODULE_DIR%\mock-sdk-*-jar-with-dependencies.jar") do (
-  if exist "%%~fF" (
-    set "MOCK_SDK=%%~fF"
-    exit /b 0
-  )
+if exist "%MOCK_SDK%" exit /b 0
+if exist "%MODULE_DIR%\%MOCK_SDK_JAR%" (
+  set "MOCK_SDK=%MODULE_DIR%\%MOCK_SDK_JAR%"
+  exit /b 0
 )
 exit /b 1
 
@@ -95,7 +102,7 @@ exit /b 1
 call :find_mock_sdk
 if not errorlevel 1 exit /b 0
 if not exist "%LOCAL_DIR%" mkdir "%LOCAL_DIR%"
-echo ==^> downloading mock-sdk 1.4.0-SNAPSHOT ^(jar-with-dependencies^)
+echo ==^> downloading mock-sdk 1.4.1-SNAPSHOT ^(jar-with-dependencies^)
 pushd "%MODULE_DIR%"
 call mvn -q org.apache.maven.plugins:maven-dependency-plugin:3.11.0:copy "-Dartifact=%MOCK_SDK_GAV%" "-DoutputDirectory=%LOCAL_DIR%" "-Dgpg.skip=true"
 set "RC=%ERRORLEVEL%"
@@ -110,61 +117,6 @@ if errorlevel 1 (
   exit /b 1
 )
 echo     sdk: %MOCK_SDK%
-exit /b 0
-
-:sdk_has_spring
-jar tf "%~1" 2>nul | findstr /C:"org/springframework/boot/context/event/ApplicationEnvironmentPreparedEvent.class" /C:"ch/qos/logback/core/model/processor/ModelInterpretationContext.class" >nul
-exit /b %ERRORLEVEL%
-
-:prepare_loader_sdk
-REM Fat mock-sdk shades Spring Boot 3. loader.path would then hide Boot 4.1.1
-REM getBootstrapContext(). Strip org/springframework when that class is present.
-call :sdk_has_spring "%MOCK_SDK%"
-if errorlevel 1 (
-  set "LOADER_SDK=%MOCK_SDK%"
-  exit /b 0
-)
-set "LOADER_SDK=%LOCAL_DIR%\mock-sdk-loader.jar"
-set "STAMP_FILE=%LOCAL_DIR%\mock-sdk-loader.stamp"
-for %%A in ("%MOCK_SDK%") do set "STAMP=%%~nxA %%~zA strip-v3"
-if exist "%LOADER_SDK%" if exist "%STAMP_FILE%" (
-  set /p OLDSTAMP=<"%STAMP_FILE%"
-  if "!OLDSTAMP!"=="!STAMP!" exit /b 0
-)
-echo ==^> building loader.path JAR without Spring/Tomcat/Logback ^(Boot 4^)
-set "UNPACK=%LOCAL_DIR%\sdk-unpacked"
-set "KEEP=%LOCAL_DIR%\sdk-keep"
-if exist "%UNPACK%" rmdir /s /q "%UNPACK%"
-if exist "%KEEP%" rmdir /s /q "%KEEP%"
-mkdir "%UNPACK%"
-pushd "%UNPACK%"
-jar xf "%MOCK_SDK%"
-popd
-mkdir "%KEEP%"
-call :copy_keep io\mosip\mock
-call :copy_keep io\mosip\biometrics
-call :copy_keep io\mosip\kernel\bio
-call :copy_keep org\opencv
-call :copy_keep nu\pattern
-call :copy_keep com\github\jaiimageio
-call :copy_keep org\imgscalr
-call :copy_keep jj2000
-call :copy_keep org\jnbis
-call :copy_keep org\apache\commons\math3
-call :copy_keep assets
-if exist "%LOADER_SDK%" del /f /q "%LOADER_SDK%"
-pushd "%KEEP%"
-jar cf "%LOADER_SDK%" .
-popd
-rmdir /s /q "%UNPACK%"
-rmdir /s /q "%KEEP%"
-(echo !STAMP!)> "%STAMP_FILE%"
-exit /b 0
-
-:copy_keep
-if exist "%UNPACK%\%~1" (
-  xcopy /E /I /Y /Q "%UNPACK%\%~1" "%KEEP%\%~1\" >nul
-)
 exit /b 0
 
 :find_service_jar
@@ -215,17 +167,15 @@ if errorlevel 1 (
 )
 call :download_mock_sdk
 if errorlevel 1 exit /b 1
-call :prepare_loader_sdk
-if errorlevel 1 exit /b 1
 if not exist "%LOCAL_DIR%\logs" mkdir "%LOCAL_DIR%\logs"
 echo ==^> starting %MODULE% on :%PORT%%CTX%/
 echo     jar: %SERVICE_JAR%
 echo     sdk: %MOCK_SDK%
-echo     loader.path: %LOADER_SDK%
+echo     loader.path: %MOCK_SDK%
 echo     log: %LOCAL_DIR%\logs\%MODULE%.log
 call :print_endpoints
 pushd "%MODULE_DIR%"
-java -Dloader.path="%LOADER_SDK%" -Dbiosdk_bioapi_impl=%IMPL% -Dspring.cloud.config.enabled=false -Dspring.profiles.active=local --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED -jar "%SERVICE_JAR%"
+java -Dloader.path="%MOCK_SDK%" -Dbiosdk_bioapi_impl=%IMPL% -Dspring.cloud.config.enabled=false -Dspring.profiles.active=local --add-modules=ALL-SYSTEM --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.stream=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.time.LocalDate=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime=ALL-UNNAMED --add-opens java.base/java.time.LocalDateTime.date=ALL-UNNAMED -jar "%SERVICE_JAR%"
 set "RC=%ERRORLEVEL%"
 popd
 exit /b %RC%

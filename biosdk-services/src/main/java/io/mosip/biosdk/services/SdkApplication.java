@@ -13,10 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * be added without rebuilding this service.
  * </p>
  * <p>
- * There is no JDBC datasource. Boot does not start a {@code DataSource} unless a
- * JDBC starter is on the classpath. Unused kernel-core auto-configurations
- * (ID generators, websub, PDF, applicant-type) are excluded in
- * {@code application.properties}.
+ * There is no JDBC datasource. Fat mock-sdk / vendor JARs on {@code loader.path}
+ * may shade Hibernate and Hikari; those auto-configurations are excluded in
+ * {@code application.properties} so Boot does not require a database URL.
  * </p>
  *
  * @since 1.0
