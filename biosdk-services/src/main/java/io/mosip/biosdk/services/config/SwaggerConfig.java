@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,6 +36,13 @@ public class SwaggerConfig {
 	private OpenApiProperties openApiProperties;
 
 	/**
+	 * Servlet context path. Used when {@code mosipbox.public.url} is unset so Try-it-out
+	 * stays on the current host instead of the literal {@code ${mosipbox.public.url}}.
+	 */
+	@Value("${server.servlet.context-path:/}")
+	private String contextPath;
+
+	/**
 	 * Constructs a {@code SwaggerConfig} instance with the provided
 	 * {@link OpenApiProperties}.
 	 *
@@ -62,10 +70,25 @@ public class SwaggerConfig {
 						.license(new License().name(openApiProperties.getInfo().getLicense().getName())
 								.url(openApiProperties.getInfo().getLicense().getUrl())));
 
-		openApiProperties.getService().getServers().forEach(
-				server -> api.addServersItem(new Server().description(server.getDescription()).url(server.getUrl())));
+		openApiProperties.getService().getServers().forEach(server -> api
+				.addServersItem(new Server().description(server.getDescription()).url(resolveServerUrl(server.getUrl()))));
 		logger.info("swagger open api bean is ready");
 		return api;
+	}
+
+	/**
+	 * Uses the configured public URL when it is a real URL. An unresolved
+	 * {@code ${mosipbox.public.url}} placeholder is treated as the context path so
+	 * Swagger Try-it-out calls this host, not {@code /v3/api-docs/${mosipbox.public.url}/...}.
+	 *
+	 * @param url OpenAPI server URL from {@code openapi.service.servers}
+	 * @return usable server URL
+	 */
+	private String resolveServerUrl(String url) {
+		if (url == null || url.isBlank() || url.contains("${")) {
+			return contextPath;
+		}
+		return url;
 	}
 
 	/**
