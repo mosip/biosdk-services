@@ -10,7 +10,8 @@ JAR_VERSION="1.4.1-SNAPSHOT"
 IMPL="io.mosip.mock.sdk.impl.SampleSDKV2"
 PORT="9099"
 CTX="/biosdk-service"
-MOCK_SDK_GAV="io.mosip.mock.sdk:mock-sdk:1.4.0-SNAPSHOT:jar:jar-with-dependencies"
+MOCK_SDK_GAV="io.mosip.mock.sdk:mock-sdk:1.4.1-SNAPSHOT:jar:jar-with-dependencies"
+MOCK_SDK_JAR="mock-sdk-1.4.1-SNAPSHOT-jar-with-dependencies.jar"
 LOCAL_DIR="${MODULE_DIR}/.local"
 UNAME_S="$(uname -s 2>/dev/null || echo unknown)"
 
@@ -93,17 +94,24 @@ find_mock_sdk() {
     printf '%s\n' "$BIOSDK_MOCK_SDK"
     return 0
   fi
-  local f
-  shopt -s nullglob
-  for f in "$LOCAL_DIR"/mock-sdk-*-jar-with-dependencies.jar \
-           "$MODULE_DIR"/mock-sdk-*-jar-with-dependencies.jar; do
-    if [[ -f "$f" ]]; then
-      printf '%s\n' "$f"
-      shopt -u nullglob
-      return 0
+  local dest="${LOCAL_DIR}/${MOCK_SDK_JAR}"
+  local sibling="${MODULE_DIR}/../../mosip-mock-services/mock-sdk/target/${MOCK_SDK_JAR}"
+  if [[ -f "$sibling" ]]; then
+    mkdir -p "$LOCAL_DIR"
+    if [[ ! -f "$dest" ]] || [[ "$(wc -c <"$sibling" | tr -d ' ')" != "$(wc -c <"$dest" | tr -d ' ')" ]]; then
+      cp -f "$sibling" "$dest"
     fi
-  done
-  shopt -u nullglob
+    printf '%s\n' "$dest"
+    return 0
+  fi
+  if [[ -f "$dest" ]]; then
+    printf '%s\n' "$dest"
+    return 0
+  fi
+  if [[ -f "${MODULE_DIR}/${MOCK_SDK_JAR}" ]]; then
+    printf '%s\n' "${MODULE_DIR}/${MOCK_SDK_JAR}"
+    return 0
+  fi
   return 1
 }
 
@@ -114,7 +122,7 @@ download_mock_sdk() {
     return 0
   fi
   mkdir -p "$LOCAL_DIR"
-  echo "==> downloading mock-sdk 1.4.0-SNAPSHOT (jar-with-dependencies)" >&2
+  echo "==> downloading mock-sdk 1.4.1-SNAPSHOT (jar-with-dependencies)" >&2
   mvn_module -q org.apache.maven.plugins:maven-dependency-plugin:3.11.0:copy \
     "-Dartifact=${MOCK_SDK_GAV}" \
     "-DoutputDirectory=${LOCAL_DIR}" \
@@ -125,58 +133,6 @@ download_mock_sdk() {
   }
   echo "    sdk: ${mock_sdk}" >&2
   printf '%s\n' "$mock_sdk"
-}
-
-sdk_has_spring() {
-  jar tf "$1" 2>/dev/null | grep -Eq 'org/springframework/boot/context/event/ApplicationEnvironmentPreparedEvent.class|ch/qos/logback/core/model/processor/ModelInterpretationContext.class'
-}
-
-# Fat mock-sdk shades Spring Boot 3. loader.path would then hide Boot 4.1.1
-# getBootstrapContext(). Strip org/springframework when that class is present.
-prepare_loader_sdk() {
-  local src="$1"
-  if ! sdk_has_spring "$src"; then
-    printf '%s\n' "$src"
-    return 0
-  fi
-  local loader="${LOCAL_DIR}/mock-sdk-loader.jar"
-  local stamp_file="${LOCAL_DIR}/mock-sdk-loader.stamp"
-  local stamp
-  stamp="$(basename "$src") $(wc -c <"$src" | tr -d ' ') strip-v3"
-  if [[ -f "$loader" && -f "$stamp_file" && "$(cat "$stamp_file")" == "$stamp" ]]; then
-    printf '%s\n' "$loader"
-    return 0
-  fi
-  echo "==> building loader.path JAR without Spring/Tomcat/Logback (Boot 4)" >&2
-  local unpack="${LOCAL_DIR}/sdk-unpacked"
-  local keep="${LOCAL_DIR}/sdk-keep"
-  rm -rf "$unpack" "$keep"
-  mkdir -p "$unpack" "$keep"
-  (cd "$unpack" && jar xf "$src")
-  local d
-  for d in \
-    io/mosip/mock \
-    io/mosip/biometrics \
-    io/mosip/kernel/bio \
-    org/opencv \
-    nu/pattern \
-    com/github/jaiimageio \
-    org/imgscalr \
-    jj2000 \
-    org/jnbis \
-    org/apache/commons/math3 \
-    assets
-  do
-    if [[ -d "$unpack/$d" ]]; then
-      mkdir -p "$keep/$(dirname "$d")"
-      cp -a "$unpack/$d" "$keep/$(dirname "$d")/"
-    fi
-  done
-  rm -f "$loader"
-  (cd "$keep" && jar cf "$loader" .)
-  rm -rf "$unpack" "$keep"
-  printf '%s\n' "$stamp" >"$stamp_file"
-  printf '%s\n' "$loader"
 }
 
 find_service_jar() {
@@ -217,24 +173,23 @@ cmd_test() {
 
 cmd_run() {
   check_prereqs
-  local service_jar mock_sdk loader_sdk
+  local service_jar mock_sdk
   service_jar="$(find_service_jar)" || {
     echo "error: service jar not found. Run: ./run-local.sh init" >&2
     exit 1
   }
   mock_sdk="$(download_mock_sdk)"
-  loader_sdk="$(prepare_loader_sdk "$mock_sdk")"
   mkdir -p "${LOCAL_DIR}/logs"
   echo "==> starting ${MODULE} on :${PORT}${CTX}/"
   echo "    jar: ${service_jar}"
   echo "    sdk: ${mock_sdk}"
-  echo "    loader.path: ${loader_sdk}"
+  echo "    loader.path: ${mock_sdk}"
   echo "    log: ${LOCAL_DIR}/logs/${MODULE}.log"
   print_endpoints
   (
     cd "$MODULE_DIR"
     java \
-      -Dloader.path="${loader_sdk}" \
+      -Dloader.path="${mock_sdk}" \
       -Dbiosdk_bioapi_impl="${IMPL}" \
       -Dspring.cloud.config.enabled=false \
       -Dspring.profiles.active=local \

@@ -5,3 +5,14 @@
 logs/
 pids/
 *.log
+
+# Accidental jar xf of fat mock-sdk into this module (not src/)
+/com/
+/io/
+/jj2000/
+/nu/
+/org/
+/assets/
+/javax/
+/jakarta/
+/META-INF/
