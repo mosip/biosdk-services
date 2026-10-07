@@ -13,10 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * be added without rebuilding this service.
  * </p>
  * <p>
- * There is no JDBC datasource. A local fat mock-sdk JAR on {@code loader.path}
- * may register Hibernate/Hikari auto-config; {@code application-local.properties}
- * excludes those so Boot does not require a database URL. The cluster profile
- * must not exclude them unless they are actual auto-configuration classes.
+ * There is no JDBC datasource. Vendor or mock-sdk JARs on {@code loader.path}
+ * may register Hibernate/Hikari; those auto-configurations are excluded in
+ * {@code application.properties} so Boot does not require a database URL.
  * </p>
  *
  * @since 1.0
